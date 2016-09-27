@@ -404,12 +404,15 @@ public class Alt_Port02 extends AppCompatActivity {
 		getView(row, 3, R.id.funct_answer).setOnClickListener(oclTest);
 		getView(row, 4, R.id.opp_calculate).setOnClickListener(oclTest);
 
+
+		// scan through all of the table layout's children
+		// all of these should be a tablerow
+		// find each child view of the proper type and update
+		// the view per the adjusted display parameters
 		TableLayout v = (TableLayout) findViewById(LAYOUT_ID);
 
 		int j = v.getChildCount();
 
-		// scan through all of the table layout's children
-		// all of these should be a tablerow
 		for (int i = 0; i < j; i++) {
 			View vTblChild = v.getChildAt(i);
 
@@ -422,8 +425,6 @@ public class Alt_Port02 extends AppCompatActivity {
 				for (int l = 0; l < k; l++) {
 
 					View vTrChild = ((TableRow) vTblChild).getChildAt(l);
-
-//					logMsg("is grid? " + vTrChild.getClass().getName() + "  is instance of: " + (vTrChild instanceof GridLayout));
 
 					if (vTrChild instanceof GridLayout) {
 

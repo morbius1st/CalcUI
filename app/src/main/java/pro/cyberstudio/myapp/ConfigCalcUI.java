@@ -46,6 +46,19 @@ class ConfigCalcUI {
 			this.value = value;
 		}
 
+		static String toString(int idx) {
+
+			for (ViewCategory v : values())
+				if (v.value == idx)
+					return v.toString();
+
+			return null;
+		}
+
+		public int getValue() {
+			return value;
+		}
+
 
 	}
 
@@ -410,8 +423,7 @@ class ConfigCalcUI {
 					if (cvView instanceof TextViewAltFunct) {
 
 						logMsg("is alternate text view: altfunctcategory: " +
-								((TextViewAltFunct) cvView).getAltFunctionCategory());
-
+								ViewCategory.toString(((TextViewAltFunct) cvView).getAltFunctionCategory()));
 					}
 
 				} else {
