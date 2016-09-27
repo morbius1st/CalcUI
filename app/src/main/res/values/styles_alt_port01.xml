@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name = "root01">
+		<item name = "android:minHeight">0dp</item>
+		<item name = "android:minWidth">0dp</item>
+		<item name = "android:paddingBottom">0dp</item>
+		<item name = "android:paddingLeft">0dp</item>
+		<item name = "android:paddingRight">0dp</item>
+		<item name = "android:paddingTop">0dp</item>
+	</style>
+
+	<!-- alt 01 -->
+	<style name = "root01.basic">
+		<item name = "android:layout_width">match_parent</item>
+		<item name = "android:layout_height">match_parent</item>
+	</style>
+
+	<!-- alt 01 -->
+	<style name = "root01.basic.tableRow">
+		<item name = "android:layout_weight">100</item>
+	</style>
+	
+	<!-- alt 01 typical table cell -->
+	<style name = "root01.basic.tableCell">
+		<item name = "android:layout_margin">2dp</item>
+		<item name = "android:layout_span">5</item>
+	</style>
+
+	<!-- alt 01 typical table cell button -->
+	<!-- not part of a gridLayout-->
+	<style name = "root01.basic.tableCell.button">
+		<item name = "android:background">@color/holo_blue_xxxdark</item>
+		<item name = "android:textColor">@color/holo_blue_bright</item>
+		<item name = "android:textSize">@dimen/text_size_button_medium_lg</item>
+		<item name = "android:gravity">center</item>
+		<item name = "android:textAllCaps">false</item>
+	</style>
+
+	<!-- alt 01 typical table cell button group -->
+	<!-- not part of a gridLayout-->
+	<style name = "root01.basic.tableCell.button.grp">
+		<item name = "android:paddingLeft">5dp</item>
+		<item name = "android:paddingRight">5dp</item>
+		<item name = "android:layout_span">3</item>
+	</style>
+
+	<!-- alt 01 typical table cell button entry -->
+	<!-- not part of a gridLayout-->
+	<style name = "root01.basic.tableCell.button.entry">
+		<item name = "android:layout_span">19</item>
+		<item name = "android:gravity">center_vertical|right</item>
+		<item name = "android:textSize">@dimen/text_size_button_xlarge</item>
+	</style>
+
+	<!-- alt 01 typical table cell button imageButton -->
+	<!-- not part of a gridLayout-->
+	<style name = "root01.basic.tableCell.button.ib">
+		<item name = "android:paddingLeft">5dp</item>
+		<item name = "android:paddingRight">5dp</item>
+		<item name = "android:layout_span">3</item>
+		<item name = "android:scaleType">matrix</item>
+		<item name = "android:contentDescription">Mark Button</item>
+		<item name = "android:adjustViewBounds">false</item>
+	</style>
+
+
+	<!-- styles that are associated with a gridLayout-->
+	<!-- alt 01 v7 grid layout-->
+	<style name = "root01.basic.tableCell.gridLayout_v7">
+		<item name = "android:background">@color/holo_blue_xxxdark</item>
+		<item name = "columnCount">3</item>
+		<item name = "rowCount">3</item>
+	</style>
+
+	<!-- atl 01 grid button -->
+	<!-- within a gridLayout -->
+	<style name = "root01.basic.gridButton_v7">
+		<item name = "android:background">#00000000</item>
+		<item name = "layout_column">0</item>
+		<item name = "layout_columnSpan">3</item>
+		<item name = "layout_row">0</item>
+		<item name = "layout_rowSpan">3</item>
+	</style>
+
+	<!-- alt 01 root text typical primary function -->
+	<!-- within a gridLayout -->
+	<style name = "root01.primeFunction">
+		<item name = "android:layout_margin">0dp</item>
+		<item name = "android:gravity">center</item>
+		<item name = "android:textColor">@color/holo_blue_bright</item>
+		<item name = "android:textSize">@dimen/text_size_button_medium_lg</item>
+
+		<item name = "android:layout_marginTop">-8sp</item>
+
+		<item name = "layout_gravity">center</item>
+		<item name = "layout_column">0</item>
+		<item name = "layout_columnSpan">3</item>
+		<item name = "layout_row">1</item>
+		<item name = "layout_rowWeight">.6</item>
+	</style>
+
+	<style name = "root01.primeFunction.3row">
+		<item name = "android:layout_marginBottom">-8sp</item>
+	</style>
+
+	<style name = "root01.spacerToprow">
+		<item name = "layout_column">1</item>
+		<item name = "layout_columnWeight">4</item>
+		<item name = "layout_row">0</item>
+	</style>
+
+	<style name = "root01.spacerBottomrow">
+		<item name = "android:layout_marginTop">6dp</item>
+		<item name = "layout_column">0</item>
+		<item name = "layout_columnSpan">3</item>
+		<item name = "layout_row">2</item>
+		<item name = "layout_rowWeight">.2</item>
+	</style>
+
+	<!-- alt 01 root text typical primary function -->
+	<!-- within a gridLayout -->
+	<style name = "root01.primeFunction.reducedText">
+		<item name = "android:paddingTop">2sp</item>
+		<item name = "android:textSize">@dimen/text_size_button_medium_sm</item>
+	</style>
+
+
+	<!-- alt 01 root text alt function -->
+	<!-- within a gridLayout -->
+	<style name = "root01.altFunction">
+		<item name = "android:layout_margin">0dp</item>
+		<item name = "android:gravity">center</item>
+		<item name = "android:textColor">@color/gray_light</item>
+		<item name = "android:textSize">@dimen/text_size_button_xsmall</item>
+	</style>
+
+	<!-- alt 01 text view upper left -->
+	<!-- within a gridLayout -->
+	<style name = "root01.altFunction.topLeft">
+		<item name = "layout_column">0</item>
+		<item name = "layout_columnWeight">2</item>
+		<item name = "layout_row">0</item>
+		<item name = "layout_rowWeight">.2</item>
+	</style>
+
+	<!-- alt 01 text view upper right -->
+	<!-- within a gridLayout -->
+	<style name = "root01.altFunction.topRight">
+		<item name = "layout_column">2</item>
+		<item name = "layout_columnWeight">2</item>
+		<item name = "layout_row">0</item>
+		<item name = "layout_rowWeight">.2</item>
+	</style>
+
+	<!-- alt 01 text view bottom right -->
+	<!-- primary view must be ...3row-->
+	<!-- within a gridLayout -->
+	<style name = "root01.altFunction.bottomLeft">
+		<item name = "layout_column">0</item>
+		<item name = "layout_columnWeight">2</item>
+		<item name = "layout_row">2</item>
+		<item name = "layout_rowWeight">.2</item>
+	</style>
+	
+	<!-- alt 01 -->
+	<style name = "root01gridLayoutCell01">
+		<item name = "android:layout_width">match_parent</item>
+		<item name = "android:layout_height">match_parent</item>
+		<item name = "android:layout_span">5</item>
+		<item name = "android:columnCount">3</item>
+		<item name = "android:rowCount">3</item>
+		<item name = "android:layout_margin">2dp</item>
+		<item name = "android:background">@color/holo_blue_xxdark</item>
+		<item name = "android:padding">1dp</item>
+	</style>
+
+	<!-- alt 01 -->
+	<style name = "root01tableBtnSubItem01">
+		<item name = "android:layout_gravity">top|right</item>
+		<item name = "android:paddingRight">4dp</item>
+		<item name = "android:tag">@string/tag_shift</item>
+		<item name = "android:layout_column">0</item>
+		<item name = "android:layout_row">0</item>
+
+		<item name = "android:layout_width">wrap_content</item>
+		<item name = "android:layout_height">wrap_content</item>
+		<item name = "android:textColor">@color/gray_light</item>
+		<item name = "android:textSize">@dimen/text_size_button_xsmall</item>
+		<item name = "android:paddingTop">1dp</item>
+	</style>
+
+	<!-- alt 11-->
+	<style name = "root01gridTextView01">
+		<item name = "android:textColor">@color/gray_light</item>
+		<item name = "android:textSize">@dimen/text_size_button_xsmall</item>
+		<item name = "android:layout_margin">0dp</item>
+		<item name = "android:minHeight">0dp</item>
+		<item name = "android:minWidth">0dp</item>
+		<item name = "android:paddingTop">0dp</item>
+		<item name = "android:paddingLeft">0dp</item>
+		<item name = "android:paddingBottom">0dp</item>
+		<item name = "android:paddingRight">0dp</item>
+	</style>
+
+
+	<!-- alt 11 -->
+	<style name = "root01tableBtn_A01">
+		<item name = "android:layout_width">match_parent</item>
+		<item name = "android:layout_height">match_parent</item>
+		<item name = "android:textSize">@dimen/text_size_button_large</item>
+		<item name = "android:textColor">@android:color/white</item>
+		<item name = "android:textAllCaps">false</item>
+		<item name = "android:gravity">center|bottom</item>
+		<item name = "android:paddingBottom">2dp</item>
+		<item name = "android:minHeight">0dp</item>
+		<item name = "android:layout_row">0</item>
+		<item name = "android:layout_column">0</item>
+		<item name = "android:background">#00000000</item>
+	</style>
+
+	<!-- alt 11 -->
+	<style name = "root01tableBtn_B01">
+		<item name = "android:layout_margin">2dp</item>
+		<item name = "android:layout_span">5</item>
+		<item name = "android:minWidth">0dp</item>
+		<item name = "android:minHeight">0dp</item>
+		<item name = "android:paddingTop">0dp</item>
+		<item name = "android:paddingLeft">0dp</item>
+		<item name = "android:paddingBottom">0dp</item>
+		<item name = "android:paddingRight">0dp</item>
+		<item name = "android:background">@color/holo_blue_xxdark</item>
+		<item name = "android:textColor">@android:color/white</item>
+		<item name = "android:textSize">@dimen/text_size_button_large</item>
+
+		<item name = "android:layout_width">match_parent</item>
+		<item name = "android:layout_height">match_parent</item>
+		<item name = "android:textAllCaps">false</item>
+		<item name = "android:gravity">center|bottom</item>
+		<item name = "android:layout_row">0</item>
+		<item name = "android:layout_column">0</item>
+	</style>
+
+
+
+</resources>

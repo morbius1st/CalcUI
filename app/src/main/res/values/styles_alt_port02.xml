@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name = "root02">
+		<item name = "android:minHeight">0dp</item>
+		<item name = "android:minWidth">0dp</item>
+		<item name = "android:paddingBottom">0dp</item>
+		<item name = "android:paddingLeft">0dp</item>
+		<item name = "android:paddingRight">0dp</item>
+		<item name = "android:paddingTop">0dp</item>
+	</style>
+
+	<!-- alt 01 -->
+	<style name = "root02.basic">
+		<item name = "android:layout_width">match_parent</item>
+		<item name = "android:layout_height">match_parent</item>
+		<item name = "android:fontFamily">sans-serif</item>
+	</style>
+
+	<!-- alt 01 -->
+	<style name = "root02.basic.tableRow">
+		<item name = "android:layout_weight">100</item>
+	</style>
+	
+	<!-- alt 01 typical table cell -->
+	<style name = "root02.basic.tableCell">
+		<item name = "android:layout_margin">2dp</item>
+		<item name = "android:layout_span">5</item>
+	</style>
+
+	<!-- alt 01 typical table cell button -->
+	<!-- not part of a gridLayout-->
+	<style name = "root02.basic.tableCell.button">
+		<item name = "android:background">@color/holo_blue_xxxdark</item>
+		<item name = "android:textColor">@color/holo_blue_bright</item>
+		<item name = "android:textSize">@dimen/text_size_button_medium_lg</item>
+		<item name = "android:gravity">center_horizontal|bottom</item>
+		<item name = "android:textAllCaps">false</item>
+		<item name = "android:paddingBottom">4dp</item>
+	</style>
+
+	<!-- alt 01 typical table cell button group -->
+	<!-- not part of a gridLayout-->
+	<style name = "root02.basic.tableCell.button.grp">
+		<item name = "android:paddingLeft">5dp</item>
+		<item name = "android:paddingRight">5dp</item>
+		<item name = "android:layout_span">3</item>
+		<item name = "android:gravity">center</item>
+	</style>
+
+	<!-- alt 01 typical table cell button entry -->
+	<!-- not part of a gridLayout-->
+	<style name = "root02.basic.tableCell.button.entry">
+		<item name = "android:layout_span">19</item>
+		<item name = "android:gravity">center_vertical|right</item>
+		<item name = "android:textSize">@dimen/text_size_button_xlarge</item>
+	</style>
+
+	<!-- alt 01 typical table cell button imageButton -->
+	<!-- not part of a gridLayout-->
+	<style name = "root02.basic.tableCell.button.ib">
+		<item name = "android:paddingLeft">5dp</item>
+		<item name = "android:paddingRight">5dp</item>
+		<item name = "android:layout_span">3</item>
+		<item name = "android:scaleType">matrix</item>
+		<item name = "android:contentDescription">Mark Button</item>
+		<item name = "android:adjustViewBounds">false</item>
+	</style>
+
+	<!-- styles that are associated with a gridLayout-->
+	<!-- alt 01 grid layout-->
+	<style name = "root02.basic.tableCell.gridLayout">
+		<item name = "android:background">@color/holo_blue_xxxdark</item>
+		<item name = "columnCount">3</item>
+		<item name = "rowCount">3</item>
+	</style>
+
+	<style name = "root02.basic.gridLayoutCell">
+		<item name = "android:layout_column">0</item>
+		<item name = "android:layout_row">0</item>
+		<item name = "android:textAllCaps">false</item>
+	</style>
+
+	<style name = "root02.basic.gridLayoutCell.Button">
+		<item name = "android:textColor">@color/holo_blue_bright</item>
+		<item name = "android:textSize">@dimen/text_size_button_large</item>
+		<item name = "android:background">@android:color/transparent</item>
+		<item name = "android:paddingTop">4dp</item>
+		<item name = "android:paddingBottom">4dp</item>
+	</style>
+
+	<style name = "root02.basic.gridLayoutCell.Button.Bottom">
+		<item name = "android:gravity">center_horizontal|bottom</item>
+	</style>
+
+	<style name = "root02.basic.gridLayoutCell.Button.Centered">
+		<item name = "android:gravity">center</item>
+	</style>
+
+	<style name = "root02.basic.gridLayoutCell.AltFunction">
+		<item name = "android:layout_height">wrap_content</item>
+		<item name = "android:layout_width">wrap_content</item>
+		<item name = "android:gravity">center</item>
+		<item name = "android:textSize">@dimen/text_size_button_xsmall</item>
+		<item name = "android:textColor">@color/gray_light</item>
+		<item name = "android:paddingBottom">2dp</item>
+		<item name = "android:paddingLeft">2dp</item>
+		<item name = "android:paddingRight">2dp</item>
+		<item name = "android:paddingTop">2dp</item>
+	</style>
+
+</resources>

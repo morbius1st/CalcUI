@@ -1,0 +1,16 @@
+<resources>
+	<dimen name = "text_size_button_xxxlarge">35sp</dimen>
+	<dimen name = "text_size_button_xxlarge">30sp</dimen>
+	<dimen name = "text_size_button_xlarge">25sp</dimen>
+	<dimen name = "text_size_button_large">20sp</dimen>
+	<dimen name = "text_size_button_medium_lg">18sp</dimen>
+	<dimen name = "text_size_button_medium">15sp</dimen>
+	<dimen name = "text_size_button_medium_sm">13sp</dimen>
+	<dimen name = "text_size_button_small">10sp</dimen>
+	<dimen name = "text_size_button_xsmall">8sp</dimen>
+	<!-- Default screen margins, per the Android Design guidelines. -->
+	<dimen name = "activity_horizontal_margin">16dp</dimen>
+	<dimen name = "activity_vertical_margin">16dp</dimen>
+
+
+</resources>
