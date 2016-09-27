@@ -1,0 +1,523 @@
+<android.support.percent.PercentRelativeLayout
+	android:id = "@+id/layoutMain"
+	xmlns:android = "http://schemas.android.com/apk/res/android"
+	xmlns:app = "http://schemas.android.com/apk/res-auto"
+	xmlns:tools = "http://schemas.android.com/tools"
+	android:layout_width = "match_parent"
+	android:layout_height = "match_parent"
+	android:background = "@android:color/black"
+	tools:context = ".MainActivity"
+	>
+
+	<TableLayout
+
+		android:id = "@+id/tbl_alt_port11"
+		android:layout_width = "match_parent"
+		android:layout_height = "match_parent"
+		android:shrinkColumns = "*"
+		android:stretchColumns = "*"
+
+		>
+
+		<TableRow
+			android:id = "@+id/ad_banner_port"
+			android:layout_width = "match_parent"
+			android:layout_height = "match_parent"
+			android:layout_marginBottom = "4dp"
+			android:layout_marginTop = "4dp"
+			>
+
+		</TableRow>
+
+		<TableRow
+			android:id = "@+id/row_01_port"
+			android:layout_width = "match_parent"
+			android:layout_height = "wrap_content"
+			>
+
+			<TextView
+				android:id = "@+id/tvHistoryMain"
+				android:text = "@string/history_default"
+				android:textColor = "@android:color/white"
+				android:textSize = "@dimen/text_size_button_medium"
+				android:layout_width = "match_parent"
+				android:layout_height = "150dp"
+				android:layout_marginBottom = "2dp"
+				android:layout_marginEnd = "6dp"
+				android:layout_marginLeft = "2dp"
+				android:layout_marginRight = "2dp"
+				android:layout_marginStart = "2dp"
+				android:layout_span = "25"
+				android:background = "@color/holo_blue_xxdark"
+				android:bufferType = "spannable"
+				android:fadeScrollbars = "false"
+				android:gravity = "bottom|end"
+				android:paddingEnd = "3dp"
+				android:paddingLeft = "3dp"
+				android:paddingRight = "3dp"
+				android:paddingStart = "3dp"
+				android:scrollHorizontally = "true"
+				android:scrollbarSize = "4dp"
+				android:scrollbarStyle = "outsideInset"
+				android:scrollbarThumbVertical = "@color/holo_blue_xxxdark"
+				android:scrollbars = "horizontal|vertical"
+
+				/>
+		</TableRow>
+
+		<TableRow
+			android:id = "@+id/row_02_port"
+			android:layout_width = "match_parent"
+			android:layout_height = "match_parent"
+			android:layout_weight = "60"
+
+			>
+
+			<Button
+				android:id = "@+id/button201"
+				style = "@style/viewStyle_A"
+				android:text = "Alt_Port11"
+				android:textSize="@dimen/text_size_button_small"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				android:onClick = "sendMessage"
+				/>
+
+			<TextView
+				android:id = "@+id/tv_entry"
+				android:text = "@string/edit_default"
+				android:textSize="@dimen/text_size_button_large"
+				android:textColor = "@android:color/white"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "20"
+				android:background = "@color/holo_blue_xxdark"
+				android:gravity = "center_vertical|end"
+				android:minHeight = "0dp"
+				/>
+
+		</TableRow>
+
+		<TableRow
+			android:id = "@+id/row_03_port"
+			android:layout_width = "match_parent"
+			android:layout_height = "match_parent"
+			android:layout_weight = "60"
+			>
+
+			<Button
+				android:id = "@+id/button301"
+				style = "@style/viewStyle_A"
+				android:text = "Alt_Port01"
+				android:textSize="@dimen/text_size_button_small"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				android:onClick = "sendMessagePort01"
+				/>
+
+			<Button
+				android:id = "@+id/button302"
+				style = "@style/viewStyle_A"
+				android:text = "Alt_Port02"
+				android:textSize="@dimen/text_size_button_small"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				android:onClick = "sendMessagePort02"
+				/>
+
+			<Button
+				android:id = "@+id/button303"
+				style = "@style/viewStyle_A"
+				android:text = "@string/const_pi"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button304"
+				style = "@style/viewStyle_A"
+				android:text = "@string/funct_sqrt"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button305"
+				style = "@style/viewStyle_A"
+				android:text = "@string/funct_square"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+
+		</TableRow>
+
+		<TableRow
+			android:id = "@+id/row_04_port"
+			android:layout_width = "match_parent"
+			android:layout_weight = "60"
+			>
+
+			<ImageButton
+				android:id = "@+id/button400"
+				style = "@style/viewStyle_A"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "3"
+				android:minHeight = "0dp"
+				android:padding = "5dp"
+				android:scaleType = "fitCenter"
+				android:src = "@mipmap/btn_sym_keyboard_degree"
+				/>
+
+			<ImageButton
+				android:id = "@+id/button401"
+				style = "@style/viewStyle_A"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "3"
+				android:minHeight = "0dp"
+				android:padding = "5dp"
+				android:scaleType = "fitCenter"
+				android:src = "@mipmap/btn_sym_keyboard_foot"
+				/>
+
+			<ImageButton
+				android:id = "@+id/button402"
+				style = "@style/viewStyle_A"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "3"
+				android:minHeight = "0dp"
+				android:padding = "5dp"
+				android:scaleType = "fitCenter"
+				android:src = "@mipmap/btn_sym_keyboard_inch"
+				/>
+
+			<ImageButton
+				android:id = "@+id/button403"
+				style = "@style/viewStyle_A"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "3"
+				android:minHeight = "0dp"
+				android:padding = "5dp"
+				android:scaleType = "fitCenter"
+				android:src = "@mipmap/btn_sym_keyboard_feedback_space"
+
+				/>
+
+			<ImageButton
+				android:id = "@+id/button404"
+				style = "@style/viewStyle_A"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "3"
+				android:minHeight = "0dp"
+				android:padding = "5dp"
+				android:scaleType = "fitCenter"
+				android:src = "@mipmap/btn_sym_keyboard_frac"
+				/>
+
+			<Button
+				android:id = "@+id/button405"
+				style = "@style/viewStyle_A"
+				android:text = "@string/edit_backspace"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button406"
+				style = "@style/viewStyle_A"
+				android:text = "@string/edit_ce_ca"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+		</TableRow>
+
+		<TableRow
+			android:id = "@+id/row_05_port"
+			android:layout_width = "match_parent"
+			android:layout_weight = "60"
+			>
+
+			<Button
+				android:id = "@+id/button501"
+				style = "@style/viewStyle_A"
+				android:text = "@string/num_seven"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button502"
+				style = "@style/viewStyle_A"
+				android:text = "@string/num_eight"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button503"
+				style = "@style/viewStyle_A"
+				android:text = "@string/num_nine"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button504"
+				style = "@style/viewStyle_A"
+				android:text = "@string/funct_integer"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button505"
+				style = "@style/viewStyle_A"
+				android:text = "@string/funct_fraction"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+		</TableRow>
+
+		<TableRow
+			android:id = "@+id/row_06_port"
+			android:layout_width = "match_parent"
+			android:layout_weight = "60"
+			>
+
+			<Button
+				android:id = "@+id/button601"
+				style = "@style/viewStyle_A"
+				android:text = "@string/num_four"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button602"
+				style = "@style/viewStyle_A"
+				android:text = "@string/num_five"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button603"
+				style = "@style/viewStyle_A"
+				android:text = "@string/num_six"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button604"
+				style = "@style/viewStyle_A"
+				android:text = "@string/opp_multiply"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button605"
+				style = "@style/viewStyle_A"
+				android:text = "@string/opp_divide"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+		</TableRow>
+
+		<TableRow
+			android:id = "@+id/row_07_port"
+			android:layout_width = "match_parent"
+			android:layout_weight = "60"
+			>
+
+			<Button
+				android:id = "@+id/button701"
+				style = "@style/viewStyle_A"
+				android:text = "@string/num_one"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button702"
+				style = "@style/viewStyle_A"
+				android:text = "@string/num_two"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button703"
+				style = "@style/viewStyle_A"
+				android:text = "@string/num_three"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button704"
+				style = "@style/viewStyle_A"
+				android:text = "@string/opp_add"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button705"
+				style = "@style/viewStyle_A"
+				android:text = "@string/opp_subtract"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+		</TableRow>
+
+		<TableRow
+			android:id = "@+id/row_08_port"
+			android:layout_width = "match_parent"
+			android:layout_marginBottom = "2dp"
+			android:layout_weight = "60"
+			>
+
+			<Button
+				android:id = "@+id/button801"
+				style = "@style/viewStyle_A"
+				android:text = "@string/num_zero"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button802"
+				style = "@style/viewStyle_A"
+				android:text = "@string/num_decimal_pt"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button803"
+				style = "@style/viewStyle_A"
+				android:text = "@string/funct_change_sign"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button804"
+				style = "@style/viewStyle_A"
+				android:text = "@string/funct_answer"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+			<Button
+				android:id = "@+id/button805"
+				style = "@style/viewStyle_A"
+				android:text = "@string/opp_calculate"
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:layout_margin = "2dp"
+				android:layout_span = "5"
+				android:minHeight = "0dp"
+				/>
+
+		</TableRow>
+
+	</TableLayout>
+
+
+</android.support.percent.PercentRelativeLayout>

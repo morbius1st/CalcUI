@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<CalculatorUI
+	xmlns:android = "http://schemas.android.com/apk/res/android"
+	>
+
+	<ButtonRow index = "1" >
+		<ButtonColumn index = "0">
+			<Button
+				android:id = "@id/zero"
+				android:text = "@string/num_zero"
+				android:textColor = "@color/red_dark"
+				android:textSize = "@dimen/text_size_button_medium"
+				android:background = "@color/holo_blue_xxxdark"
+				onClick = "oclDigit"
+				/>
+			<SubFunctions>
+				<TopRight
+					android:text = "t right"
+					android:textColor = "#55ddff"
+					android:textSize = "@dimen/text_size_button_medium_lg"
+					/>
+			</SubFunctions>
+		</ButtonColumn>
+		<ButtonColumn column = "1">
+			<Button
+				android:id = "@id/decimal_pt"
+				android:text = "@string/num_decimal_pt"
+				android:textColor = "@color/holo_blue_bright"
+				android:textSize = "@dimen/text_size_button_medium_lg"
+				onClick = "oclDigit"
+				/>
+			<SubFunctions>
+				<TopRight
+					android:text = "t right"
+					android:textColor = "#33ddff"
+					/>
+			</SubFunctions>
+			<testA>
+				<testB>
+					<testC>
+
+					</testC>
+				</testB>
+			</testA>
+		</ButtonColumn>
+		<test>
+			<test2>
+				<test3>
+
+				</test3>
+			</test2>
+		</test>
+
+	</ButtonRow>
+	<ButtonRow>
+		<ButtonColumn>
+			<Button
+				android:text = "@string/num_decimal_pt"
+				>
+			</Button>
+		</ButtonColumn>
+	</ButtonRow>
+	<testX>
+		<testY>
+			<testZ
+				name = "name"
+				>
+
+			</testZ>
+		</testY>
+	</testX>
+
+</CalculatorUI>

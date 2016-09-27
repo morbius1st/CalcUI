@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android = "http://schemas.android.com/tools">
+
+	<string-array name = "testarray">
+		<item name = "test1">test1</item>
+		<item name = "test2">test2</item>
+		<item name = "test3">test3</item>
+	</string-array>
+
+</resources>

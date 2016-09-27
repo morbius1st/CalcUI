@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:and="http://schemas.android.com/apk/res/android"
+>
+  <xs:element name="calculatorUI" type="calculatorUIType"/>
+  <xs:complexType name="tableRowType">
+    <xs:sequence>
+      <xs:element type="cellType" name="cell" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:byte" name="row"/>
+  </xs:complexType>
+  <xs:complexType name="buttonType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="and:id"/>
+        <xs:attribute ref="and:text"/>
+        <xs:attribute ref="and:textColor"/>
+        <xs:attribute ref="and:textSize"/>
+        <xs:attribute ref="and:background"/>
+        <xs:attribute type="xs:string" name="onClick" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="cellType">
+    <xs:sequence>
+      <xs:element type="buttonType" name="button"/>
+      <xs:element type="sub_functionsType" name="sub_functions"/>
+    </xs:sequence>
+    <xs:attribute type="xs:byte" name="column" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="topRightType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="and:text"/>
+        <xs:attribute ref="and:textColor"/>
+        <xs:attribute ref="and:textSize"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="calculatorUIType">
+    <xs:sequence>
+      <xs:element type="tableRowType" name="tableRow"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sub_functionsType">
+    <xs:sequence>
+      <xs:element type="topRightType" name="topRight"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

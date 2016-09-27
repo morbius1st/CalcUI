@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name = "msg_recvd"> message received</string>
+	<string name = "result_not_ok">result not OK</string>
+	<string name = "default_return">default return</string>
+
+	<!-- content descriptions -->
+	<string name = "btn_mark_degree_content">Degree mark button</string>
+	<string name = "btn_mark_foot_content">Foot mark button</string>
+	<string name = "btn_mark_inch_content">Inch mark button</string>
+	<string name = "btn_mark_sepr_content">Separation mark button</string>
+	<string name = "btn_mark_frac_content">Fraction mark button</string>
+
+</resources>

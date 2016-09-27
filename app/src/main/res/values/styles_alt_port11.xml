@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- alt 11 -->
+	<style name = "base">
+		<item name = "android:layout_width">match_parent</item>
+		<item name = "android:layout_height">match_parent</item>
+	</style>
+
+	<style name = "base.tableRow">
+		<item name = "android:layout_weight">100</item>
+	</style>
+
+	<!-- alt 11 -->
+	<style name = "gridLayoutCell">
+		<item name = "android:layout_width">match_parent</item>
+		<item name = "android:layout_height">match_parent</item>
+		<item name = "android:layout_span">5</item>
+		<item name = "android:columnCount">3</item>
+		<item name = "android:rowCount">3</item>
+		<item name = "android:layout_margin">2dp</item>
+		<item name = "android:background">@color/holo_blue_xxdark</item>
+		<item name = "android:padding">1dp</item>
+	</style>
+
+	<!-- alt 11 -->
+	<style name = "tableBtnSubItem">
+		<item name = "android:layout_gravity">top|right</item>
+		<item name = "android:paddingRight">4dp</item>
+		<item name = "android:tag">@string/tag_shift</item>
+		<item name = "android:layout_column">0</item>
+		<item name = "android:layout_row">0</item>
+
+		<item name = "android:layout_width">wrap_content</item>
+		<item name = "android:layout_height">wrap_content</item>
+		<item name = "android:textColor">@color/gray_light</item>
+		<item name = "android:textSize">@dimen/text_size_button_xsmall</item>
+		<item name = "android:paddingTop">1dp</item>
+	</style>
+
+	<!-- alt 11-->
+	<style name = "gridTextView">
+		<item name = "android:textColor">@color/gray_light</item>
+		<item name = "android:textSize">@dimen/text_size_button_xsmall</item>
+		<item name = "android:layout_margin">0dp</item>
+		<item name = "android:minHeight">0dp</item>
+		<item name = "android:minWidth">0dp</item>
+		<item name = "android:paddingTop">0dp</item>
+		<item name = "android:paddingLeft">0dp</item>
+		<item name = "android:paddingBottom">0dp</item>
+		<item name = "android:paddingRight">0dp</item>
+	</style>
+
+
+	<!-- alt 11 -->
+	<style name = "tableBtn_A">
+		<item name = "android:layout_width">match_parent</item>
+		<item name = "android:layout_height">match_parent</item>
+		<item name = "android:textSize">@dimen/text_size_button_medium_lg</item>
+		<item name = "android:textColor">@android:color/white</item>
+		<item name = "android:textAllCaps">false</item>
+		<item name = "android:gravity">center|bottom</item>
+		<item name = "android:paddingBottom">2dp</item>
+		<item name = "android:minHeight">0dp</item>
+		<item name = "android:layout_row">0</item>
+		<item name = "android:layout_column">0</item>
+		<item name = "android:background">#00000000</item>
+	</style>
+
+	<!-- alt 11 -->
+	<style name = "tableBtn_B">
+		<item name = "android:layout_margin">2dp</item>
+		<item name = "android:layout_span">5</item>
+		<item name = "android:minWidth">0dp</item>
+		<item name = "android:minHeight">0dp</item>
+		<item name = "android:paddingTop">0dp</item>
+		<item name = "android:paddingLeft">0dp</item>
+		<item name = "android:paddingBottom">0dp</item>
+		<item name = "android:paddingRight">0dp</item>
+		<item name = "android:background">@color/holo_blue_xxdark</item>
+		<item name = "android:textColor">@android:color/white</item>
+		<item name = "android:textSize">@dimen/text_size_button_large</item>
+
+		<item name = "android:layout_width">match_parent</item>
+		<item name = "android:layout_height">match_parent</item>
+		<item name = "android:textAllCaps">false</item>
+		<item name = "android:gravity">center|bottom</item>
+		<item name = "android:layout_row">0</item>
+		<item name = "android:layout_column">0</item>
+
+	</style>
+
+
+</resources>
