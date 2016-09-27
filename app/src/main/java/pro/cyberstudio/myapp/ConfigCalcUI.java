@@ -27,8 +27,6 @@ class ConfigCalcUI {
 	static final int COLUMNS_MAX = 5;
 	static final int ROWS_MAX = 9;
 
-	static Context ctx = AppContext.getContext();
-
 	// note that this must correspond 1 to 1 with the attrs.xml file for the view
 	enum ViewCategory {
 		UNDEFINED (-1),
@@ -47,6 +45,8 @@ class ConfigCalcUI {
 		ViewCategory(int value) {
 			this.value = value;
 		}
+
+
 	}
 
 	enum ViewFunctions {PRIME_FUNCT, SUB_FUNCT}
@@ -130,7 +130,7 @@ class ConfigCalcUI {
 	@Override
 	public String toString() {
 
-		StringBuffer sBuf = new StringBuffer();
+		StringBuilder sBuf = new StringBuilder();
 		CellInfo ci;
 		String s;
 
@@ -393,7 +393,7 @@ class ConfigCalcUI {
 				sBuf.append("\nText: " + cvText);
 				sBuf.append("\nText color: " + cvTextColor);
 				sBuf.append("\nText size: " + cvTextSize);
-				sBuf.append("\nBackground: " + cvBackground);
+				sBuf.append("\nBackground color: " + cvBackground);
 				sBuf.append("\nView tag: ");
 				if (cvView != null) {
 					String tagS;
