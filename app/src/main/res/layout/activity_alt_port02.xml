@@ -114,7 +114,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "ms_top|right"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 
@@ -123,7 +123,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "bottom|left"
 				android:tag = "ms_bottom|left"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 		</GridLayout>
@@ -144,7 +144,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "mr_top|right"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 		</GridLayout>
 
@@ -164,7 +164,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "sr_top|right"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 		</GridLayout>
 
@@ -184,7 +184,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "sq_top|right"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 		</GridLayout>
 
@@ -216,7 +216,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "pi_top|right"
-				app:category = "unit"
+				app:category_textview = "unit"
 				/>
 		</GridLayout>
 
@@ -235,7 +235,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "sin_top|right"
-				app:category = "unit"
+				app:category_textview = "unit"
 				/>
 		</GridLayout>
 
@@ -255,7 +255,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "cos_top|right"
-				app:category = "unit"
+				app:category_textview = "unit"
 				/>
 		</GridLayout>
 
@@ -274,7 +274,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "tan_top|right"
-				app:category = "unit"
+				app:category_textview = "unit"
 				/>
 		</GridLayout>
 
@@ -343,7 +343,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "unit"
+				app:category_textview = "unit"
 				/>
 		</GridLayout>
 
@@ -362,7 +362,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "unit"
+				app:category_textview = "unit"
 				/>
 		</GridLayout>
 
@@ -389,7 +389,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "function"
+				app:category_textview = "function"
 				/>
 		</GridLayout>
 
@@ -409,7 +409,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "function"
+				app:category_textview = "function"
 				/>
 		</GridLayout>
 
@@ -429,7 +429,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "function"
+				app:category_textview = "function"
 				/>
 
 		</GridLayout>
@@ -450,7 +450,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "function"
+				app:category_textview = "function"
 				/>
 		</GridLayout>
 
@@ -469,7 +469,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "function"
+				app:category_textview = "function"
 				/>
 		</GridLayout>
 
@@ -495,7 +495,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "conversion"
+				app:category_textview = "conversion"
 				/>
 		</GridLayout>
 
@@ -514,7 +514,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "conversion"
+				app:category_textview = "conversion"
 				/>
 
 		</GridLayout>
@@ -534,7 +534,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "conversion"
+				app:category_textview = "conversion"
 				/>
 		</GridLayout>
 
@@ -553,7 +553,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "conversion"
+				app:category_textview = "conversion"
 				/>
 		</GridLayout>
 
@@ -572,7 +572,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "conversion"
+				app:category_textview = "conversion"
 				/>
 		</GridLayout>
 
@@ -598,7 +598,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "operation"
+				app:category_textview = "operation"
 				/>
 		</GridLayout>
 
@@ -617,7 +617,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "operation"
+				app:category_textview = "operation"
 				/>
 		</GridLayout>
 
@@ -636,7 +636,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "operation"
+				app:category_textview = "operation"
 				/>
 
 		</GridLayout>
@@ -656,7 +656,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "operation"
+				app:category_textview = "operation"
 				/>
 		</GridLayout>
 
@@ -675,7 +675,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "operation"
+				app:category_textview = "operation"
 				/>
 		</GridLayout>
 
@@ -703,7 +703,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 		</GridLayout>
 
@@ -723,7 +723,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 		</GridLayout>
@@ -744,7 +744,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 		</GridLayout>
@@ -765,7 +765,7 @@
 				android:text = "@string/alt_funct_top_left"
 				android:layout_gravity = "top|left"
 				android:tag = "top|left"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAltFunct
@@ -773,7 +773,7 @@
 				android:text = "@string/alt_funct_top_ctr"
 				android:layout_gravity = "top|center"
 				android:tag = "top|center"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAltFunct
@@ -781,7 +781,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAltFunct
@@ -791,7 +791,7 @@
 				android:layout_marginLeft = "-6dp"
 				android:tag = "center|left"
 				android:rotation = "-90"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAltFunct
@@ -801,7 +801,7 @@
 				android:layout_marginRight = "-6dp"
 				android:tag = "center|right"
 				android:rotation = "-90"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAltFunct
@@ -809,7 +809,7 @@
 				android:text = "@string/alt_funct_top_left"
 				android:layout_gravity = "bottom|left"
 				android:tag = "bottom|left"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAltFunct
@@ -817,7 +817,7 @@
 				android:text = "@string/alt_funct_bot_ctr"
 				android:layout_gravity = "bottom|center"
 				android:tag = "bottom|center"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAltFunct
@@ -825,7 +825,7 @@
 				android:text = "@string/alt_funct_bot_right"
 				android:layout_gravity = "bottom|right"
 				android:tag = "bottom|right"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 		</GridLayout>
@@ -846,7 +846,7 @@
 				android:text = "@string/alt_funct_top_left"
 				android:layout_gravity = "top|left"
 				android:tag = "top|left"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAltFunct
@@ -854,7 +854,7 @@
 				android:text = "@string/alt_funct_top_ctr"
 				android:layout_gravity = "top|center_horizontal"
 				android:tag = "top|center_horizontalt"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAltFunct
@@ -862,7 +862,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 
@@ -871,7 +871,7 @@
 				android:text = "@string/alt_funct_top_left"
 				android:layout_gravity = "bottom|left"
 				android:tag = "bottom|left"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAltFunct
@@ -879,7 +879,7 @@
 				android:text = "@string/alt_funct_bot_right"
 				android:layout_gravity = "bottom|right"
 				android:tag = "bottom|right"
-				app:category = "alpha"
+				app:category_textview = "alpha"
 				/>
 
 		</GridLayout>

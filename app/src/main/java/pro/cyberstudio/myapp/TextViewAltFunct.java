@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import static pro.cyberstudio.myapp.ConfigCalcUI.ViewCategory.UNDEFINED;
+
 /**
  * @author Jeff
  *         File:    TextViewAltFunct
@@ -14,24 +16,43 @@ import android.widget.TextView;
 
 class TextViewAltFunct extends TextView {
 
-	int altFunctionCategory;
+	int functionCategory;
 
 
-	TextViewAltFunct (Context context, AttributeSet attrs) {
+
+	public TextViewAltFunct (Context context) {
+		super(context);
+
+	}
+
+	public TextViewAltFunct (Context context, AttributeSet attrs) {
 		super(context, attrs);
 
+		setAttributes(context, attrs);
+
+	}
+
+	public TextViewAltFunct (Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+
+		setAttributes(context, attrs);
+
+	}
+
+	private void setAttributes(Context context, AttributeSet attrs) {
 		TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.TextViewAltFunct);
 
-		altFunctionCategory = attributes.getInt(R.styleable.TextViewAltFunct_category, -1);
+		functionCategory = attributes.getInt(R.styleable.TextViewAltFunct_category_textview, UNDEFINED.getValue());
 
 		attributes.recycle();
 	}
 
-	public int getAltFunctionCategory() {
-		return altFunctionCategory;
+
+	public int getFunctionCategory() {
+		return functionCategory;
 	}
 
-	public void setAltFunctionCategory(int altFunctionCategory) {
-		this.altFunctionCategory = altFunctionCategory;
+	public void setFunctionCategory(int functionCategory) {
+		this.functionCategory = functionCategory;
 	}
 }

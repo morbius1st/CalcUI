@@ -3,16 +3,30 @@
 
 
 	<declare-styleable name = "TextViewAltFunct" >
-		<attr name = "category" format="enum">
+		<attr name = "category_textview" format="enum">
 			<!--<enum name="digit" value="0"/>-->
 			<!--<enum name="mark" value="1"/>-->
-			<!--<enum name="constant" value="2"-->
+			<!--<enum name="constant" value="2"/>-->
 			<!--<enum name="edit" value="3"/>-->
 			<enum name="operation" value="10"/>
 			<enum name="function" value="11"/>
 			<enum name="conversion" value="20"/>
 			<enum name="alpha" value="30"/>
 			<enum name="unit" value="100"/>
+		</attr>
+	</declare-styleable>
+
+	<declare-styleable name = "ButtonAltFunct" >
+		<attr name = "category_button" format="enum">
+			<enum name="digit" value="0"/>
+			<!--<enum name="mark" value="1"/>-->
+			<enum name="constant" value="2"/>
+			<enum name="edit" value="3"/>
+			<!--<enum name="operation" value="10"/>-->
+			<!--<enum name="function" value="11"/>-->
+			<!--<enum name="conversion" value="20"/>-->
+			<!--<enum name="alpha" value="30"/>-->
+			<!--<enum name="unit" value="100"/>-->
 		</attr>
 	</declare-styleable>
 

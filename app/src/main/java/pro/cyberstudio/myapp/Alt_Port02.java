@@ -1,15 +1,11 @@
 package pro.cyberstudio.myapp;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewParent;
@@ -18,8 +14,6 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -274,7 +268,7 @@ public class Alt_Port02 extends AppCompatActivity {
 
 			// setup the basic cell view with just the type, id, and view reference
 			// the other settings are based on the XML layout
-			CellView cv = new CellView(BUTTON, viewId, "", -1, -1, -1, v);
+			CellView cv = new CellView(BUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
 			ci.addView(cv);
 
 			ViewParent vp = v.getParent();
@@ -289,7 +283,7 @@ public class Alt_Port02 extends AppCompatActivity {
 
 					cvt = findViewTypeByGravity(GLG.getGravity(vChild));
 					if (cvt != null) {
-						cv = new CellView(cvt, -1, "", -1, -1, -1, vChild);
+						cv = new CellView(cvt, UNDEF, "", UNDEF, UNDEF, UNDEF, vChild);
 						ci.addView(cv);
 					}
 				}
