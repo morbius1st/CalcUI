@@ -407,8 +407,8 @@ class ConfigCalcUI {
 				sBuf.append("\nText color: " + cvTextColor);
 				sBuf.append("\nText size: " + cvTextSize);
 				sBuf.append("\nBackground color: " + cvBackground);
-				sBuf.append("\nView tag: ");
 				sBuf.append("\nView cat: " + ViewCategory.toString(cvCategory));
+				sBuf.append("\nView tag: ");
 				if (cvView != null) {
 
 					Object tagX = cvView.getTag();
