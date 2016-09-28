@@ -317,7 +317,7 @@ class ConfigCalcUI {
 			if (v instanceof TextViewAltFunct)
 				cvCategory = ((TextViewAltFunct)v).getAltFunctionCategory();
 			else
-				cvCategory = -1;
+				cvCategory = ViewCategory.UNDEFINED.getValue();
 
 		}
 
@@ -408,6 +408,7 @@ class ConfigCalcUI {
 				sBuf.append("\nText size: " + cvTextSize);
 				sBuf.append("\nBackground color: " + cvBackground);
 				sBuf.append("\nView tag: ");
+				sBuf.append("\nView cat: " + ViewCategory.toString(cvCategory));
 				if (cvView != null) {
 
 					Object tagX = cvView.getTag();
@@ -416,11 +417,6 @@ class ConfigCalcUI {
 						sBuf.append(tagX.toString());
 					} else {
 						sBuf.append("no tag");
-					}
-					if (cvView instanceof TextViewAltFunct) {
-
-						logMsg("is alternate text view: altfunctcategory: " +
-								ViewCategory.toString(((TextViewAltFunct) cvView).getAltFunctionCategory()));
 					}
 
 				} else {
