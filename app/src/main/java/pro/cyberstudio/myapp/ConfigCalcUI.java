@@ -409,17 +409,14 @@ class ConfigCalcUI {
 				sBuf.append("\nBackground color: " + cvBackground);
 				sBuf.append("\nView tag: ");
 				if (cvView != null) {
-					String tagS;
+
 					Object tagX = cvView.getTag();
 
 					if (tagX != null) {
-						 tagS= tagX.toString();
+						sBuf.append(tagX.toString());
 					} else {
-						tagS = "";
+						sBuf.append("no tag");
 					}
-
-					sBuf.append(cvView.getTag());
-
 					if (cvView instanceof TextViewAltFunct) {
 
 						logMsg("is alternate text view: altfunctcategory: " +

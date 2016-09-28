@@ -274,7 +274,7 @@ public class Alt_Port02 extends AppCompatActivity {
 
 			// setup the basic cell view with just the type, id, and view reference
 			// the other settings are based on the XML layout
-			CellView cv = new CellView(BUTTON, viewId, "", 0, 0, 0, v);
+			CellView cv = new CellView(BUTTON, viewId, "", -1, -1, -1, v);
 			ci.addView(cv);
 
 			ViewParent vp = v.getParent();
@@ -285,18 +285,12 @@ public class Alt_Port02 extends AppCompatActivity {
 				for (int j = 0; j < i; j++) {
 					View vChild = ((GridLayout) vp).getChildAt(j);
 
+					adjustChildView(vChild);
+
 					cvt = findViewTypeByGravity(GLG.getGravity(vChild));
 					if (cvt != null) {
-//						idx =  cvt.getArrayIndex();
-//						logMsg("@view : " + cvt.toString() + "  idx: " + idx +
-//								"  vClass: " + vChild.getClass().getSimpleName() + "  : " +
-//								"  match?: " + (vChild instanceof TextViewAltFunct));
-
-
-						cv = new CellView(cvt, 0, "", 0, 0, 0, vChild);
-
+						cv = new CellView(cvt, -1, "", -1, -1, -1, vChild);
 						ci.addView(cv);
-
 					}
 				}
 			}
@@ -409,51 +403,51 @@ public class Alt_Port02 extends AppCompatActivity {
 		// all of these should be a tablerow
 		// find each child view of the proper type and update
 		// the view per the adjusted display parameters
-		TableLayout v = (TableLayout) findViewById(LAYOUT_ID);
-
-		int j = v.getChildCount();
-
-		for (int i = 0; i < j; i++) {
-			View vTblChild = v.getChildAt(i);
-
-			if (vTblChild instanceof TableRow) {
-				// the tablelayout's child is a tablerow
-
-				int k = ((TableRow) vTblChild).getChildCount();
-
-				// scan through all of the children of the table row
-				for (int l = 0; l < k; l++) {
-
-					View vTrChild = ((TableRow) vTblChild).getChildAt(l);
-
-					if (vTrChild instanceof GridLayout) {
-
-						GridLayout gridView = (GridLayout) vTrChild;
-
-						int m = gridView.getChildCount();
-
-						// scan through all of the children of the Grid Layout
-						for (int n = 0; n < m; n++) {
-
-							adjustChildView(gridView.getChildAt(n));
-						}
-
-					} else if (vTrChild instanceof android.support.v7.widget.GridLayout) {
-
-						android.support.v7.widget.GridLayout gridView =
-								(android.support.v7.widget.GridLayout) vTrChild;
-
-						int m = gridView.getChildCount();
-
-						// scan through all of the children of the Grid Layout
-						for (int n = 0; n < m; n++) {
-							adjustChildView(gridView.getChildAt(n));
-						}
-
-					}
-				}
-			}
-		}
+//		TableLayout v = (TableLayout) findViewById(LAYOUT_ID);
+//
+//		int j = v.getChildCount();
+//
+//		for (int i = 0; i < j; i++) {
+//			View vTblChild = v.getChildAt(i);
+//
+//			if (vTblChild instanceof TableRow) {
+//				// the tablelayout's child is a tablerow
+//
+//				int k = ((TableRow) vTblChild).getChildCount();
+//
+//				// scan through all of the children of the table row
+//				for (int l = 0; l < k; l++) {
+//
+//					View vTrChild = ((TableRow) vTblChild).getChildAt(l);
+//
+//					if (vTrChild instanceof GridLayout) {
+//
+//						GridLayout gridView = (GridLayout) vTrChild;
+//
+//						int m = gridView.getChildCount();
+//
+//						// scan through all of the children of the Grid Layout
+//						for (int n = 0; n < m; n++) {
+//
+//							adjustChildView(gridView.getChildAt(n));
+//						}
+//
+//					} else if (vTrChild instanceof android.support.v7.widget.GridLayout) {
+//
+//						android.support.v7.widget.GridLayout gridView =
+//								(android.support.v7.widget.GridLayout) vTrChild;
+//
+//						int m = gridView.getChildCount();
+//
+//						// scan through all of the children of the Grid Layout
+//						for (int n = 0; n < m; n++) {
+//							adjustChildView(gridView.getChildAt(n));
+//						}
+//
+//					}
+//				}
+//			}
+//		}
 	}
 
 	private OnClickListener oclTest = new OnClickListener() {
