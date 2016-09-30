@@ -114,7 +114,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "ms_top|right"
-				app:category_textview = "alpha"
+				app:category_textview="alphabet"
 				/>
 
 
@@ -123,7 +123,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "bottom|left"
 				android:tag = "ms_bottom|left"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 		</GridLayout>
@@ -144,7 +144,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "mr_top|right"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 		</GridLayout>
 
@@ -164,7 +164,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "sr_top|right"
-				app:category_textview = "alpha"
+				app:category_textview = "constant"
 				/>
 		</GridLayout>
 
@@ -177,7 +177,6 @@
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/funct_square"
 				android:tag = "square"
-				app:category_button=""
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -185,7 +184,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "sq_top|right"
-				app:category_textview = "alpha"
+				app:category_textview = "operation"
 				/>
 		</GridLayout>
 
@@ -704,7 +703,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 		</GridLayout>
 
@@ -724,7 +723,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 		</GridLayout>
@@ -745,7 +744,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 		</GridLayout>
@@ -766,7 +765,7 @@
 				android:text = "@string/alt_funct_top_left"
 				android:layout_gravity = "top|left"
 				android:tag = "top|left"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -774,7 +773,7 @@
 				android:text = "@string/alt_funct_top_ctr"
 				android:layout_gravity = "top|center"
 				android:tag = "top|center"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -782,7 +781,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -792,7 +791,7 @@
 				android:layout_marginLeft = "-6dp"
 				android:tag = "center|left"
 				android:rotation = "-90"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -802,7 +801,7 @@
 				android:layout_marginRight = "-6dp"
 				android:tag = "center|right"
 				android:rotation = "-90"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -810,7 +809,7 @@
 				android:text = "@string/alt_funct_top_left"
 				android:layout_gravity = "bottom|left"
 				android:tag = "bottom|left"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -818,7 +817,7 @@
 				android:text = "@string/alt_funct_bot_ctr"
 				android:layout_gravity = "bottom|center"
 				android:tag = "bottom|center"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -826,7 +825,7 @@
 				android:text = "@string/alt_funct_bot_right"
 				android:layout_gravity = "bottom|right"
 				android:tag = "bottom|right"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 		</GridLayout>
@@ -847,7 +846,7 @@
 				android:text = "@string/alt_funct_top_left"
 				android:layout_gravity = "top|left"
 				android:tag = "top|left"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -855,7 +854,7 @@
 				android:text = "@string/alt_funct_top_ctr"
 				android:layout_gravity = "top|center_horizontal"
 				android:tag = "top|center_horizontalt"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -863,7 +862,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "top|right"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 
@@ -872,7 +871,7 @@
 				android:text = "@string/alt_funct_top_left"
 				android:layout_gravity = "bottom|left"
 				android:tag = "bottom|left"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -880,7 +879,7 @@
 				android:text = "@string/alt_funct_bot_right"
 				android:layout_gravity = "bottom|right"
 				android:tag = "bottom|right"
-				app:category_textview = "alpha"
+				app:category_textview = "alphabet"
 				/>
 
 		</GridLayout>
