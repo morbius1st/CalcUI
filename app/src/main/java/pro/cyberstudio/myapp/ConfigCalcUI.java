@@ -311,8 +311,8 @@ class ConfigCalcUI {
 			this.cvBackground = cvBackground;
 			this.cvView = v;
 
-			if (v instanceof TextViewAltFunct)
-				cvCategory = ((TextViewAltFunct)v).getFunctionCategory();
+			if (v instanceof TextViewAlt)
+				cvCategory = ((TextViewAlt)v).getFunctionCategory();
 			else
 				cvCategory = ViewCategory.UNDEFINED.getValue();
 

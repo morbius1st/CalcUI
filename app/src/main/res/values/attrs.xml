@@ -2,7 +2,7 @@
 <resources>
 
 
-	<declare-styleable name = "TextViewAltFunct" >
+	<declare-styleable name = "TextViewAlt" >
 		<attr name = "category_textview" format="enum">
 			<!--<enum name="digit" value="0"/>-->
 			<!--<enum name="mark" value="1"/>-->
@@ -16,19 +16,54 @@
 		</attr>
 	</declare-styleable>
 
-	<declare-styleable name = "ButtonAltFunct" >
-		<attr name = "category_button" format="enum">
+	<declare-styleable name = "ButtonAlt" >
+		<attr name = "category_button" format="enum" >
 			<enum name="digit" value="0"/>
-			<!--<enum name="mark" value="1"/>-->
+			<enum name="mark" value="1"/>
 			<enum name="constant" value="2"/>
 			<enum name="edit" value="3"/>
-			<!--<enum name="operation" value="10"/>-->
-			<!--<enum name="function" value="11"/>-->
-			<!--<enum name="conversion" value="20"/>-->
-			<!--<enum name="alpha" value="30"/>-->
-			<!--<enum name="unit" value="100"/>-->
+			<enum name="operation" value="10"/>
+			<enum name="function" value="11"/>
+			<enum name="grouping" value="12"/>
+			<enum name="conversion" value="20"/>
+			<enum name="alpha" value="30"/>
+			<enum name="unit" value="100"/>
 		</attr>
 	</declare-styleable>
+
+	<!--
+	view categories:
+	control			0
+b	edit			1
+b	shift			2
+b	alpha			3
+
+	data			10
+b	calculation		11
+b	answer			12
+b	memory			13
+
+b	grouping		20
+
+	operand			30
+b	digit			31
+b	mark			32
+
+	textfield		40
+tv	history			41
+tv	entry field		42
+
+	mathops			50
+btv	function		51
+btv	operation		52
+bvt	conversion		53
+
+bvt	constant		70
+
+tv	alphabet		90
+
+tv	unit			100
+	-->
 
 
 </resources>

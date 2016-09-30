@@ -14,25 +14,25 @@ import static pro.cyberstudio.myapp.ConfigCalcUI.ViewCategory.UNDEFINED;
  *         Project: CalcUI
  */
 
-class TextViewAltFunct extends TextView {
+class TextViewAlt extends TextView {
 
 	int functionCategory;
 
 
 
-	public TextViewAltFunct (Context context) {
+	public TextViewAlt(Context context) {
 		super(context);
 
 	}
 
-	public TextViewAltFunct (Context context, AttributeSet attrs) {
+	public TextViewAlt(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
 		setAttributes(context, attrs);
 
 	}
 
-	public TextViewAltFunct (Context context, AttributeSet attrs, int defStyleAttr) {
+	public TextViewAlt(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 
 		setAttributes(context, attrs);
@@ -40,9 +40,9 @@ class TextViewAltFunct extends TextView {
 	}
 
 	private void setAttributes(Context context, AttributeSet attrs) {
-		TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.TextViewAltFunct);
+		TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.TextViewAlt);
 
-		functionCategory = attributes.getInt(R.styleable.TextViewAltFunct_category_textview, UNDEFINED.getValue());
+		functionCategory = attributes.getInt(R.styleable.TextViewAlt_category_textview, UNDEFINED.getValue());
 
 		attributes.recycle();
 	}

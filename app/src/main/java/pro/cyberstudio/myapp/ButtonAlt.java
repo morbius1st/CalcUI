@@ -18,15 +18,24 @@ class ButtonAlt extends Button {
 
 	int functionCategory;
 
-	ButtonAlt(Context context, AttributeSet attrs) {
+	public ButtonAlt(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.ButtonAltFunct);
+		TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.ButtonAlt);
 
-		functionCategory = attributes.getInt(R.styleable.ButtonAltFunct_category_button, UNDEFINED.getValue());
+		functionCategory = attributes.getInt(R.styleable.ButtonAlt_category_button, UNDEFINED.getValue());
 
 		attributes.recycle();
 	}
+
+	private void setAttributes(Context context, AttributeSet attrs) {
+		TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.ButtonAlt);
+
+		functionCategory = attributes.getInt(R.styleable.ButtonAlt_category_button, UNDEFINED.getValue());
+
+		attributes.recycle();
+	}
+
 
 	public int getFunctionCategory() {
 		return functionCategory;

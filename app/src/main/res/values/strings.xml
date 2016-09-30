@@ -21,6 +21,7 @@
 	<string name = "history_default">History Text Default</string>
 
 	<!-- default entry text field-->
+	<!--view category-->
 	<string name = "edit_default">0\' 0.00\"</string>
 
 	<!-- empty alternate button text -->

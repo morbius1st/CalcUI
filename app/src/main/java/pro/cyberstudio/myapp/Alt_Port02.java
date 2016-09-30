@@ -468,7 +468,7 @@ public class Alt_Port02 extends AppCompatActivity {
 
 	void adjustChildView (View vChild) {
 
-		if (vChild instanceof TextViewAltFunct) {
+		if (vChild instanceof TextViewAlt) {
 			DI.adjustViewTextSize((TextView) vChild);
 		}
 
