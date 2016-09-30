@@ -1,59 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
 	<declare-styleable name = "TextViewAlt" >
 		<attr name = "category_textview" format="enum">
 			<!-- mathops >5< buttons textviews -->
 			<enum name="operation" value="501"/>
 			<enum name="function" value="502"/>
 			<enum name="conversion" value="503"/>
-
 			<!-- constants >6< buttons textviews -->
 			<enum name="constant" value="601"/>
-
 			<!-- textfield >7< textviews -->
 			<enum name="history" value="701"/>
 			<enum name="entry" value="702"/>
-
 			<!-- alphabet >8< textviews -->
 			<enum name="alphabet" value="801"/>
-
 			<!-- unit >9< textviews -->
 			<enum name="unit" value="901"/>
 		</attr>
 	</declare-styleable>
 
-	<!--<declare-styleable name = "ButtonAlt" >-->
-		<!--<attr name = "category_button" format="enum">-->
-
-			<!--&lt;!&ndash; control >0< buttons &ndash;&gt;-->
-			<!--<enum name="edit" value="1"/>-->
-			<!--<enum name="shift" value="2"/>-->
-			<!--<enum name="alpha" value="3"/>-->
-
-			<!--&lt;!&ndash; data >2< buttons &ndash;&gt;-->
-			<!--<enum name="calculation" value="21"/>-->
-			<!--<enum name="answer" value="22"/>-->
-			<!--<enum name="memory" value="23"/>-->
-
-			<!--&lt;!&ndash; grouping >3< buttons &ndash;&gt;-->
-			<!--<enum name="grouping" value="3"/>-->
-
-			<!--&lt;!&ndash; operand >4< buttons &ndash;&gt;-->
-			<!--<enum name="digit" value="41"/>-->
-			<!--<enum name="mark" value="42"/>-->
-
-			<!--&lt;!&ndash; mathops >5< buttons textviews &ndash;&gt;-->
-			<!--<enum name="operation" value="501"/>-->
-			<!--<enum name="function" value="502"/>-->
-			<!--<enum name="conversion" value="503"/>-->
-
-			<!--&lt;!&ndash; constants >6< buttons textviews &ndash;&gt;-->
-			<!--<enum name="constant" value="601"/>-->
-
-		<!--</attr>-->
-	<!--</declare-styleable>-->
+	<declare-styleable name = "ButtonAlt" >
+		<attr name = "category_button" format="enum">
+			<!-- control >0< buttons -->
+			<enum name="edit" value="101"/>
+			<enum name="shift" value="102"/>
+			<enum name="alpha" value="103"/>
+			<!-- data >2< buttons -->
+			<enum name="calculation" value="20"/>
+			<enum name="answer" value="202"/>
+			<enum name="memory" value="203"/>
+			<!-- grouping >3< buttons -->
+			<enum name="grouping" value="301"/>
+			<!-- operand >4< buttons -->
+			<enum name="digit" value="401"/>
+			<enum name="mark" value="402"/>
+			<!-- mathops >5< buttons textviews -->
+			<enum name="operation" value="501"/>
+			<enum name="function" value="502"/>
+			<enum name="conversion" value="503"/>
+			<!-- constants >6< buttons textviews -->
+			<enum name="constant" value="601"/>
+		</attr>
+	</declare-styleable>
 
 </resources>
 

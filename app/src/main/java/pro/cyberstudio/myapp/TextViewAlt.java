@@ -14,7 +14,7 @@ import static pro.cyberstudio.myapp.ConfigCalcUI.ViewCategory.UNDEFINED;
  *         Project: CalcUI
  */
 
-class TextViewAlt extends TextView {
+public class TextViewAlt extends TextView {
 
 	int functionCategory;
 
