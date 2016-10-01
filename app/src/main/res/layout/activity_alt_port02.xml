@@ -81,7 +81,7 @@
 			style = "@style/root02.basic.tableCell.button.entry"
 			android:text = "@string/app_type"
 			android:tag = "entry"
-			app:category_textview="history"
+			app:category_textview="entry"
 			/>
 
 	</TableRow>
