@@ -291,8 +291,8 @@ public class Alt_Port02 extends AppCompatActivity {
 //					logMsg("type is imagebutton");
 					cv = new CellView(IMAGEBUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
 					break;
-				default:
-					logMsg("type is undefined");
+//				default:
+//					logMsg("type is undefined");
 			}
 
 			if (cv != null) {

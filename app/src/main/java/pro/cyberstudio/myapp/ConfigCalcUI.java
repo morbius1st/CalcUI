@@ -52,6 +52,7 @@ class ConfigCalcUI {
 		ALPHABET(801),
 		UNIT(901);
 
+
 		private int value;
 
 		ViewCategory(int value) {
