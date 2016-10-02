@@ -5,8 +5,11 @@ import android.annotation.SuppressLint;
 import android.view.Gravity;
 import android.view.View;
 
-
+import static pro.cyberstudio.myapp.ConfigCalcUI.CellViewType.*;
 import static pro.cyberstudio.myapp.ConfigCalcUI.ViewFunctions.*;
+import static pro.cyberstudio.myapp.Utilities.*;
+
+
 
 /**
  * @author Jeff
@@ -19,23 +22,35 @@ import static pro.cyberstudio.myapp.ConfigCalcUI.ViewFunctions.*;
 
 class ConfigCalcUI {
 
-	protected static final int VIEWS_MAX = 9;
-	static final int COLUMNS_MAX = 5;
+	static final int VIEWS_MAX = 11;
+	static final int COLUMNS_MAX = 7;
 	static final int ROWS_MAX = 9;
 	static final int UNDEF = -1;
+
+	static boolean clearFlag = true;
+
+	static int idx = 0;
 
 	// note that this must correspond 1 to 1 with the attrs.xml file for the view
 	enum ViewCategory {
 		UNDEFINED (-1),
-		DIGIT (0),
-//		MARK (1),
-		CONSTANT (2),
-		EDIT (3),
-		OPERATION (10),
-		FUNCTION (11),
-		CONVERSION (20),
-		ALPHA (30),
-		UNIT (100);
+		EDIT(101),
+		SHIFT(102),
+		ALPHA(103),
+		CALCULATE(201),
+		ANSWER(202),
+		MEMORY(203),
+		GROUPING(301),
+		DIGIT(401),
+		MARK(402),
+		OPERATION(501),
+		FUNCTION(502),
+		CONVERSATION(503),
+		CONSTANT(601),
+		HISTORY(701),
+		ENTRY(702),
+		ALPHABET(801),
+		UNIT(901);
 
 		private int value;
 
@@ -61,35 +76,48 @@ class ConfigCalcUI {
 
 	enum ViewFunctions {PRIME_FUNCT, SUB_FUNCT}
 
-	enum CellViewTypes {
-		BUTTON (0, PRIME_FUNCT, Gravity.NO_GRAVITY),
+	enum CellViewType {
+		BUTTON (idx++, PRIME_FUNCT, Gravity.NO_GRAVITY),
+		TEXTVIEW (idx++, PRIME_FUNCT, Gravity.NO_GRAVITY),
+		IMAGEBUTTON (idx++, PRIME_FUNCT, Gravity.NO_GRAVITY),
 
-		TOP_LEFT (1, SUB_FUNCT, Gravity.TOP | Gravity.LEFT),
-		TOP_CENTER (2, SUB_FUNCT, Gravity.TOP | Gravity.CENTER),
-		TOP_RIGHT (3, SUB_FUNCT, Gravity.TOP | Gravity.RIGHT),
-		BOTTOM_LEFT (4, SUB_FUNCT, Gravity.BOTTOM | Gravity.LEFT),
-		BOTTOM_CENTER (5, SUB_FUNCT, Gravity.BOTTOM | Gravity.CENTER),
-		BOTTOM_RIGHT (6, SUB_FUNCT, Gravity.BOTTOM | Gravity.RIGHT),
-		CENTER_LEFT (7, SUB_FUNCT, Gravity.CENTER | Gravity.LEFT),
-		CENTER_RIGHT (8, SUB_FUNCT, Gravity.CENTER | Gravity.RIGHT);
+		TOP_LEFT (idx++, SUB_FUNCT, Gravity.TOP | Gravity.LEFT),
+		TOP_CENTER (idx++, SUB_FUNCT, Gravity.TOP | Gravity.CENTER),
+		TOP_RIGHT (idx++, SUB_FUNCT, Gravity.TOP | Gravity.RIGHT),
+		BOTTOM_LEFT (idx++, SUB_FUNCT, Gravity.BOTTOM | Gravity.LEFT),
+		BOTTOM_CENTER (idx++, SUB_FUNCT, Gravity.BOTTOM | Gravity.CENTER),
+		BOTTOM_RIGHT (idx++, SUB_FUNCT, Gravity.BOTTOM | Gravity.RIGHT),
+		CENTER_LEFT (idx++, SUB_FUNCT, Gravity.CENTER | Gravity.LEFT),
+		CENTER_RIGHT (idx++, SUB_FUNCT, Gravity.CENTER | Gravity.RIGHT);
 
 		private ViewFunctions vFunct;
 		private int gravity;
 		private int arrayIndex;
 
-		CellViewTypes(int i, ViewFunctions vF, int g) {
+		CellViewType(int i, ViewFunctions vF, int g) {
 			vFunct = vF;
 			gravity = g;
 			arrayIndex = i;
 		}
 
-		static CellViewTypes findViewTypeByGravity(int gravity) {
+		static CellViewType findViewTypeByGravity(int gravity) {
 
-			for (CellViewTypes cvt : CellViewTypes.values()) {
+			for (CellViewType cvt : CellViewType.values()) {
 				if (cvt.getGravity() == gravity)
 					return cvt;
 			}
 			return null;
+		}
+
+		static CellViewType findViewTypeByView(View v) {
+			if (v instanceof TextViewAlt)
+				return TEXTVIEW;
+			else if (v instanceof ButtonAlt)
+				return BUTTON;
+			else if (v instanceof ImageButtonAlt)
+				return IMAGEBUTTON;
+			else
+				return null;
 		}
 
 		boolean isButton() {
@@ -131,11 +159,6 @@ class ConfigCalcUI {
 
 		return false;
 	}
-
-
-//	CalculatorUI getCalcUI() {
-//		return cui;
-//	}
 
 	@Override
 	public String toString() {
@@ -268,7 +291,7 @@ class ConfigCalcUI {
 	// information a single view in a cell array
 	static class CellView {
 
-		CellViewTypes cvViewType;
+		CellViewType cvViewType;
 		int cvID;
 		String cvText;
 		int cvTextColor;
@@ -277,31 +300,38 @@ class ConfigCalcUI {
 		View cvView;
 		int cvCategory;
 
-		CellView(CellViewTypes cvViewType, int cvID, String cvText,
-						int cvTextColor, int cvTextSize, int cvBackground) {
+		CellView(CellViewType cvViewType, int cvID, String cvText,
+				 int cvTextColor, int cvTextSize, int cvBackground) {
 
+			clearFlag = true;
 			setCellView(cvViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, null);
+
 		}
 
-		CellView(CellViewTypes cvViewType, int cvID, String cvText,
-				 int cvTextColor, int cvTextSize, int cvBackground, View v) {
+		CellView(CellViewType cvViewType, int cvID, String cvText,
+				 int cvTextColor, int cvTextSize, int cvBackground, View vx) {
 
-			setCellView(cvViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, v);
+//			logMsg("setting cell view:  is null? " + (vx == null));
+
+			clearFlag = false;
+			setCellView(cvViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, vx);
 		}
 
 		CellView() {
 			clear();
 		}
 
-		void setCellView(CellViewTypes cvViewType, int cvID, String cvText,
-					int cvTextColor, int cvTextSize, int cvBackground) {
+		void setCellView(CellViewType cvViewType, int cvID, String cvText,
+						 int cvTextColor, int cvTextSize, int cvBackground) {
 
+//			logMsg("setting cell view 2");
+
+			clearFlag = true;
 			setCellView(cvViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, null);
-
 		}
 
-		void setCellView(CellViewTypes cvViewType, int cvID, String cvText,
-					  int cvTextColor, int cvTextSize, int cvBackground, View v) {
+		void setCellView(CellViewType cvViewType, int cvID, String cvText,
+						 int cvTextColor, int cvTextSize, int cvBackground, View v) {
 
 			this.cvViewType = cvViewType;
 			this.cvID = cvID;
@@ -311,15 +341,51 @@ class ConfigCalcUI {
 			this.cvBackground = cvBackground;
 			this.cvView = v;
 
-			if (v instanceof TextViewAlt)
-				cvCategory = ((TextViewAlt)v).getFunctionCategory();
-			else
-				cvCategory = ViewCategory.UNDEFINED.getValue();
+			String tag = "null";
 
+//			logMsg("setting ceil view 3: is null? " + (v == null) + " clearflag? " + !clearFlag);
+
+
+			if (!clearFlag) {
+
+//				if (v == null)
+//					logMsg("view is null");
+//				else
+//					logMsg("view is not null");
+
+
+				if (v != null) {
+//
+//					if (v.getTag() != null) {
+//						tag = v.getTag().toString();
+//					} else {
+//						tag = "is null";
+//					}
+
+					switch (findViewTypeByView(v)) {
+						case BUTTON:
+							cvCategory = ((ButtonAlt) v).getFunctionCategory();
+							break;
+						case TEXTVIEW:
+							cvCategory = ((TextViewAlt) v).getFunctionCategory();
+							break;
+						case IMAGEBUTTON:
+							cvCategory = ((ImageButtonAlt) v).getFunctionCategory();
+							break;
+						default:
+							cvCategory = ViewCategory.UNDEFINED.getValue();
+							break;
+					}
+//					logMsg("cat: " + cvCategory + "  class: " + v.getClass().getSimpleName() + "  tag: " + tag);
+				}
+//				else
+//					logMsg("** is null - tag: " + tag);
+			}
 		}
 
 		void clear() {
 			setCellView(null, 0, null, 0, 0, 0, null);
+			clearFlag = true;
 		}
 
 		public void setView(View v) {
@@ -342,11 +408,11 @@ class ConfigCalcUI {
 			return cvViewType.getArrayIndex();
 		}
 
-		public CellViewTypes getCellViewType() {
+		public CellViewType getCellViewType() {
 			return cvViewType;
 		}
 
-		public void setCellViewType(CellViewTypes cvView) {
+		public void setCellViewType(CellViewType cvView) {
 			this.cvViewType = cvView;
 		}
 
@@ -485,7 +551,7 @@ class ConfigCalcUI {
 			return cellViewArray[index];
 		}
 
-		CellView getView(CellViewTypes cvs) {
+		CellView getView(CellViewType cvs) {
 
 			return cellViewArray[cvs.getArrayIndex()];
 		}

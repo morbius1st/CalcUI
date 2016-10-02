@@ -48,7 +48,7 @@
 			android:scrollbars = "horizontal|vertical"
 			android:textColor = "@color/holo_blue_bright"
 			android:textSize = "@dimen/text_size_button_medium"
-			app:category_textview="history"
+			app:category_textview = "history"
 			/>
 
 	</TableRow>
@@ -64,7 +64,7 @@
 			android:text = "@string/group_pren_begin"
 			android:tag = "group pren begin"
 			android:onClick = "returnResult"
-			app:category_button="grouping"
+			app:category_button = "grouping"
 			/>
 
 		<pro.cyberstudio.myapp.ButtonAlt
@@ -73,7 +73,7 @@
 			android:text = "@string/ctrl_pren_right"
 			android:tag = "group pren end"
 			android:onClick = "returnResult"
-			app:category_button="grouping"
+			app:category_button = "grouping"
 			/>
 
 		<pro.cyberstudio.myapp.TextViewAlt
@@ -81,7 +81,7 @@
 			style = "@style/root02.basic.tableCell.button.entry"
 			android:text = "@string/app_type"
 			android:tag = "entry"
-			app:category_textview="entry"
+			app:category_textview = "entry"
 			/>
 
 	</TableRow>
@@ -100,6 +100,7 @@
 			android:text = "@string/app_name_alt02"
 			android:tag = "@string/ctrl_shift"
 			android:textSize = "@dimen/text_size_button_small"
+			app:category_button = "shift"
 			/>
 
 		<GridLayout
@@ -111,7 +112,7 @@
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/memory_store"
 				android:tag = "memory store"
-				app:category_button="memory"
+				app:category_button = "memory"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -119,7 +120,7 @@
 				android:text = "@string/alt_funct_top_right"
 				android:layout_gravity = "top|right"
 				android:tag = "ms_top|right"
-				app:category_textview="alphabet"
+				app:category_textview = "alphabet"
 				/>
 
 
@@ -142,6 +143,7 @@
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/memory_recall"
 				android:tag = "memory recall"
+				app:category_button = "memory"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -162,6 +164,7 @@
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/funct_sqrt_sym"
 				android:tag = "sq root"
+				app:category_button = "function"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -182,6 +185,7 @@
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/funct_square"
 				android:tag = "square"
+				app:category_button = "function"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -204,6 +208,8 @@
 			android:id = "@+id/convert_deg_to_decimal"
 			style = "@style/root02.basic.tableCell.button"
 			android:text = "@string/convert_deg_to_decimal"
+			android:tag = "deg 2 dec"
+			app:category_button = "conversion"
 			/>
 
 		<GridLayout
@@ -214,6 +220,8 @@
 				android:id = "@+id/const_pi"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/const_pi"
+				android:tag = "pi"
+				app:category_button = "constant"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -233,6 +241,8 @@
 				android:id = "@+id/funct_sin"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/funct_sin"
+				android:tag = "sin"
+				app:category_button = "function"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -253,6 +263,8 @@
 				android:id = "@+id/funct_cos"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/funct_cos"
+				android:tag = "cos"
+				app:category_button = "function"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -272,6 +284,8 @@
 				android:id = "@+id/funct_tan"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/funct_tan"
+				android:tag = "tan"
+				app:category_button = "function"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -291,56 +305,17 @@
 		style = "@style/root02.basic.tableRow"
 		>
 
-		<!--android:text = "@string/mark_degree"-->
-		<ImageButton
-			android:id = "@+id/mark_degree"
-			style = "@style/root02.basic.tableCell.button.ib"
-			android:contentDescription = "@string/btn_mark_degree_content"
-			android:src = "@mipmap/btn_sym_keyboard_degree"
-			/>
-
-		<!--android:text = "@string/mark_foot"-->
-		<ImageButton
-			android:id = "@+id/mark_foot"
-			style = "@style/root02.basic.tableCell.button.ib"
-			android:contentDescription = "@string/btn_mark_foot_content"
-			android:src = "@mipmap/btn_sym_keyboard_foot"
-			/>
-
-		<!--android:text = "@string/mark_inch"-->
-		<ImageButton
-			android:id = "@+id/mark_inch"
-			style = "@style/root02.basic.tableCell.button.ib"
-			android:contentDescription = "@string/btn_mark_inch_content"
-			android:src = "@mipmap/btn_sym_keyboard_inch"
-			/>
-
-		<!--android:text = "@string/mark_separation"-->
-		<!--android:textSize="@dimen/text_size_button_small"-->
-		<!--android:textScaleX="4"-->
-		<ImageButton
-			android:id = "@+id/mark_space"
-			style = "@style/root02.basic.tableCell.button.ib"
-			android:contentDescription = "@string/btn_mark_sepr_content"
-			android:src = "@mipmap/btn_sym_keyboard_feedback_space"
-			/>
-
-		<!--android:text = "@string/mark_fraction"-->
-		<ImageButton
-			android:id = "@+id/mark_frac"
-			style = "@style/root02.basic.tableCell.button.ib"
-			android:contentDescription = "@string/btn_mark_frac_content"
-			android:src = "@mipmap/btn_sym_keyboard_frac"
-			/>
-
 		<GridLayout
-			style = "@style/root02.basic.tableCell.gridLayout"
+			style = "@style/root02.basic.tableCell.gridLayout.ib"
 			>
 
-			<pro.cyberstudio.myapp.ButtonAlt
-				android:id = "@+id/edit_backspace"
-				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
-				android:text = "@string/edit_backspace"
+			<pro.cyberstudio.myapp.ImageButtonAlt
+				android:id = "@+id/mark_degree"
+				style = "@style/root02.basic.tableCell.button.ib"
+				android:contentDescription = "@string/btn_mark_degree_content"
+				android:src = "@mipmap/btn_sym_keyboard_degree"
+				android:tag = "mark degree"
+				app:category_imagebutton = "mark"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -350,6 +325,121 @@
 				android:tag = "top|right"
 				app:category_textview = "unit"
 				/>
+
+		</GridLayout>
+
+		<GridLayout
+			style = "@style/root02.basic.tableCell.gridLayout.ib"
+			>
+
+			<pro.cyberstudio.myapp.ImageButtonAlt
+				android:id = "@+id/mark_foot"
+				style = "@style/root02.basic.tableCell.button.ib"
+				android:contentDescription = "@string/btn_mark_foot_content"
+				android:src = "@mipmap/btn_sym_keyboard_foot"
+				android:tag = "mark foot"
+				app:category_imagebutton = "mark"
+				/>
+
+			<pro.cyberstudio.myapp.TextViewAlt
+				style = "@style/root02.basic.gridLayoutCell.AltFunction"
+				android:text = "@string/alt_funct_top_right"
+				android:layout_gravity = "top|right"
+				android:tag = "top|right"
+				app:category_textview = "unit"
+				/>
+
+		</GridLayout>
+
+		<GridLayout
+			style = "@style/root02.basic.tableCell.gridLayout.ib"
+			>
+
+			<pro.cyberstudio.myapp.ImageButtonAlt
+				android:id = "@+id/mark_inch"
+				style = "@style/root02.basic.tableCell.button.ib"
+				android:contentDescription = "@string/btn_mark_inch_content"
+				android:src = "@mipmap/btn_sym_keyboard_inch"
+				android:tag = "mark inch"
+				app:category_imagebutton = "mark"
+				/>
+
+			<pro.cyberstudio.myapp.TextViewAlt
+				style = "@style/root02.basic.gridLayoutCell.AltFunction"
+				android:text = "@string/alt_funct_top_right"
+				android:layout_gravity = "top|right"
+				android:tag = "top|right"
+				app:category_textview = "unit"
+				/>
+
+		</GridLayout>
+
+		<GridLayout
+			style = "@style/root02.basic.tableCell.gridLayout.ib"
+			>
+
+			<pro.cyberstudio.myapp.ImageButtonAlt
+				android:id = "@+id/mark_space"
+				style = "@style/root02.basic.tableCell.button.ib"
+				android:contentDescription = "@string/btn_mark_sepr_content"
+				android:src = "@mipmap/btn_sym_keyboard_feedback_space"
+				android:tag = "mark space"
+				app:category_imagebutton = "mark"
+				/>
+
+			<pro.cyberstudio.myapp.TextViewAlt
+				style = "@style/root02.basic.gridLayoutCell.AltFunction"
+				android:text = "@string/alt_funct_top_right"
+				android:layout_gravity = "top|right"
+				android:tag = "top|right"
+				app:category_textview = "unit"
+				/>
+
+		</GridLayout>
+
+		<GridLayout
+			style = "@style/root02.basic.tableCell.gridLayout.ib"
+			>
+
+			<pro.cyberstudio.myapp.ImageButtonAlt
+				android:id = "@+id/mark_frac"
+				style = "@style/root02.basic.tableCell.button.ib"
+				android:contentDescription = "@string/btn_mark_frac_content"
+				android:src = "@mipmap/btn_sym_keyboard_frac"
+				android:tag = "mark frac"
+				app:category_imagebutton = "mark"
+				/>
+
+			<pro.cyberstudio.myapp.TextViewAlt
+				style = "@style/root02.basic.gridLayoutCell.AltFunction"
+				android:text = "@string/alt_funct_top_right"
+				android:layout_gravity = "top|right"
+				android:tag = "top|right"
+				app:category_textview = "unit"
+				/>
+
+		</GridLayout>
+
+		<GridLayout
+			style = "@style/root02.basic.tableCell.gridLayout"
+			>
+
+			<pro.cyberstudio.myapp.ButtonAlt
+				android:id = "@+id/edit_backspace"
+				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
+				android:text = "@string/edit_backspace"
+				android:tag = "backspace"
+				app:category_button = "edit"
+				/>
+
+			<pro.cyberstudio.myapp.TextViewAlt
+				style = "@style/root02.basic.gridLayoutCell.AltFunction"
+				android:text = "@string/alt_funct_top_right"
+				android:layout_gravity = "top|right"
+				android:tag = "top|right"
+				app:category_textview = "unit"
+				/>
+
 		</GridLayout>
 
 		<GridLayout
@@ -360,6 +450,8 @@
 				android:id = "@+id/edit_ce_ca"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/edit_ce_ca"
+				android:tag = "ce-ca"
+				app:category_button = "edit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -387,6 +479,8 @@
 				android:id = "@+id/num_seven"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/num_seven"
+				android:tag = "num 7"
+				app:category_button = "digit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -407,6 +501,8 @@
 				android:id = "@+id/num_eight"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/num_eight"
+				android:tag = "num 8"
+				app:category_button = "digit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -427,6 +523,8 @@
 				android:id = "@+id/num_nine"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/num_nine"
+				android:tag = "num 9"
+				app:category_button = "digit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -448,6 +546,8 @@
 				android:id = "@+id/funct_integer"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/funct_integer"
+				android:tag = "integer"
+				app:category_button = "function"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -467,6 +567,8 @@
 				android:id = "@+id/funct_fraction"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/funct_fraction"
+				android:tag = "fraction"
+				app:category_button = "function"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -493,6 +595,8 @@
 				android:id = "@+id/num_four"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/num_four"
+				android:tag = "num 4"
+				app:category_button = "digit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -512,6 +616,8 @@
 				android:id = "@+id/num_five"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/num_five"
+				android:tag = "num 5"
+				app:category_button = "digit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -532,6 +638,8 @@
 				android:id = "@+id/num_six"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/num_six"
+				android:tag = "num 6"
+				app:category_button = "digit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -551,6 +659,8 @@
 				android:id = "@+id/opp_multiply"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/opp_multiply"
+				android:tag = "multiply"
+				app:category_button = "operation"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -570,6 +680,8 @@
 				android:id = "@+id/opp_divide"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/opp_divide"
+				android:tag = "divide"
+				app:category_button = "operation"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -596,6 +708,8 @@
 				android:id = "@+id/num_one"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/num_one"
+				android:tag = "num 1"
+				app:category_button = "digit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -615,6 +729,8 @@
 				android:id = "@+id/num_two"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/num_two"
+				android:tag = "num 2"
+				app:category_button = "digit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -634,6 +750,8 @@
 				android:id = "@+id/num_three"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/num_three"
+				android:tag = "num 3"
+				app:category_button = "digit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -654,6 +772,8 @@
 				android:id = "@+id/opp_add"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/opp_add"
+				android:tag = "add"
+				app:category_button = "operation"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -673,6 +793,8 @@
 				android:id = "@+id/opp_subtract"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/opp_subtract"
+				android:tag = "subtact"
+				app:category_button = "operation"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -700,7 +822,8 @@
 				android:id = "@+id/num_zero"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/num_zero"
-				android:tag = "cell number zero"
+				android:tag = "num 0"
+				app:category_button = "digit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -720,7 +843,8 @@
 				android:id = "@+id/num_decimal_pt"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/num_decimal_pt"
-				android:tag = "cell decimal point"
+				android:tag = "num ."
+				app:category_button = "digit"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -741,7 +865,8 @@
 				android:id = "@+id/funct_change_sign"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/funct_change_sign"
-				android:tag = "cell change sign"
+				android:tag = "change sign"
+				app:category_button = "function"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -762,7 +887,8 @@
 				android:id = "@+id/funct_answer"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/funct_answer"
-				android:tag = "cell answer"
+				android:tag = "answer"
+				app:category_button = "answer"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt
@@ -843,7 +969,8 @@
 				android:id = "@+id/opp_calculate"
 				style = "@style/root02.basic.gridLayoutCell.Button.Centered"
 				android:text = "@string/opp_calculate"
-				android:tag = "cell calculate"
+				android:tag = "calculate"
+				app:category_button = "calculate"
 				/>
 
 			<pro.cyberstudio.myapp.TextViewAlt

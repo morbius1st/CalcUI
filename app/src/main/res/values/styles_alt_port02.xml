@@ -21,7 +21,7 @@
 	<style name = "root02.basic.tableRow">
 		<item name = "android:layout_weight">100</item>
 	</style>
-	
+
 	<!-- alt 01 typical table cell -->
 	<style name = "root02.basic.tableCell">
 		<item name = "android:layout_margin">2dp</item>
@@ -59,20 +59,33 @@
 	<!-- alt 01 typical table cell button imageButton -->
 	<!-- not part of a gridLayout-->
 	<style name = "root02.basic.tableCell.button.ib">
+		<item name = "android:paddingTop">5dp</item>
 		<item name = "android:paddingLeft">5dp</item>
 		<item name = "android:paddingRight">5dp</item>
+		<item name = "android:paddingBottom">0dp</item>
+		<item name = "android:layout_marginBottom">0dp</item>
 		<item name = "android:layout_span">3</item>
 		<item name = "android:scaleType">matrix</item>
 		<item name = "android:contentDescription">Mark Button</item>
 		<item name = "android:adjustViewBounds">false</item>
+		<item name = "android:scaleX">.7</item>
+		<item name = "android:scaleY">.7</item>
 	</style>
 
 	<!-- styles that are associated with a gridLayout-->
-	<!-- alt 01 grid layout-->
+	<!-- alt 02 grid layout-->
 	<style name = "root02.basic.tableCell.gridLayout">
 		<item name = "android:background">@color/holo_blue_xxxdark</item>
 		<item name = "columnCount">3</item>
 		<item name = "rowCount">3</item>
+	</style>
+
+	<!-- alt 02 grid layout - image button -->
+	<style name = "root02.basic.tableCell.gridLayout.ib">
+		<item name = "android:background">@color/holo_blue_xxxdark</item>
+		<item name = "columnCount">3</item>
+		<item name = "rowCount">3</item>
+		<item name = "android:layout_span">3</item>
 	</style>
 
 	<style name = "root02.basic.gridLayoutCell">

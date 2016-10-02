@@ -3,31 +3,31 @@ package pro.cyberstudio.myapp;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import static pro.cyberstudio.myapp.ConfigCalcUI.ViewCategory.UNDEFINED;
 
 /**
  * @author Jeff
- *         File:    ButtonAlt
- *         Created: 9/27/2016 @ 7:29 PM
+ *         File:    ImageButtonAlt
+ *         Created: 10/1/2016 @ 11:33 AM
  *         Project: CalcUI
  */
 
-public class ButtonAlt extends Button implements iWidgetAlt {
+public class ImageButtonAlt extends ImageButton implements iWidgetAlt{
 
 	private int functionCategory;
 
-	public ButtonAlt(Context context, AttributeSet attrs) {
+	public ImageButtonAlt(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
 		setAttributes(context, attrs);
 	}
 
 	public void setAttributes(Context context, AttributeSet attrs) {
-		TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.ButtonAlt);
+		TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.ImageButtonAlt);
 
-		functionCategory = attributes.getInt(R.styleable.ButtonAlt_category_button, UNDEFINED.getValue());
+		functionCategory = attributes.getInt(R.styleable.ImageButtonAlt_category_imagebutton, UNDEFINED.getValue());
 
 		attributes.recycle();
 	}
@@ -41,3 +41,4 @@ public class ButtonAlt extends Button implements iWidgetAlt {
 		this.functionCategory = functionCategory;
 	}
 }
+

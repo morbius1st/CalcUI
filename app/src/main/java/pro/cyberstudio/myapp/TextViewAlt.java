@@ -14,11 +14,9 @@ import static pro.cyberstudio.myapp.ConfigCalcUI.ViewCategory.UNDEFINED;
  *         Project: CalcUI
  */
 
-public class TextViewAlt extends TextView {
+public class TextViewAlt extends TextView  implements iWidgetAlt{
 
-	int functionCategory;
-
-
+	private int functionCategory;
 
 	public TextViewAlt(Context context) {
 		super(context);
@@ -39,7 +37,7 @@ public class TextViewAlt extends TextView {
 
 	}
 
-	private void setAttributes(Context context, AttributeSet attrs) {
+	public void setAttributes(Context context, AttributeSet attrs) {
 		TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.TextViewAlt);
 
 		functionCategory = attributes.getInt(R.styleable.TextViewAlt_category_textview, UNDEFINED.getValue());

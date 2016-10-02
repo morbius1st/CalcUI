@@ -26,7 +26,7 @@
 			<enum name="shift" value="102"/>
 			<enum name="alpha" value="103"/>
 			<!-- data >2< buttons -->
-			<enum name="calculation" value="20"/>
+			<enum name="calculate" value="201"/>
 			<enum name="answer" value="202"/>
 			<enum name="memory" value="203"/>
 			<!-- grouping >3< buttons -->
@@ -43,6 +43,12 @@
 		</attr>
 	</declare-styleable>
 
+	<declare-styleable name = "ImageButtonAlt" >
+		<attr name = "category_imagebutton" format="enum">
+			<!-- mark >4< buttons -->
+			<enum name="mark" value="402"/>
+		</attr>
+	</declare-styleable>
 </resources>
 
 <!-- master list -->
@@ -54,7 +60,7 @@
 	<!--<enum name="alpha" value="103"/>-->
 
 	<!-- data >2< buttons -->
-	<!--<enum name="calculation" value="201"/>-->
+	<!--<enum name="calculate" value="201"/>-->
 	<!--<enum name="answer" value="202"/>-->
 	<!--<enum name="memory" value="203"/>-->
 
