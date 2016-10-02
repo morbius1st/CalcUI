@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import static pro.cyberstudio.myapp.Utilities.*;
 import static pro.cyberstudio.myapp.ConfigCalcUI.*;
-import static pro.cyberstudio.myapp.ConfigCalcUI.CellViewTypes.*;
+import static pro.cyberstudio.myapp.ConfigCalcUI.CellViewType.*;
 
 public class Alt_Port02 extends AppCompatActivity {
 
@@ -36,6 +36,8 @@ public class Alt_Port02 extends AppCompatActivity {
 	private ConfigCalcUI CUI = new ConfigCalcUI();
 
 	private GridLayoutGravity GLG = new GridLayoutGravity();
+
+	private int idx = 0;
 
 //	Object udfAlignment = null;
 
@@ -258,8 +260,7 @@ public class Alt_Port02 extends AppCompatActivity {
 	// for initial setup only - this will wipe out existing cell views
 	// this deals with the primary views (the buttons)
 	<T extends View> T getView(int row, int column, int viewId) {
-		CellViewTypes cvt;
-		int idx;
+		CellViewType cvt;
 
 		T v = (Utilities.getView(this, DI, viewId));
 
@@ -268,33 +269,58 @@ public class Alt_Port02 extends AppCompatActivity {
 
 			// setup the basic cell view with just the type, id, and view reference
 			// the other settings are based on the XML layout
-			CellView cv = new CellView(BUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
-			ci.addView(cv);
 
-			ViewParent vp = v.getParent();
+			CellView cv = null;
+//
+//			if (v != null) {
+//				logMsg("v: " + v.getClass().getSimpleName());
+//			} else {
+//				logMsg("v: is null");
+//			}
 
-			if (vp.getClass() == GridLayout.class) {
-				int i = ((GridLayout) vp).getChildCount();
+			switch (findViewTypeByView(v)) {
+				case BUTTON:
+//					logMsg("type is button");
+					 cv = new CellView(BUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
+					break;
+				case TEXTVIEW:
+//					logMsg("type is textview");
+					cv = new CellView(TEXTVIEW, viewId, "", UNDEF, UNDEF, UNDEF, v);
+					break;
+				case IMAGEBUTTON:
+//					logMsg("type is imagebutton");
+					cv = new CellView(IMAGEBUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
+					break;
+				default:
+					logMsg("type is undefined");
+			}
 
-				for (int j = 0; j < i; j++) {
-					View vChild = ((GridLayout) vp).getChildAt(j);
+			if (cv != null) {
+				ci.addView(cv);
 
-					adjustChildView(vChild);
+				ViewParent vp = v.getParent();
 
-					cvt = findViewTypeByGravity(GLG.getGravity(vChild));
-					if (cvt != null) {
-						cv = new CellView(cvt, UNDEF, "", UNDEF, UNDEF, UNDEF, vChild);
-						ci.addView(cv);
+				if (vp.getClass() == GridLayout.class) {
+					int i = ((GridLayout) vp).getChildCount();
+
+					for (int j = 0; j < i; j++) {
+						View vChild = ((GridLayout) vp).getChildAt(j);
+
+						adjustChildView(vChild);
+
+						cvt = findViewTypeByGravity(GLG.getGravity(vChild));
+						if (cvt != null) {
+//							logMsg("add child view");
+							cv = new CellView(cvt, UNDEF, "", UNDEF, UNDEF, UNDEF, vChild);
+							ci.addView(cv);
+						}
 					}
 				}
+				CUI.addCell(row, column, ci);
 			}
-			CUI.addCell(row, column, ci);
 		}
 		return v;
 	}
-
-
-
 
 	public String test() {
 		return "this is a test";
@@ -355,10 +381,14 @@ public class Alt_Port02 extends AppCompatActivity {
 		getView(row, 4, R.id.funct_tan);
 
 		// row 4
-		// not mark buttons - only edit buttons
 		row = 4;
-		getView(row, 0, R.id.edit_backspace);
-		getView(row, 1, R.id.edit_ce_ca);
+		getView(row, 0, R.id.mark_degree);
+		getView(row, 1, R.id.mark_foot);
+		getView(row, 2, R.id.mark_inch);
+		getView(row, 3, R.id.mark_space);
+		getView(row, 4, R.id.mark_frac);
+		getView(row, 5, R.id.edit_backspace);
+		getView(row, 6, R.id.edit_ce_ca);
 
 		// row 5
 		row = 5;
@@ -459,7 +489,7 @@ public class Alt_Port02 extends AppCompatActivity {
 
 			String tagString = ((Button) view).getText().toString();
 
-			logMsg("view clicked: " + tagString);
+//			logMsg("view clicked: " + tagString);
 
 			Toast.makeText(getApplicationContext(), tagString + "  Clicked", Toast.LENGTH_SHORT).show();
 		}
