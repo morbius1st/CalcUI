@@ -23,8 +23,10 @@ class Utilities {
 		}
 
 	static void logMsg(String[] msg) {
-		for (int i = 0; i < msg.length; i++) {
-			Log.d("Test1", msg[i]);
+		for (String aMsg : msg) {
+			if (aMsg != null) {
+				Log.d("Test1", aMsg);
+			}
 		}
 	}
 

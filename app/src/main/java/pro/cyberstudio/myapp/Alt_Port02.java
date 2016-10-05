@@ -18,13 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import static pro.cyberstudio.myapp.Utilities.*;
 import static pro.cyberstudio.myapp.ConfigCalcUI.*;
 import static pro.cyberstudio.myapp.ConfigCalcUI.CellViewType.*;
+import static pro.cyberstudio.myapp.Utilities.*;
+//import static pro.cyberstudio.myapp.Utilities.*;
 
 public class Alt_Port02 extends AppCompatActivity {
 
-	private DisplayInformation DI;
+	static DisplayInformation DI;
 
 	private float HISTORY_PERCENT = 0.25f; // 30%
 	private static final float MARK_IMAGE_MAX_PERCENT = 0.70f; // 70%
@@ -34,6 +35,7 @@ public class Alt_Port02 extends AppCompatActivity {
 	private static final int TV_HISTORY = R.id.tvHistory02;
 
 	private ConfigCalcUI CUI = new ConfigCalcUI();
+	private ConfigCalcUIMgr CCM = new ConfigCalcUIMgr();
 
 	private GridLayoutGravity GLG = new GridLayoutGravity();
 
@@ -80,7 +82,9 @@ public class Alt_Port02 extends AppCompatActivity {
 
 		updateTextSize();
 
-		logMsg(CUI.toStringInitOnlyArray());
+//		logMsg(CUI.toStringInitOnlyArray());
+
+		logMsg(CCM.toStringInitOnlyArray());
 
 		initHistoryView(message);
 
@@ -257,6 +261,19 @@ public class Alt_Port02 extends AppCompatActivity {
 		return (Utilities.getView(this, DI, viewId));
 	}
 
+
+	// the field bogus is only to create a unique signature
+	// for this method
+	<T extends View> T getView(int viewId, boolean bogus) {
+		T v = Utilities.getView(this, DI, viewId);
+
+		CCM.addView(v, viewId);
+
+		return v;
+	}
+
+
+
 	// for initial setup only - this will wipe out existing cell views
 	// this deals with the primary views (the buttons)
 	<T extends View> T getView(int row, int column, int viewId) {
@@ -360,9 +377,9 @@ public class Alt_Port02 extends AppCompatActivity {
 		// row 1
 		row = 1;
 
-		getView(row, 0, R.id.grp_pren_begin);
-		getView(row, 1, R.id.grp_pren_end);
-		getView(row, 2, R.id.tv_entry);
+		getView(R.id.grp_pren_begin, true);
+		getView(R.id.grp_pren_end, true);
+		getView(R.id.tv_entry, true);
 
 		// row 2
 		row = 2;

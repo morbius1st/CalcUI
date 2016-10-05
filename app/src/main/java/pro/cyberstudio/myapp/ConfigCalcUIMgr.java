@@ -1,17 +1,19 @@
 package pro.cyberstudio.myapp;
 
 import android.annotation.SuppressLint;
+import android.telephony.CellInfo;
+import android.view.*;
+import android.widget.*;
 
-import android.view.Gravity;
-import android.view.View;
 
-import java.util.ArrayList;
+import java.util.*;
 
-import static pro.cyberstudio.myapp.ConfigCalcUI.CellViewType.*;
-import static pro.cyberstudio.myapp.ConfigCalcUI.ViewFunction.*;
-//import static pro.cyberstudio.myapp.Utilities.*;
+import static pro.cyberstudio.myapp.ConfigCalcUIMgr.CellType.*;
+import static pro.cyberstudio.myapp.ConfigCalcUIMgr.ViewFunction.*;
+import static pro.cyberstudio.myapp.ConfigCalcUIMgr.functionCategory.*;
 import static pro.cyberstudio.myapp.Utilities.*;
 
+//import static pro.cyberstudio.myapp.Utilities.*;
 
 /**
  * @author Jeff
@@ -22,19 +24,20 @@ import static pro.cyberstudio.myapp.Utilities.*;
 @SuppressLint("RtlHardcoded")
 @SuppressWarnings("WeakerAccess UnusedDeclaration")
 
-class ConfigCalcUI {
+public class ConfigCalcUIMgr {
 
-	static final int VIEWS_MAX = 11;
+	static final int VIEWS_MAX = 7;
 	static final int COLUMNS_MAX = 7;
-	static final int ROWS_MAX = 9;
 	static final int UNDEF = -1;
-
-	static boolean clearFlag = true;
 
 	static int idx = 0;
 
+	static DisplayInformation DI = Alt_Port02.DI;
+
+	private GridLayoutGravity GLG = new GridLayoutGravity();
+
 	// note that this must correspond 1 to 1 with the attrs.xml file for the view
-	enum ViewCategory {
+	enum functionCategory {
 		EDIT(101),
 		SHIFT(102),
 		ALPHA(103),
@@ -56,13 +59,13 @@ class ConfigCalcUI {
 
 		private int value;
 
-		ViewCategory(int value) {
+		functionCategory(int value) {
 			this.value = value;
 		}
 
 		static String toString(int idx) {
 
-			for (ViewCategory v : values())
+			for (functionCategory v : values())
 				if (v.value == idx)
 					return v.toString();
 
@@ -76,14 +79,25 @@ class ConfigCalcUI {
 		static int count() {
 			return UNDEFINED.ordinal() -1;
 		}
+
+		static int getIndex(int fCategory) {
+
+			if (fCategory < 0) {return -1;}
+
+			for (functionCategory fc : values()) {
+				if (fCategory == fc.getValue())
+					return fc.ordinal();
+			}
+			return -1;
+		}
 	}
 
 	enum ViewFunction {PRIME_FUNCT, SUB_FUNCT}
 
-	enum CellViewType {
-		BUTTON (idx++, PRIME_FUNCT, Gravity.NO_GRAVITY),
-		TEXTVIEW (idx++, PRIME_FUNCT, Gravity.NO_GRAVITY),
-		IMAGEBUTTON (idx++, PRIME_FUNCT, Gravity.NO_GRAVITY),
+	enum CellType {
+		BUTTON (-1, PRIME_FUNCT, Gravity.NO_GRAVITY),
+		TEXTVIEW (-1, PRIME_FUNCT, Gravity.NO_GRAVITY),
+		IMAGEBUTTON (-1, PRIME_FUNCT, Gravity.NO_GRAVITY),
 
 		TOP_LEFT (idx++, SUB_FUNCT, Gravity.TOP | Gravity.LEFT),
 		TOP_CENTER (idx++, SUB_FUNCT, Gravity.TOP | Gravity.CENTER),
@@ -98,22 +112,22 @@ class ConfigCalcUI {
 		private int gravity;
 		private int arrayIndex;
 
-		CellViewType(int i, ViewFunction vF, int g) {
+		CellType(int i, ViewFunction vF, int g) {
 			vFunct = vF;
 			gravity = g;
 			arrayIndex = i;
 		}
 
-		static CellViewType findViewTypeByGravity(int gravity) {
+		static CellType findViewTypeByGravity(int gravity) {
 
-			for (CellViewType cvt : CellViewType.values()) {
+			for (CellType cvt : CellType.values()) {
 				if (cvt.getGravity() == gravity)
 					return cvt;
 			}
 			return null;
 		}
 
-		static CellViewType findViewTypeByView(View v) {
+		static CellType findViewTypeByView(View v) {
 			if (v instanceof TextViewAlt)
 				return TEXTVIEW;
 			else if (v instanceof ButtonAlt)
@@ -124,7 +138,7 @@ class ConfigCalcUI {
 				return null;
 		}
 
-		boolean isButton() {
+		boolean isPrime() {
 			return vFunct == PRIME_FUNCT;
 		}
 
@@ -140,59 +154,104 @@ class ConfigCalcUI {
 			return vFunct;
 		}
 
-		int getArrayIndex() {
+		int getIndex() {
 			return arrayIndex;
 		}
 	}
 
 	private static CalculatorUI cui;
-	private static RowInfo[] ri;
 
 	private static boolean assigned = false;
 
-	ConfigCalcUI() {
+	ConfigCalcUIMgr() {
 
 		if (!assigned) {
-
 			assigned = true;
-
 			cui = new CalculatorUI();
-
-			logMsg("number of categories: " + ViewCategory.count());
+			logMsg("number of categories: " + functionCategory.count());
 		}
 
 	}
 
-	boolean addCell(int row, int column, CellInfo ci) {
+	public void addView(View vw, int viewId) {
+logMsg("config: add view: "+ vw.getTag().toString());
+		CellType ct = CellType.findViewTypeByView(vw);
 
-		if (!verifyRowColumn(row, column)) {
-			return false;
+		if (ct == null) {return;}
+
+		CellInfo ci = new CellInfo();
+
+		ci.addPrime(new CellView(ct, viewId, vw));
+
+		ViewParent vp = vw.getParent();
+
+		if (vp instanceof GridLayout) {
+			int i = ((GridLayout) vp).getChildCount();
+
+			for (int j = 0; j < ((GridLayout) vp).getChildCount(); j++) {
+
+				View vChild = ((GridLayout) vp).getChildAt(j);
+
+				adjustChildView(vChild);
+
+				ct = findViewTypeByGravity(GLG.getGravity(vChild));
+
+				if (ct != null) {
+					logMsg("adding child view: " + ct.toString());
+
+					ci.addView(new CellView(ct, vChild));
+				}
+			}
 		}
-
-		if (cui.addCell(row, column, ci)) {
-			return true;
-		}
-
-		return false;
+		// got a fully loaded CellInfo structure
+		cui.addCell(ci);
 	}
+
+	void adjustChildView (View vChild) {
+
+		if (vChild instanceof TextViewAlt) {
+			DI.adjustViewTextSize((TextView) vChild);
+		}
+
+	}
+//
+//	boolean addCell(int row, int column, CellInfo ci) {
+//
+//		if (!verifyRowColumn(row, column)) {
+//			return false;
+//		}
+//
+//		if (cui.addCell(row, column, ci)) {
+//			return true;
+//		}
+//
+//		return false;
+//	}
 
 	@Override
 	public String toString() {
 
 		StringBuilder sBuf = new StringBuilder();
-		CellInfo ci;
+//		CellInfo ci;
 		String s;
+
+		int c;
+
 
 		sBuf.append("\n<-- Start -->");
 
-		for (int r = 0; r < ROWS_MAX; r++) {
-			for (int c = 0; c < COLUMNS_MAX; c++) {
+		for (int r = 0; r < functionCategory.count(); r++) {
+			c = 0;
 
 
-				ci = cui.getCell(r, c);
+//			for (int c = 0; c < COLUMNS_MAX; c++) {
+
+			for (CellInfo ci : cui.calcArray[r]) {
+
+//				ci = cui.getCell(r, c);
 				s = ci.toString();
 
-				sBuf.append("\n r: " + r + " c: " + c);
+				sBuf.append("\n r: " + r + " c: " + c++);
 				sBuf.append(s);
 				sBuf.append("\n<-- next -->");
 			}
@@ -206,17 +265,21 @@ class ConfigCalcUI {
 	public String[] toStringArray() {
 
 		StringBuffer sBuf = new StringBuffer();
-		CellInfo ci;
+//		CellInfo ci;
 		String s;
-		String response[] = new String[ROWS_MAX];
+		String response[] = new String[functionCategory.count()];
+		int c;
 
 		sBuf.append("\n<-- Start -->");
 
-		for (int r = 0; r < ROWS_MAX; r++) {
-			for (int c = 0; c < COLUMNS_MAX; c++) {
+		for (int r = 0; r < functionCategory.count(); r++) {
 
+			c = 0;
 
-				ci = cui.getCell(r, c);
+//			for (int c = 0; c < COLUMNS_MAX; c++) {
+			for (CellInfo ci : cui.calcArray[r]) {
+
+//				ci = cui.getCell(r, c);
 				s = ci.toString();
 
 				sBuf.append("\n r: " + r + " c: " + c);
@@ -239,22 +302,25 @@ class ConfigCalcUI {
 	public String toStringInitOnly() {
 
 		StringBuffer sBuf = new StringBuffer();
-		CellInfo ci;
+//		CellInfo ci;
 		String s;
+		int c;
 
 		sBuf.append("\n<-- Start -->");
 
-		for (int r = 0; r < ROWS_MAX; r++) {
-			for (int c = 0; c < COLUMNS_MAX; c++) {
+		for (int r = 0; r < functionCategory.count(); r++) {
+			c = 0;
 
-				ci = cui.getCell(r, c);
+//			for (int c = 0; c < COLUMNS_MAX; c++) {
+			for (CellInfo ci : cui.calcArray[r]) {
+//				ci = cui.getCell(r, c);
 
 				// returns a string representation of the
 				// cell info or null if nothing
 				s = ci.toStringInitOnly();
 
 				if (s != null) {
-					sBuf.append("\n\nr: " + r + " c: " + c);
+					sBuf.append("\n\nr: " + r + " c: " + c++);
 					sBuf.append(s);
 				}
 			}
@@ -268,37 +334,41 @@ class ConfigCalcUI {
 	public String[] toStringInitOnlyArray() {
 
 		StringBuffer sBuf = new StringBuffer();
-		CellInfo ci;
 		String s;
-		String response[] = new String[ROWS_MAX];
+		String response[] = new String[functionCategory.count() +5];
 
-		sBuf.append("\n<-- Start -->");
+		int r = 0;
+		int c = 0;
 
-		for (int r = 0; r < ROWS_MAX; r++) {
+		response[r++] = "\n<-- Start -->";
 
-			sBuf.append("\nRow: " + r);
+		for (RowInfo ri : cui.calcArray) {
 
-			for (int c = 0; c < COLUMNS_MAX; c++) {
+			logMsg("<-- processing row: " + r);
 
-				ci = cui.getCell(r, c);
+			// ri = one row if ci's held in an arraylist
 
-				// returns a string representation of the
-				// cell info or null if nothing
+			for (CellInfo ci : ri) {
+
+				logMsg("<-- processing col: " + c);
+
 				s = ci.toStringInitOnly();
 
 				if (s != null) {
 					sBuf.append("\n\ncell: row: " + r + " column: " + c);
 					sBuf.append(s);
 				}
+
+				c++;
 			}
-			response[r] = sBuf.toString();
+
+			response[r++] = sBuf.toString();
 
 			// clear the buffer - this is the faster way
 			sBuf.delete(0, sBuf.length());
-
 		}
 
-		sBuf.append("\n<-- end -->");
+		response[r] = "\n<-- end -->";
 
 		return response;
 	}
@@ -307,7 +377,7 @@ class ConfigCalcUI {
 	// information a single view in a cell array
 	static class CellView {
 
-		CellViewType cvViewType;
+		CellType cvViewType;
 		int cvID;
 		String cvText;
 		int cvTextColor;
@@ -316,38 +386,31 @@ class ConfigCalcUI {
 		View cvView;
 		int cvCategory;
 
-		CellView(CellViewType cvViewType, int cvID, String cvText,
-				 int cvTextColor, int cvTextSize, int cvBackground) {
+		CellView(CellType cvViewType, View vw) {
+			setCellView(cvViewType, UNDEF, "", UNDEF, UNDEF, UNDEF, vw);
+		}
 
-			clearFlag = true;
+		CellView(CellType cvViewType, int cvID, View vw) {
+			setCellView(cvViewType, cvID, "", UNDEF, UNDEF, UNDEF, vw);
+		}
+
+		CellView(CellType cvViewType, int cvID, String cvText,
+		         int cvTextColor, int cvTextSize, int cvBackground) {
 			setCellView(cvViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, null);
-
 		}
 
-		CellView(CellViewType cvViewType, int cvID, String cvText,
-				 int cvTextColor, int cvTextSize, int cvBackground, View vx) {
-
-//			logMsg("setting cell view:  is null? " + (vx == null));
-
-			clearFlag = false;
-			setCellView(cvViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, vx);
+		CellView(CellType cvViewType, int cvID, String cvText,
+		         int cvTextColor, int cvTextSize, int cvBackground, View vw) {
+			setCellView(cvViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, vw);
 		}
+
 
 		CellView() {
 			clear();
 		}
 
-		void setCellView(CellViewType cvViewType, int cvID, String cvText,
-						 int cvTextColor, int cvTextSize, int cvBackground) {
-
-//			logMsg("setting cell view 2");
-
-			clearFlag = true;
-			setCellView(cvViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, null);
-		}
-
-		void setCellView(CellViewType cvViewType, int cvID, String cvText,
-						 int cvTextColor, int cvTextSize, int cvBackground, View v) {
+		void setCellView(CellType cvViewType, int cvID, String cvText,
+		                 int cvTextColor, int cvTextSize, int cvBackground, View v) {
 
 			this.cvViewType = cvViewType;
 			this.cvID = cvID;
@@ -359,49 +422,28 @@ class ConfigCalcUI {
 
 			String tag = "null";
 
-//			logMsg("setting ceil view 3: is null? " + (v == null) + " clearflag? " + !clearFlag);
+			if (v != null) {
 
-
-			if (!clearFlag) {
-
-//				if (v == null)
-//					logMsg("view is null");
-//				else
-//					logMsg("view is not null");
-
-
-				if (v != null) {
-//
-//					if (v.getTag() != null) {
-//						tag = v.getTag().toString();
-//					} else {
-//						tag = "is null";
-//					}
-
-					switch (findViewTypeByView(v)) {
-						case BUTTON:
-							cvCategory = ((ButtonAlt) v).getFunctionCategory();
-							break;
-						case TEXTVIEW:
-							cvCategory = ((TextViewAlt) v).getFunctionCategory();
-							break;
-						case IMAGEBUTTON:
-							cvCategory = ((ImageButtonAlt) v).getFunctionCategory();
-							break;
-						default:
-							cvCategory = ViewCategory.UNDEFINED.getValue();
-							break;
-					}
-//					logMsg("cat: " + cvCategory + "  class: " + v.getClass().getSimpleName() + "  tag: " + tag);
+				switch (findViewTypeByView(v)) {
+					case BUTTON:
+						cvCategory = ((ButtonAlt) v).getFunctionCategory();
+						break;
+					case TEXTVIEW:
+						cvCategory = ((TextViewAlt) v).getFunctionCategory();
+						break;
+					case IMAGEBUTTON:
+						cvCategory = ((ImageButtonAlt) v).getFunctionCategory();
+						break;
+					default:
+						cvCategory = functionCategory.UNDEFINED.getValue();
+						break;
 				}
-//				else
-//					logMsg("** is null - tag: " + tag);
 			}
+
 		}
 
 		void clear() {
 			setCellView(null, 0, null, 0, 0, 0, null);
-			clearFlag = true;
 		}
 
 		public void setView(View v) {
@@ -421,14 +463,14 @@ class ConfigCalcUI {
 		}
 
 		public  int getIndex() {
-			return cvViewType.getArrayIndex();
+			return cvViewType.getIndex();
 		}
 
-		public CellViewType getCellViewType() {
+		public CellType getCellType() {
 			return cvViewType;
 		}
 
-		public void setCellViewType(CellViewType cvView) {
+		public void setCellViewType(CellType cvView) {
 			this.cvViewType = cvView;
 		}
 
@@ -486,7 +528,7 @@ class ConfigCalcUI {
 				sBuf.append("\nText color: " + cvTextColor);
 				sBuf.append("\nText size: " + cvTextSize);
 				sBuf.append("\nBackground color: " + cvBackground);
-				sBuf.append("\nView cat: " + ViewCategory.toString(cvCategory));
+				sBuf.append("\nView cat: " + functionCategory.toString(cvCategory));
 				sBuf.append("\nView tag: ");
 				if (cvView != null) {
 
@@ -512,9 +554,14 @@ class ConfigCalcUI {
 		// provide null if not initalized (i.e. viewtype == null)
 		public String toStringInitOnly() {
 
+			logMsg("@cv toString ");
+
 			if (cvViewType == null) {
+				logMsg("view type is null");
 				return null;
 			}
+
+			logMsg(" not null");
 
 			return toString();
 		}
@@ -525,51 +572,54 @@ class ConfigCalcUI {
 	// minimum is 0 maximum is Views_max
 	static class CellInfo {
 
-		CellView[] cellViewArray = new CellView[VIEWS_MAX];
+		CellView cvPrime;
+
+		CellView[] cvArray = new CellView[VIEWS_MAX];
 
 		CellInfo() {
 			clear();
 		}
 
+		boolean addPrime(CellView cv) {
+			if (cv == null || cv.getCellType().isSubFunction()) {return false;}
+
+			cvPrime = cv;
+
+			return true;
+		}
+
 		boolean addView(CellView cv) {
+			if (cv == null || cv.getCellType().isPrime()) { return false;}
 
-			if (cv == null) {
-				return false;
-			}
-
-			int index = cv.getIndex();
-
-			if (index > VIEWS_MAX || index < 0) {
-				return false;
-			}
-
-			if (index == 0 &&
-					cv.getCellViewType().isSubFunction()) {
-				return false;
-			}
-
-			cellViewArray[index] = cv;
+			cvArray[cv.getCellType().getIndex()] = cv;
 
 			return true;
 		}
 
 		void clear() {
 			for (int i = 0; i < VIEWS_MAX; i++) {
-				cellViewArray[i] = new CellView();
+				cvArray[i] = new CellView();
 			}
+		}
+
+		CellView getPrime() {
+			return cvPrime;
 		}
 
 		CellView getView(int index) {
 			if (index > VIEWS_MAX || index <0) {
 				return null;
 			}
-
-			return cellViewArray[index];
+			return cvArray[index];
 		}
 
-		CellView getView(CellViewType cvs) {
+		CellView getView(CellType ct) {
 
-			return cellViewArray[cvs.getArrayIndex()];
+			if (ct.isPrime()) {
+				return cvPrime;
+			}
+
+			return cvArray[ct.getIndex()];
 		}
 
 		// provide toString for all of the views contained
@@ -580,7 +630,7 @@ class ConfigCalcUI {
 			StringBuffer sBuf = new StringBuffer("\n<--- start views --->   ");
 
 			for (int v = 0; v < VIEWS_MAX; v++) {
-				sBuf.append(cellViewArray[v].toString());
+				sBuf.append(cvArray[v].toString());
 			}
 
 			sBuf.append("\n<--- end views --->   ");
@@ -594,13 +644,20 @@ class ConfigCalcUI {
 			StringBuffer sBuf = new StringBuffer();
 			String s;
 
-			for (int v = 0; v < VIEWS_MAX; v++) {
+			logMsg("@ci toString: ");
 
-				CellView cv = cellViewArray[v];
+			s = cvPrime.toStringInitOnly();
 
-				s = cv.toStringInitOnly();
-				if (s != null)
-					sBuf.append(s);
+			if (s != null) {
+				sBuf.append(s);
+				for (CellView cv : cvArray) {
+
+					logMsg("@cv:");
+
+					s = cv.toStringInitOnly();
+					if (s != null)
+						sBuf.append(s);
+				}
 			}
 
 			if (sBuf.length() != 0) {
@@ -616,33 +673,61 @@ class ConfigCalcUI {
 
 	// array of cells in a single row
 	// minimum is 0 max is columns_max
-	class RowInfo {
+	class RowInfo implements Iterable<CellInfo> {
 
-		CellInfo[] rowArray = new CellInfo[COLUMNS_MAX];
+		ArrayList<CellInfo> ra;
 
-		RowInfo(int row) {
-			for (int i = 0; i < COLUMNS_MAX; i++) {
-				rowArray[i] = new CellInfo();
-			}
+
+//		CellInfo[] rowArray = new CellInfo[COLUMNS_MAX];
+
+		RowInfo() {
+
+			ra = new ArrayList<>(COLUMNS_MAX);
 		}
 
-		boolean addCell(int column, CellInfo ci) {
-
-			if (column > COLUMNS_MAX || column < 0) {
-				return false;
-			}
-
-			rowArray[column] = ci;
-
-			return true;
+		boolean addCell(CellInfo ci) {
+			logMsg("row info add cell: " + ci.getPrime().getView().getTag().toString());
+			return ra.add(ci);
 		}
 
-		CellInfo getCell(int column) {
-			if (column > COLUMNS_MAX || column < 0) {
+		CellInfo getCell(int index) {
+			if (index > ra.size() || index < 0) {
 				return null;
 			}
-			return rowArray[column];
+			return ra.get(index);
 		}
+
+		public Iterator<CellInfo> iterator() {
+			return new RowInfoIterator();
+		}
+
+		private class RowInfoIterator implements Iterator<CellInfo> {
+
+			private int cursor;
+
+			public RowInfoIterator() {
+				this.cursor = 0;
+			}
+
+			@Override
+			public boolean hasNext() {
+				return this.cursor < ra.size();
+			}
+
+			@Override
+			public CellInfo next() {
+				if (!this.hasNext()) {
+					throw new NoSuchElementException();
+				}
+				return ra.get(cursor++);
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+		}
+
 	}
 
 
@@ -657,29 +742,49 @@ class ConfigCalcUI {
 		CalculatorUI() {
 			if (!assigned) {
 				assigned = true;
-				calcArray = new RowInfo[ViewCategory.count()];
+				calcArray = new RowInfo[functionCategory.count()];
 
-				for (int i = 0; i < ViewCategory.count(); i++) {
-								calcArray[i] = new RowInfo(i);
+				for (int i = 0; i < functionCategory.count(); i++) {
+					calcArray[i] = new RowInfo();
 				}
 			}
 		}
 
-		boolean addCell(int row, int column, CellInfo cellInfo) {
+		boolean addCell(CellInfo ci) {
+			int fCategory;
+			int row;
 
-			if (!verifyRowColumn(row, column)) {
-				return false;
-			}
+			logMsg("calcui addCell: " + ci.getPrime().getView().getTag().toString());
 
-			calcArray[row].addCell(column, cellInfo);
+			View vw = ci.getPrime().getView();
 
-			return true;
+			fCategory = ((iWidgetAlt) vw).getFunctionCategory();
+
+			row = getIndex(fCategory);
+
+			if (row < 0) { return false;}
+
+			if (calcArray[row].addCell(ci))
+				return true;
+
+			return false;
 		}
 
-		CellInfo getCell(int row, int column) {
+//		boolean addCell(int row, int column, CellInfo cellInfo) {
+//
+//			if (!verifyRowColumn(row, column)) {
+//				return false;
+//			}
+//
+//			calcArray[row].addCell(column, cellInfo);
+//
+//			return true;
+//		}
 
-			return calcArray[row].getCell(column);
-		}
+//		CellInfo getCell(int row, int column) {
+//
+//			return calcArray[row].getCell(column);
+//		}
 	}
 
 	static boolean verifyRowColumn(int row, int column) {
@@ -691,7 +796,7 @@ class ConfigCalcUI {
 	}
 
 	static boolean verifyRow(int row) {
-		if (row > ROWS_MAX || row < 0) {
+		if (row > functionCategory.count() || row < 0) {
 			return false;
 		}
 		return true;
