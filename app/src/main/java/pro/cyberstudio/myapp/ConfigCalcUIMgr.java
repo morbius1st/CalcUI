@@ -76,7 +76,7 @@ public class ConfigCalcUIMgr {
 		}
 
 		static int count() {
-			return UNDEFINED.ordinal() -1;
+			return UNDEFINED.ordinal();
 		}
 
 		static int getIndex(int fCategory) {
