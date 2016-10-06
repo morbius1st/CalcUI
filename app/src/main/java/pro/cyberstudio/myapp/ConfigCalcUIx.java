@@ -5,10 +5,8 @@ import android.annotation.SuppressLint;
 import android.view.Gravity;
 import android.view.View;
 
-import java.util.ArrayList;
-
-import static pro.cyberstudio.myapp.ConfigCalcUI.CellViewType.*;
-import static pro.cyberstudio.myapp.ConfigCalcUI.ViewFunction.*;
+import static pro.cyberstudio.myapp.ConfigCalcUIx.CellViewType.*;
+import static pro.cyberstudio.myapp.ConfigCalcUIx.ViewFunction.*;
 //import static pro.cyberstudio.myapp.Utilities.*;
 import static pro.cyberstudio.myapp.Utilities.*;
 
@@ -22,7 +20,7 @@ import static pro.cyberstudio.myapp.Utilities.*;
 @SuppressLint("RtlHardcoded")
 @SuppressWarnings("WeakerAccess UnusedDeclaration")
 
-class ConfigCalcUI {
+class ConfigCalcUIx {
 
 	static final int VIEWS_MAX = 11;
 	static final int COLUMNS_MAX = 7;
@@ -150,7 +148,7 @@ class ConfigCalcUI {
 
 	private static boolean assigned = false;
 
-	ConfigCalcUI() {
+	ConfigCalcUIx() {
 
 		if (!assigned) {
 

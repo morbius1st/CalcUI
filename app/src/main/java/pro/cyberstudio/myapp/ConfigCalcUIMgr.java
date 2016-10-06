@@ -1,7 +1,6 @@
 package pro.cyberstudio.myapp;
 
 import android.annotation.SuppressLint;
-import android.telephony.CellInfo;
 import android.view.*;
 import android.widget.*;
 
@@ -26,13 +25,13 @@ import static pro.cyberstudio.myapp.Utilities.*;
 
 public class ConfigCalcUIMgr {
 
-	static final int VIEWS_MAX = 7;
+	static final int VIEWS_MAX = 9;
 	static final int COLUMNS_MAX = 7;
 	static final int UNDEF = -1;
 
 	static int idx = 0;
 
-	static DisplayInformation DI = Alt_Port02.DI;
+	private DisplayInformation DI;
 
 	private GridLayoutGravity GLG = new GridLayoutGravity();
 
@@ -163,7 +162,9 @@ public class ConfigCalcUIMgr {
 
 	private static boolean assigned = false;
 
-	ConfigCalcUIMgr() {
+	ConfigCalcUIMgr(DisplayInformation DI) {
+
+		this.DI = DI;
 
 		if (!assigned) {
 			assigned = true;
@@ -209,8 +210,12 @@ logMsg("config: add view: "+ vw.getTag().toString());
 
 	void adjustChildView (View vChild) {
 
-		if (vChild instanceof TextViewAlt) {
-			DI.adjustViewTextSize((TextView) vChild);
+		if (vChild != null) {
+			if (vChild instanceof TextViewAlt) {
+				DI.adjustViewTextSize((TextView) vChild);
+			}
+		} else {
+			logMsg("child view is null");
 		}
 
 	}
@@ -338,13 +343,15 @@ logMsg("config: add view: "+ vw.getTag().toString());
 		String response[] = new String[functionCategory.count() +5];
 
 		int r = 0;
-		int c = 0;
+		int c;
 
 		response[r++] = "\n<-- Start -->";
 
-		for (RowInfo ri : cui.calcArray) {
+		for (RowInfo2 ri : cui.calcArray) {
 
 			logMsg("<-- processing row: " + r);
+
+			c = 0;
 
 			// ri = one row if ci's held in an arraylist
 
@@ -671,30 +678,71 @@ logMsg("config: add view: "+ vw.getTag().toString());
 
 	}
 
+	class RowInfo implements Iterable<CellView> {
+
+		ArrayList<CellView> alCellView;
+
+		RowInfo() {
+			alCellView = new ArrayList<>(COLUMNS_MAX);
+		}
+
+		boolean add(CellView cv) {
+			logMsg("@row info: add cell: " + cv.getView().getTag().toString());
+
+			return alCellView.add(cv);
+		}
+
+		CellView get(int index) {
+			if (index > alCellView.size() || index <0)
+				return null;
+
+			return alCellView.get(index);
+		}
+
+		public Iterator<CellView> iterator() {return new RowInfoIterator(); }
+
+		private class RowInfoIterator implements Iterator<CellView> {
+			private int cursor;
+
+			public RowInfoIterator() { this.cursor = 0;}
+
+			@Override
+			public boolean hasNext() { return this.cursor < alCellView.size(); }
+
+			@Override
+			public CellView
+		}
+
+
+	}
+
+
+
+
+
 	// array of cells in a single row
 	// minimum is 0 max is columns_max
-	class RowInfo implements Iterable<CellInfo> {
+	class RowInfo2 implements Iterable<CellInfo> {
 
-		ArrayList<CellInfo> ra;
-
+		ArrayList<CellInfo> alCellInfo;
 
 //		CellInfo[] rowArray = new CellInfo[COLUMNS_MAX];
 
-		RowInfo() {
-
-			ra = new ArrayList<>(COLUMNS_MAX);
+		RowInfo2() {
+			alCellInfo = new ArrayList<>(COLUMNS_MAX);
 		}
+
 
 		boolean addCell(CellInfo ci) {
 			logMsg("row info add cell: " + ci.getPrime().getView().getTag().toString());
-			return ra.add(ci);
+			return alCellInfo.add(ci);
 		}
 
 		CellInfo getCell(int index) {
-			if (index > ra.size() || index < 0) {
+			if (index > alCellInfo.size() || index < 0) {
 				return null;
 			}
-			return ra.get(index);
+			return alCellInfo.get(index);
 		}
 
 		public Iterator<CellInfo> iterator() {
@@ -711,7 +759,7 @@ logMsg("config: add view: "+ vw.getTag().toString());
 
 			@Override
 			public boolean hasNext() {
-				return this.cursor < ra.size();
+				return this.cursor < alCellInfo.size();
 			}
 
 			@Override
@@ -719,7 +767,7 @@ logMsg("config: add view: "+ vw.getTag().toString());
 				if (!this.hasNext()) {
 					throw new NoSuchElementException();
 				}
-				return ra.get(cursor++);
+				return alCellInfo.get(cursor++);
 			}
 
 			@Override
@@ -736,16 +784,16 @@ logMsg("config: add view: "+ vw.getTag().toString());
 	// minimum row number is 0 max is rows_max
 	class CalculatorUI {
 
-		RowInfo[] calcArray;
+		RowInfo2[] calcArray;
 		private boolean assigned = false;
 
 		CalculatorUI() {
 			if (!assigned) {
 				assigned = true;
-				calcArray = new RowInfo[functionCategory.count()];
+				calcArray = new RowInfo2[functionCategory.count()];
 
 				for (int i = 0; i < functionCategory.count(); i++) {
-					calcArray[i] = new RowInfo();
+					calcArray[i] = new RowInfo2();
 				}
 			}
 		}
