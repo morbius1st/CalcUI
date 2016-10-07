@@ -7,10 +7,11 @@ import android.widget.*;
 
 import java.util.*;
 
+import static android.R.attr.tag;
 import static pro.cyberstudio.myapp.ConfigCalcUIMgr.CellType.*;
 import static pro.cyberstudio.myapp.ConfigCalcUIMgr.ViewFunction.*;
 import static pro.cyberstudio.myapp.ConfigCalcUIMgr.functionCategory.*;
-import static pro.cyberstudio.myapp.Utilities.*;
+import static pro.cyberstudio.myapp.Utilities.padLeft;
 
 //import static pro.cyberstudio.myapp.Utilities.*;
 
@@ -62,10 +63,15 @@ public class ConfigCalcUIMgr {
 			this.value = value;
 		}
 
-		static String toString(int idx) {
+		static String toStringOrdinal(int ordinal) {
+
+			return functionCategory.values()[ordinal].name();
+		}
+
+		static String toStringValue(int value) {
 
 			for (functionCategory v : values())
-				if (v.value == idx)
+				if (v.value == value)
 					return v.toString();
 
 			return null;
@@ -169,13 +175,18 @@ public class ConfigCalcUIMgr {
 		if (!assigned) {
 			assigned = true;
 			cui = new CalculatorUI();
-			logMsg("number of categories: " + functionCategory.count());
+//			logMsg("number of categories: " + functionCategory.count());
+//
+//			for (functionCategory fc : functionCategory.values()) {
+//				logMsg("fc #" + fc.ordinal() + "  : " + fc.toString());
+//			}
+
 		}
 
 	}
 
 	public void addView(View vw, int viewId) {
-		logMsg("config: add view: "+ vw.getTag().toString());
+//		logMsg("config: add view: "+ vw.getTag().toString());
 		CellType ct = CellType.findViewTypeByView(vw);
 
 		if (ct == null) {return;}
@@ -196,7 +207,7 @@ public class ConfigCalcUIMgr {
 				ct = findViewTypeByGravity(GLG.getGravity(vChild));
 
 				if (ct != null) {
-					logMsg("adding child view: " + ct.toString());
+//					logMsg("adding child view: " + ct.toString());
 
 					cui.add(new CellView(ct, vChild));
 				}
@@ -210,9 +221,10 @@ public class ConfigCalcUIMgr {
 			if (vChild instanceof TextViewAlt) {
 				DI.adjustViewTextSize((TextView) vChild);
 			}
-		} else {
-			logMsg("child view is null");
 		}
+//		else {
+//			logMsg("child view is null");
+//		}
 
 	}
 //
@@ -345,7 +357,7 @@ public class ConfigCalcUIMgr {
 
 		for (RowInfo ri : cui.calcArray) {
 
-			logMsg("<-- processing row: " + r);
+//			logMsg("<-- processing row: " + r);
 
 			c = 0;
 
@@ -353,12 +365,12 @@ public class ConfigCalcUIMgr {
 
 			for (CellView cv : ri) {
 
-				logMsg("<-- processing col: " + c);
+//				logMsg("<-- processing col: " + c);
 
 				s = cv.toStringInitOnly();
 
 				if (s != null) {
-					sBuf.append("\n\ncell: row: " + r + " column: " + c);
+					sBuf.append("\n\ncell: row #" + r + " " + functionCategory.toStringOrdinal(r) + " column: " + c);
 					sBuf.append(s);
 				}
 
@@ -521,18 +533,21 @@ public class ConfigCalcUIMgr {
 		public String toString() {
 			StringBuffer sBuf = new StringBuffer("");
 
+			int COLUMN = 20;
+
 			if (cvViewType != null) {
 				// view position and type
-				sBuf.append("\n\nView: " + cvViewType.ordinal() +
+				sBuf.append("\n\n" + padLeft("View type: ", COLUMN) +
+						cvViewType.ordinal() +
 						" (" + cvViewType.toString() + ")");
-				sBuf.append("\nID: " + cvID);
+				sBuf.append("\n" + padLeft("ID: ", COLUMN) + cvID);
 
-				sBuf.append("\nText: " + cvText);
-				sBuf.append("\nText color: " + cvTextColor);
-				sBuf.append("\nText size: " + cvTextSize);
-				sBuf.append("\nBackground color: " + cvBackground);
-				sBuf.append("\nView cat: " + functionCategory.toString(cvCategory));
-				sBuf.append("\nView tag: ");
+				sBuf.append("\n" + padLeft("Text: ", COLUMN) + cvText);
+				sBuf.append("\n" + padLeft("Text color: ", COLUMN) + cvTextColor);
+				sBuf.append("\n" + padLeft("Text size: ", COLUMN) + cvTextSize);
+				sBuf.append("\n" + padLeft("Background color: ", COLUMN) + cvBackground);
+				sBuf.append("\n" + padLeft("View cat: ", COLUMN) + functionCategory.toStringValue(cvCategory));
+				sBuf.append("\n" + padLeft("View tag: ", COLUMN));
 				if (cvView != null) {
 
 					Object tagX = cvView.getTag();
@@ -550,6 +565,8 @@ public class ConfigCalcUIMgr {
 				sBuf.append("\n*** View: not initalized");
 			}
 
+			sBuf.append("\n");
+
 			return sBuf.toString();
 		}
 
@@ -557,122 +574,122 @@ public class ConfigCalcUIMgr {
 		// provide null if not initalized (i.e. viewtype == null)
 		public String toStringInitOnly() {
 
-			logMsg("@cv toString ");
+//			logMsg("@cv toString ");
 
 			if (cvViewType == null) {
-				logMsg("view type is null");
+//				logMsg("view type is null");
 				return null;
 			}
 
-			logMsg(" not null");
+//			logMsg(" not null");
 
 			return toString();
 		}
 	}
 
-
-	// array of views in a single cell
-	// minimum is 0 maximum is Views_max
-	static class CellInfo {
-
-		CellView cvPrime;
-
-		CellView[] cvArray = new CellView[VIEWS_MAX];
-
-		CellInfo() {
-			clear();
-		}
-
-		boolean addPrime(CellView cv) {
-			if (cv == null || cv.getCellType().isSubFunction()) {return false;}
-
-			cvPrime = cv;
-
-			return true;
-		}
-
-		boolean addView(CellView cv) {
-			if (cv == null || cv.getCellType().isPrime()) { return false;}
-
-			cvArray[cv.getCellType().getIndex()] = cv;
-
-			return true;
-		}
-
-		void clear() {
-			for (int i = 0; i < VIEWS_MAX; i++) {
-				cvArray[i] = new CellView();
-			}
-		}
-
-		CellView getPrime() {
-			return cvPrime;
-		}
-
-		CellView getView(int index) {
-			if (index > VIEWS_MAX || index <0) {
-				return null;
-			}
-			return cvArray[index];
-		}
-
-		CellView getView(CellType ct) {
-
-			if (ct.isPrime()) {
-				return cvPrime;
-			}
-
-			return cvArray[ct.getIndex()];
-		}
-
-		// provide toString for all of the views contained
-		// regardless whether the view is initialized or not
-		@Override
-		public String toString() {
-
-			StringBuffer sBuf = new StringBuffer("\n<--- start views --->   ");
-
-			for (int v = 0; v < VIEWS_MAX; v++) {
-				sBuf.append(cvArray[v].toString());
-			}
-
-			sBuf.append("\n<--- end views --->   ");
-
-			return sBuf.toString();
-		}
-
-		// provide toString for all initialized views contained
-		// return null if nothing is initalized
-		public String toStringInitOnly() {
-			StringBuffer sBuf = new StringBuffer();
-			String s;
-
-			logMsg("@ci toString: ");
-
-			s = cvPrime.toStringInitOnly();
-
-			if (s != null) {
-				sBuf.append(s);
-				for (CellView cv : cvArray) {
-
-					logMsg("@cv:");
-
-					s = cv.toStringInitOnly();
-					if (s != null)
-						sBuf.append(s);
-				}
-			}
-
-			if (sBuf.length() != 0) {
-				sBuf.insert(0, "\n\n<--- start views --->   ");
-				sBuf.append("\n\n<--- end views --->   ");
-				return sBuf.toString();
-			}
-
-			return null;
-		}
-
-	}
+//
+//	// array of views in a single cell
+//	// minimum is 0 maximum is Views_max
+//	static class CellInfo {
+//
+//		CellView cvPrime;
+//
+//		CellView[] cvArray = new CellView[VIEWS_MAX];
+//
+//		CellInfo() {
+//			clear();
+//		}
+//
+//		boolean addPrime(CellView cv) {
+//			if (cv == null || cv.getCellType().isSubFunction()) {return false;}
+//
+//			cvPrime = cv;
+//
+//			return true;
+//		}
+//
+//		boolean addView(CellView cv) {
+//			if (cv == null || cv.getCellType().isPrime()) { return false;}
+//
+//			cvArray[cv.getCellType().getIndex()] = cv;
+//
+//			return true;
+//		}
+//
+//		void clear() {
+//			for (int i = 0; i < VIEWS_MAX; i++) {
+//				cvArray[i] = new CellView();
+//			}
+//		}
+//
+//		CellView getPrime() {
+//			return cvPrime;
+//		}
+//
+//		CellView getView(int index) {
+//			if (index > VIEWS_MAX || index <0) {
+//				return null;
+//			}
+//			return cvArray[index];
+//		}
+//
+//		CellView getView(CellType ct) {
+//
+//			if (ct.isPrime()) {
+//				return cvPrime;
+//			}
+//
+//			return cvArray[ct.getIndex()];
+//		}
+//
+//		// provide toString for all of the views contained
+//		// regardless whether the view is initialized or not
+//		@Override
+//		public String toString() {
+//
+//			StringBuffer sBuf = new StringBuffer("\n<--- start views --->   ");
+//
+//			for (int v = 0; v < VIEWS_MAX; v++) {
+//				sBuf.append(cvArray[v].toString());
+//			}
+//
+//			sBuf.append("\n<--- end views --->   ");
+//
+//			return sBuf.toString();
+//		}
+//
+//		// provide toString for all initialized views contained
+//		// return null if nothing is initalized
+//		public String toStringInitOnly() {
+//			StringBuffer sBuf = new StringBuffer();
+//			String s;
+//
+////			logMsg("@ci toString: ");
+//
+//			s = cvPrime.toStringInitOnly();
+//
+//			if (s != null) {
+//				sBuf.append(s);
+//				for (CellView cv : cvArray) {
+//
+////					logMsg("@cv:");
+//
+//					s = cv.toStringInitOnly();
+//					if (s != null)
+//						sBuf.append(s);
+//				}
+//			}
+//
+//			if (sBuf.length() != 0) {
+//				sBuf.insert(0, "\n\n<--- start views --->   ");
+//				sBuf.append("\n\n<--- end views --->   ");
+//				return sBuf.toString();
+//			}
+//
+//			return null;
+//		}
+//
+//	}
 
 	class RowInfo implements Iterable<CellView> {
 
@@ -683,7 +700,7 @@ public class ConfigCalcUIMgr {
 		}
 
 		boolean add(CellView cv) {
-			logMsg("@row info: add cell: " + cv.getView().getTag().toString());
+//			logMsg("@row info: add cell: " + cv.getView().getTag().toString());
 
 			return alCellView.add(cv);
 		}
@@ -804,7 +821,7 @@ public class ConfigCalcUIMgr {
 			int fCategory;
 			int row;
 
-			logMsg("calcui add: " + cv.getView().getTag().toString());
+//			logMsg("calcui add: " + cv.getView().getTag().toString());
 
 			View vw = cv.getView();
 

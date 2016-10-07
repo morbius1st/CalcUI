@@ -34,7 +34,7 @@ public class Alt_Port02 extends AppCompatActivity {
 
 	private static final int TV_HISTORY = R.id.tvHistory02;
 
-	private ConfigCalcUIx CUI = new ConfigCalcUIx();
+//	private ConfigCalcUIx CUI = new ConfigCalcUIx();
 	private ConfigCalcUIMgr CCM;
 
 	private GridLayoutGravity GLG = new GridLayoutGravity();
@@ -66,6 +66,8 @@ public class Alt_Port02 extends AppCompatActivity {
 				findViewById(R.id.ad_banner_port), null);
 
 		TextView tvE = (TextView) findViewById(R.id.tv_entry);
+
+		logMsg("init configcalcui");
 
 		CCM = new ConfigCalcUIMgr(DI);
 
@@ -275,71 +277,71 @@ public class Alt_Port02 extends AppCompatActivity {
 	}
 
 
-
-	// for initial setup only - this will wipe out existing cell views
-	// this deals with the primary views (the buttons)
-	<T extends View> T getView(int row, int column, int viewId) {
-		CellViewType cvt;
-
-		T v = (Utilities.getView(this, DI, viewId));
-
-		if (verifyRowColumn(row, column)) {
-			CellInfo ci = new CellInfo();
-
-			// setup the basic cell view with just the type, id, and view reference
-			// the other settings are based on the XML layout
-
-			CellView cv = null;
 //
-//			if (v != null) {
-//				logMsg("v: " + v.getClass().getSimpleName());
-//			} else {
-//				logMsg("v: is null");
+//	// for initial setup only - this will wipe out existing cell views
+//	// this deals with the primary views (the buttons)
+//	<T extends View> T getView(int row, int column, int viewId) {
+//		CellViewType cvt;
+//
+//		T v = (Utilities.getView(this, DI, viewId));
+//
+//		if (verifyRowColumn(row, column)) {
+//			CellInfo ci = new CellInfo();
+//
+//			// setup the basic cell view with just the type, id, and view reference
+//			// the other settings are based on the XML layout
+//
+//			CellView cv = null;
+////
+////			if (v != null) {
+////				logMsg("v: " + v.getClass().getSimpleName());
+////			} else {
+////				logMsg("v: is null");
+////			}
+//
+//			switch (findViewTypeByView(v)) {
+//				case BUTTON:
+////					logMsg("type is button");
+//					 cv = new CellView(BUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
+//					break;
+//				case TEXTVIEW:
+////					logMsg("type is textview");
+//					cv = new CellView(TEXTVIEW, viewId, "", UNDEF, UNDEF, UNDEF, v);
+//					break;
+//				case IMAGEBUTTON:
+////					logMsg("type is imagebutton");
+//					cv = new CellView(IMAGEBUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
+//					break;
+////				default:
+////					logMsg("type is undefined");
 //			}
-
-			switch (findViewTypeByView(v)) {
-				case BUTTON:
-//					logMsg("type is button");
-					 cv = new CellView(BUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
-					break;
-				case TEXTVIEW:
-//					logMsg("type is textview");
-					cv = new CellView(TEXTVIEW, viewId, "", UNDEF, UNDEF, UNDEF, v);
-					break;
-				case IMAGEBUTTON:
-//					logMsg("type is imagebutton");
-					cv = new CellView(IMAGEBUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
-					break;
-//				default:
-//					logMsg("type is undefined");
-			}
-
-			if (cv != null) {
-				ci.addView(cv);
-
-				ViewParent vp = v.getParent();
-
-				if (vp.getClass() == GridLayout.class) {
-					int i = ((GridLayout) vp).getChildCount();
-
-					for (int j = 0; j < i; j++) {
-						View vChild = ((GridLayout) vp).getChildAt(j);
-
-						adjustChildView(vChild);
-
-						cvt = findViewTypeByGravity(GLG.getGravity(vChild));
-						if (cvt != null) {
-//							logMsg("add child view");
-							cv = new CellView(cvt, UNDEF, "", UNDEF, UNDEF, UNDEF, vChild);
-							ci.addView(cv);
-						}
-					}
-				}
-				CUI.addCell(row, column, ci);
-			}
-		}
-		return v;
-	}
+//
+//			if (cv != null) {
+//				ci.addView(cv);
+//
+//				ViewParent vp = v.getParent();
+//
+//				if (vp.getClass() == GridLayout.class) {
+//					int i = ((GridLayout) vp).getChildCount();
+//
+//					for (int j = 0; j < i; j++) {
+//						View vChild = ((GridLayout) vp).getChildAt(j);
+//
+//						adjustChildView(vChild);
+//
+//						cvt = findViewTypeByGravity(GLG.getGravity(vChild));
+//						if (cvt != null) {
+////							logMsg("add child view");
+//							cv = new CellView(cvt, UNDEF, "", UNDEF, UNDEF, UNDEF, vChild);
+//							ci.addView(cv);
+//						}
+//					}
+//				}
+//				CUI.addCell(row, column, ci);
+//			}
+//		}
+//		return v;
+//	}
 
 	public String test() {
 		return "this is a test";
