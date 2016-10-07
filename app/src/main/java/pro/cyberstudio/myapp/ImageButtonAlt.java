@@ -5,7 +5,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
 
-import static pro.cyberstudio.myapp.ConfigCalcUI.ViewCategory.UNDEFINED;
+import static pro.cyberstudio.myapp.ConfigCalcUIx.ViewCategory.UNDEFINED;
 
 /**
  * @author Jeff

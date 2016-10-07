@@ -1,7 +1,6 @@
 package pro.cyberstudio.myapp;
 
 import android.annotation.SuppressLint;
-import android.telephony.CellInfo;
 import android.view.*;
 import android.widget.*;
 
@@ -26,13 +25,13 @@ import static pro.cyberstudio.myapp.Utilities.*;
 
 public class ConfigCalcUIMgr {
 
-	static final int VIEWS_MAX = 7;
+	static final int VIEWS_MAX = 9;
 	static final int COLUMNS_MAX = 7;
 	static final int UNDEF = -1;
 
 	static int idx = 0;
 
-	static DisplayInformation DI = Alt_Port02.DI;
+	private DisplayInformation DI;
 
 	private GridLayoutGravity GLG = new GridLayoutGravity();
 
@@ -77,7 +76,7 @@ public class ConfigCalcUIMgr {
 		}
 
 		static int count() {
-			return UNDEFINED.ordinal() -1;
+			return UNDEFINED.ordinal();
 		}
 
 		static int getIndex(int fCategory) {
@@ -163,7 +162,9 @@ public class ConfigCalcUIMgr {
 
 	private static boolean assigned = false;
 
-	ConfigCalcUIMgr() {
+	ConfigCalcUIMgr(DisplayInformation DI) {
+
+		this.DI = DI;
 
 		if (!assigned) {
 			assigned = true;
@@ -174,14 +175,12 @@ public class ConfigCalcUIMgr {
 	}
 
 	public void addView(View vw, int viewId) {
-logMsg("config: add view: "+ vw.getTag().toString());
+		logMsg("config: add view: "+ vw.getTag().toString());
 		CellType ct = CellType.findViewTypeByView(vw);
 
 		if (ct == null) {return;}
 
-		CellInfo ci = new CellInfo();
-
-		ci.addPrime(new CellView(ct, viewId, vw));
+		cui.add(new CellView(ct, viewId, vw));
 
 		ViewParent vp = vw.getParent();
 
@@ -199,29 +198,31 @@ logMsg("config: add view: "+ vw.getTag().toString());
 				if (ct != null) {
 					logMsg("adding child view: " + ct.toString());
 
-					ci.addView(new CellView(ct, vChild));
+					cui.add(new CellView(ct, vChild));
 				}
 			}
 		}
-		// got a fully loaded CellInfo structure
-		cui.addCell(ci);
 	}
 
 	void adjustChildView (View vChild) {
 
-		if (vChild instanceof TextViewAlt) {
-			DI.adjustViewTextSize((TextView) vChild);
+		if (vChild != null) {
+			if (vChild instanceof TextViewAlt) {
+				DI.adjustViewTextSize((TextView) vChild);
+			}
+		} else {
+			logMsg("child view is null");
 		}
 
 	}
 //
-//	boolean addCell(int row, int column, CellInfo ci) {
+//	boolean add(int row, int column, CellInfo ci) {
 //
 //		if (!verifyRowColumn(row, column)) {
 //			return false;
 //		}
 //
-//		if (cui.addCell(row, column, ci)) {
+//		if (cui.add(row, column, ci)) {
 //			return true;
 //		}
 //
@@ -246,10 +247,10 @@ logMsg("config: add view: "+ vw.getTag().toString());
 
 //			for (int c = 0; c < COLUMNS_MAX; c++) {
 
-			for (CellInfo ci : cui.calcArray[r]) {
+			for (CellView cv : cui.calcArray[r]) {
 
 //				ci = cui.getCell(r, c);
-				s = ci.toString();
+				s = cv.toString();
 
 				sBuf.append("\n r: " + r + " c: " + c++);
 				sBuf.append(s);
@@ -277,10 +278,10 @@ logMsg("config: add view: "+ vw.getTag().toString());
 			c = 0;
 
 //			for (int c = 0; c < COLUMNS_MAX; c++) {
-			for (CellInfo ci : cui.calcArray[r]) {
+			for (CellView cv : cui.calcArray[r]) {
 
 //				ci = cui.getCell(r, c);
-				s = ci.toString();
+				s = cv.toString();
 
 				sBuf.append("\n r: " + r + " c: " + c);
 				sBuf.append(s);
@@ -312,12 +313,12 @@ logMsg("config: add view: "+ vw.getTag().toString());
 			c = 0;
 
 //			for (int c = 0; c < COLUMNS_MAX; c++) {
-			for (CellInfo ci : cui.calcArray[r]) {
+			for (CellView cv : cui.calcArray[r]) {
 //				ci = cui.getCell(r, c);
 
 				// returns a string representation of the
 				// cell info or null if nothing
-				s = ci.toStringInitOnly();
+				s = cv.toStringInitOnly();
 
 				if (s != null) {
 					sBuf.append("\n\nr: " + r + " c: " + c++);
@@ -338,7 +339,7 @@ logMsg("config: add view: "+ vw.getTag().toString());
 		String response[] = new String[functionCategory.count() +5];
 
 		int r = 0;
-		int c = 0;
+		int c;
 
 		response[r++] = "\n<-- Start -->";
 
@@ -346,13 +347,15 @@ logMsg("config: add view: "+ vw.getTag().toString());
 
 			logMsg("<-- processing row: " + r);
 
+			c = 0;
+
 			// ri = one row if ci's held in an arraylist
 
-			for (CellInfo ci : ri) {
+			for (CellView cv : ri) {
 
 				logMsg("<-- processing col: " + c);
 
-				s = ci.toStringInitOnly();
+				s = cv.toStringInitOnly();
 
 				if (s != null) {
 					sBuf.append("\n\ncell: row: " + r + " column: " + c);
@@ -671,65 +674,112 @@ logMsg("config: add view: "+ vw.getTag().toString());
 
 	}
 
-	// array of cells in a single row
-	// minimum is 0 max is columns_max
-	class RowInfo implements Iterable<CellInfo> {
+	class RowInfo implements Iterable<CellView> {
 
-		ArrayList<CellInfo> ra;
-
-
-//		CellInfo[] rowArray = new CellInfo[COLUMNS_MAX];
+		ArrayList<CellView> alCellView;
 
 		RowInfo() {
-
-			ra = new ArrayList<>(COLUMNS_MAX);
+			alCellView = new ArrayList<>(COLUMNS_MAX);
 		}
 
-		boolean addCell(CellInfo ci) {
-			logMsg("row info add cell: " + ci.getPrime().getView().getTag().toString());
-			return ra.add(ci);
+		boolean add(CellView cv) {
+			logMsg("@row info: add cell: " + cv.getView().getTag().toString());
+
+			return alCellView.add(cv);
 		}
 
-		CellInfo getCell(int index) {
-			if (index > ra.size() || index < 0) {
+		CellView get(int index) {
+			if (index > alCellView.size() || index <0)
 				return null;
-			}
-			return ra.get(index);
+
+			return alCellView.get(index);
 		}
 
-		public Iterator<CellInfo> iterator() {
-			return new RowInfoIterator();
-		}
+		public Iterator<CellView> iterator() {return new RowInfoIterator(); }
 
-		private class RowInfoIterator implements Iterator<CellInfo> {
-
+		private class RowInfoIterator implements Iterator<CellView> {
 			private int cursor;
 
-			public RowInfoIterator() {
-				this.cursor = 0;
-			}
+			public RowInfoIterator() { this.cursor = 0;}
 
 			@Override
-			public boolean hasNext() {
-				return this.cursor < ra.size();
-			}
+			public boolean hasNext() { return this.cursor < alCellView.size(); }
 
 			@Override
-			public CellInfo next() {
+			public CellView next() {
 				if (!this.hasNext()) {
 					throw new NoSuchElementException();
 				}
-				return ra.get(cursor++);
+				return alCellView.get(cursor++);
 			}
 
 			@Override
-			public void remove() {
-				throw new UnsupportedOperationException();
-			}
+			public void remove() {throw new UnsupportedOperationException(); }
 		}
-
 	}
 
+
+
+
+//
+//	// array of cells in a single row
+//	// minimum is 0 max is columns_max
+//	class RowInfo2 implements Iterable<CellInfo> {
+//
+//		ArrayList<CellInfo> alCellInfo;
+//
+////		CellInfo[] rowArray = new CellInfo[COLUMNS_MAX];
+//
+//		RowInfo2() {
+//			alCellInfo = new ArrayList<>(COLUMNS_MAX);
+//		}
+//
+//
+//		boolean add(CellInfo ci) {
+//			logMsg("row info add cell: " + ci.getPrime().getView().getTag().toString());
+//			return alCellInfo.add(ci);
+//		}
+//
+//		CellInfo getCell(int index) {
+//			if (index > alCellInfo.size() || index < 0) {
+//				return null;
+//			}
+//			return alCellInfo.get(index);
+//		}
+//
+//		public Iterator<CellInfo> iterator() {
+//			return new RowInfoIterator();
+//		}
+//
+//		private class RowInfoIterator implements Iterator<CellInfo> {
+//
+//			private int cursor;
+//
+//			public RowInfoIterator() {
+//				this.cursor = 0;
+//			}
+//
+//			@Override
+//			public boolean hasNext() {
+//				return this.cursor < alCellInfo.size();
+//			}
+//
+//			@Override
+//			public CellInfo next() {
+//				if (!this.hasNext()) {
+//					throw new NoSuchElementException();
+//				}
+//				return alCellInfo.get(cursor++);
+//			}
+//
+//			@Override
+//			public void remove() {
+//				throw new UnsupportedOperationException();
+//			}
+//		}
+//
+//	}
+//
 
 
 	// array of rows for the whole interface
@@ -750,13 +800,13 @@ logMsg("config: add view: "+ vw.getTag().toString());
 			}
 		}
 
-		boolean addCell(CellInfo ci) {
+		boolean add(CellView cv) {
 			int fCategory;
 			int row;
 
-			logMsg("calcui addCell: " + ci.getPrime().getView().getTag().toString());
+			logMsg("calcui add: " + cv.getView().getTag().toString());
 
-			View vw = ci.getPrime().getView();
+			View vw = cv.getView();
 
 			fCategory = ((iWidgetAlt) vw).getFunctionCategory();
 
@@ -764,19 +814,19 @@ logMsg("config: add view: "+ vw.getTag().toString());
 
 			if (row < 0) { return false;}
 
-			if (calcArray[row].addCell(ci))
+			if (calcArray[row].add(cv))
 				return true;
 
 			return false;
 		}
 
-//		boolean addCell(int row, int column, CellInfo cellInfo) {
+//		boolean add(int row, int column, CellInfo cellInfo) {
 //
 //			if (!verifyRowColumn(row, column)) {
 //				return false;
 //			}
 //
-//			calcArray[row].addCell(column, cellInfo);
+//			calcArray[row].add(column, cellInfo);
 //
 //			return true;
 //		}
