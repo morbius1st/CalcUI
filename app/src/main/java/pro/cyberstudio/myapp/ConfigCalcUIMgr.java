@@ -7,11 +7,10 @@ import android.widget.*;
 
 import java.util.*;
 
-import static android.R.attr.tag;
-import static pro.cyberstudio.myapp.ConfigCalcUIMgr.CellType.*;
-import static pro.cyberstudio.myapp.ConfigCalcUIMgr.ViewFunction.*;
-import static pro.cyberstudio.myapp.ConfigCalcUIMgr.functionCategory.*;
-import static pro.cyberstudio.myapp.Utilities.padLeft;
+import static pro.cyberstudio.myapp.ConfigCalcUIMgr.ViewType.*;
+import static pro.cyberstudio.myapp.ConfigCalcUIMgr.ViewClass.*;
+import static pro.cyberstudio.myapp.ConfigCalcUIMgr.ViewCategory.*;
+import static pro.cyberstudio.myapp.Utilities.*;
 
 //import static pro.cyberstudio.myapp.Utilities.*;
 
@@ -37,7 +36,7 @@ public class ConfigCalcUIMgr {
 	private GridLayoutGravity GLG = new GridLayoutGravity();
 
 	// note that this must correspond 1 to 1 with the attrs.xml file for the view
-	enum functionCategory {
+	enum ViewCategory {
 		EDIT(101),
 		SHIFT(102),
 		ALPHA(103),
@@ -59,18 +58,18 @@ public class ConfigCalcUIMgr {
 
 		private int value;
 
-		functionCategory(int value) {
+		ViewCategory(int value) {
 			this.value = value;
 		}
 
 		static String toStringOrdinal(int ordinal) {
 
-			return functionCategory.values()[ordinal].name();
+			return ViewCategory.values()[ordinal].name();
 		}
 
 		static String toStringValue(int value) {
 
-			for (functionCategory v : values())
+			for (ViewCategory v : values())
 				if (v.value == value)
 					return v.toString();
 
@@ -89,7 +88,7 @@ public class ConfigCalcUIMgr {
 
 			if (fCategory < 0) {return -1;}
 
-			for (functionCategory fc : values()) {
+			for (ViewCategory fc : values()) {
 				if (fCategory == fc.getValue())
 					return fc.ordinal();
 			}
@@ -97,9 +96,9 @@ public class ConfigCalcUIMgr {
 		}
 	}
 
-	enum ViewFunction {PRIME_FUNCT, SUB_FUNCT}
+	enum ViewClass {PRIME_FUNCT, SUB_FUNCT}
 
-	enum CellType {
+	enum ViewType {
 		BUTTON (-1, PRIME_FUNCT, Gravity.NO_GRAVITY),
 		TEXTVIEW (-1, PRIME_FUNCT, Gravity.NO_GRAVITY),
 		IMAGEBUTTON (-1, PRIME_FUNCT, Gravity.NO_GRAVITY),
@@ -113,26 +112,26 @@ public class ConfigCalcUIMgr {
 		CENTER_LEFT (idx++, SUB_FUNCT, Gravity.CENTER | Gravity.LEFT),
 		CENTER_RIGHT (idx++, SUB_FUNCT, Gravity.CENTER | Gravity.RIGHT);
 
-		private ViewFunction vFunct;
+		private ViewClass vFunct;
 		private int gravity;
 		private int arrayIndex;
 
-		CellType(int i, ViewFunction vF, int g) {
+		ViewType(int i, ViewClass vF, int g) {
 			vFunct = vF;
 			gravity = g;
 			arrayIndex = i;
 		}
 
-		static CellType findViewTypeByGravity(int gravity) {
+		static ViewType findViewTypeByGravity(int gravity) {
 
-			for (CellType cvt : CellType.values()) {
+			for (ViewType cvt : ViewType.values()) {
 				if (cvt.getGravity() == gravity)
 					return cvt;
 			}
 			return null;
 		}
 
-		static CellType findViewTypeByView(View v) {
+		static ViewType findViewTypeByView(View v) {
 			if (v instanceof TextViewAlt)
 				return TEXTVIEW;
 			else if (v instanceof ButtonAlt)
@@ -143,11 +142,11 @@ public class ConfigCalcUIMgr {
 				return null;
 		}
 
-		boolean isPrime() {
+		boolean isPrimeCategory() {
 			return vFunct == PRIME_FUNCT;
 		}
 
-		boolean isSubFunction() {
+		boolean isSubCategory() {
 			return vFunct == SUB_FUNCT;
 		}
 
@@ -155,7 +154,7 @@ public class ConfigCalcUIMgr {
 			return gravity;
 		}
 
-		ViewFunction getViewFunction() {
+		ViewClass getViewCategory() {
 			return vFunct;
 		}
 
@@ -175,19 +174,12 @@ public class ConfigCalcUIMgr {
 		if (!assigned) {
 			assigned = true;
 			cui = new CalculatorUI();
-//			logMsg("number of categories: " + functionCategory.count());
-//
-//			for (functionCategory fc : functionCategory.values()) {
-//				logMsg("fc #" + fc.ordinal() + "  : " + fc.toString());
-//			}
-
 		}
-
 	}
 
 	public void addView(View vw, int viewId) {
 //		logMsg("config: add view: "+ vw.getTag().toString());
-		CellType ct = CellType.findViewTypeByView(vw);
+		ViewType ct = ViewType.findViewTypeByView(vw);
 
 		if (ct == null) {return;}
 
@@ -202,13 +194,15 @@ public class ConfigCalcUIMgr {
 
 				View vChild = ((GridLayout) vp).getChildAt(j);
 
+				if (vChild.equals(vw)) {
+					continue;
+				}
+
 				adjustChildView(vChild);
 
 				ct = findViewTypeByGravity(GLG.getGravity(vChild));
 
 				if (ct != null) {
-//					logMsg("adding child view: " + ct.toString());
-
 					cui.add(new CellView(ct, vChild));
 				}
 			}
@@ -222,10 +216,6 @@ public class ConfigCalcUIMgr {
 				DI.adjustViewTextSize((TextView) vChild);
 			}
 		}
-//		else {
-//			logMsg("child view is null");
-//		}
-
 	}
 //
 //	boolean add(int row, int column, CellInfo ci) {
@@ -253,7 +243,7 @@ public class ConfigCalcUIMgr {
 
 		sBuf.append("\n<-- Start -->");
 
-		for (int r = 0; r < functionCategory.count(); r++) {
+		for (int r = 0; r < ViewCategory.count(); r++) {
 			c = 0;
 
 
@@ -280,12 +270,12 @@ public class ConfigCalcUIMgr {
 		StringBuffer sBuf = new StringBuffer();
 //		CellInfo ci;
 		String s;
-		String response[] = new String[functionCategory.count()];
+		String response[] = new String[ViewCategory.count()];
 		int c;
 
 		sBuf.append("\n<-- Start -->");
 
-		for (int r = 0; r < functionCategory.count(); r++) {
+		for (int r = 0; r < ViewCategory.count(); r++) {
 
 			c = 0;
 
@@ -321,7 +311,7 @@ public class ConfigCalcUIMgr {
 
 		sBuf.append("\n<-- Start -->");
 
-		for (int r = 0; r < functionCategory.count(); r++) {
+		for (int r = 0; r < ViewCategory.count(); r++) {
 			c = 0;
 
 //			for (int c = 0; c < COLUMNS_MAX; c++) {
@@ -346,53 +336,131 @@ public class ConfigCalcUIMgr {
 
 	public String[] toStringInitOnlyArray() {
 
-		StringBuffer sBuf = new StringBuffer();
-		String s;
-		String response[] = new String[functionCategory.count() +5];
+		StringBuilder sBuild = new StringBuilder();
+		String response[] = new String[ViewCategory.count()];
 
 		int r = 0;
-		int c;
 
-		response[r++] = "\n<-- Start -->";
+		// run through each row in the array
+		for (RowInfo ri : cui.calcArray) {
+
+			// note beginning of a row = a ViewCategory
+			sBuild.append("<--- Begin function Type: ")
+					.append(ViewCategory.toStringOrdinal(r))
+					.append(" --->\n");
+
+			StringBuilder sb = rowInfoToStringInitOnly(ri);
+
+			if (sb.length() != 0) {
+				sBuild.append(sb);
+			} else {
+				sBuild.append("\n   Category is Empty\n");
+			}
+
+			// row done, note end
+			sBuild.append("\n<--- end function type --->\n\n");
+
+			// add the row to the response array
+			response[r++] = sBuild.toString();
+
+			// clear the old response
+			// apparently this is the best way to clear
+			sBuild.delete(0, sBuild.length());
+		}
+
+		// return the response
+		return response;
+	}
+
+	public ArrayList<StringBuilder> toStringInitOnlyArrayList() {
+
+		ArrayList<StringBuilder> sbArray = new ArrayList<>(100);
+		ArrayList<StringBuilder> sbA;
+		String viewCat;
+
+		int r = 0;
 
 		for (RowInfo ri : cui.calcArray) {
 
-//			logMsg("<-- processing row: " + r);
+			// indicate beginning of a row = ViewCategory
 
-			c = 0;
+			viewCat = ViewCategory.toStringOrdinal(r);
 
-			// ri = one row if ci's held in an arraylist
+			sbArray.add(new StringBuilder("<--- Begin view category: ")
+					.append(viewCat).append(" --->\n"));
 
-			for (CellView cv : ri) {
+			sbA = rowInfoAsArrayList(ri);
 
-//				logMsg("<-- processing col: " + c);
-
-				s = cv.toStringInitOnly();
-
-				if (s != null) {
-					sBuf.append("\n\ncell: row #" + r + " " + functionCategory.toStringOrdinal(r) + " column: " + c);
-					sBuf.append(s);
-				}
-
-				c++;
+			if (sbA.size() != 0) {
+				sbArray.addAll(sbA);
+			} else {
+				sbArray.add(new StringBuilder("\n   Category is Empty\n"));
 			}
 
-			response[r++] = sBuf.toString();
+			sbArray.add(new StringBuilder("<--- End view category: ")
+					.append(viewCat).append(" --->\n"));
+		}
+		return sbArray;
+	}
 
-			// clear the buffer - this is the faster way
-			sBuf.delete(0, sBuf.length());
+
+
+	// format a single row - no header or footer
+	private StringBuilder rowInfoToStringInitOnly(RowInfo ri) {
+
+		StringBuilder sBuild = new StringBuilder();
+
+		// run through each view in the row
+		for (CellView cv : ri) {
+
+			// format the string
+			String s = cv.toStringInitOnly();
+
+			// append if not null
+			if (s != null) {
+
+				sBuild.append("\n <---start view --->");
+				sBuild.append(s);
+				sBuild.append("\n <--- end view --->\n");
+			}
 		}
 
-		response[r] = "\n<-- end -->";
-
-		return response;
+		return sBuild;
 	}
+
+	private ArrayList<StringBuilder> rowInfoAsArrayList(RowInfo ri) {
+
+		ArrayList<StringBuilder> sbArray = new ArrayList<>(10);
+		StringBuilder sBuild = new StringBuilder();
+
+		// run through each view in the row
+		for (CellView cv : ri) {
+
+			// format the string
+			String s = cv.toStringInitOnly();
+
+			// append if not null
+			if (s != null) {
+
+				sBuild.append("\n <---start view --->");
+				sBuild.append(s);
+				sBuild.append("\n <--- end view --->\n");
+
+				sbArray.add(sBuild);
+
+				sBuild = new StringBuilder();
+			}
+		}
+
+		return sbArray;
+	}
+
 
 
 	// information a single view in a cell array
 	static class CellView {
 
-		CellType cvViewType;
+		ViewType eViewType;
 		int cvID;
 		String cvText;
 		int cvTextColor;
@@ -401,22 +469,22 @@ public class ConfigCalcUIMgr {
 		View cvView;
 		int cvCategory;
 
-		CellView(CellType cvViewType, View vw) {
-			setCellView(cvViewType, UNDEF, "", UNDEF, UNDEF, UNDEF, vw);
+		CellView(ViewType eViewType, View vw) {
+			setCellView(eViewType, UNDEF, "", UNDEF, UNDEF, UNDEF, vw);
 		}
 
-		CellView(CellType cvViewType, int cvID, View vw) {
-			setCellView(cvViewType, cvID, "", UNDEF, UNDEF, UNDEF, vw);
+		CellView(ViewType eViewType, int cvID, View vw) {
+			setCellView(eViewType, cvID, "", UNDEF, UNDEF, UNDEF, vw);
 		}
 
-		CellView(CellType cvViewType, int cvID, String cvText,
+		CellView(ViewType eViewType, int cvID, String cvText,
 		         int cvTextColor, int cvTextSize, int cvBackground) {
-			setCellView(cvViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, null);
+			setCellView(eViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, null);
 		}
 
-		CellView(CellType cvViewType, int cvID, String cvText,
+		CellView(ViewType eViewType, int cvID, String cvText,
 		         int cvTextColor, int cvTextSize, int cvBackground, View vw) {
-			setCellView(cvViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, vw);
+			setCellView(eViewType, cvID, cvText, cvTextColor, cvTextSize, cvBackground, vw);
 		}
 
 
@@ -424,10 +492,10 @@ public class ConfigCalcUIMgr {
 			clear();
 		}
 
-		void setCellView(CellType cvViewType, int cvID, String cvText,
+		void setCellView(ViewType cvViewType, int cvID, String cvText,
 		                 int cvTextColor, int cvTextSize, int cvBackground, View v) {
 
-			this.cvViewType = cvViewType;
+			this.eViewType = cvViewType;
 			this.cvID = cvID;
 			this.cvText = cvText;
 			this.cvTextColor = cvTextColor;
@@ -450,7 +518,7 @@ public class ConfigCalcUIMgr {
 						cvCategory = ((ImageButtonAlt) v).getFunctionCategory();
 						break;
 					default:
-						cvCategory = functionCategory.UNDEFINED.getValue();
+						cvCategory = ViewCategory.UNDEFINED.getValue();
 						break;
 				}
 			}
@@ -469,24 +537,24 @@ public class ConfigCalcUIMgr {
 			return cvView;
 		}
 
-		public ViewFunction getViewFunction() {
-			return cvViewType.getViewFunction();
+		public ViewClass getViewFunction() {
+			return eViewType.getViewCategory();
 		}
 
 		public int getGravity() {
-			return cvViewType.getGravity();
+			return eViewType.getGravity();
 		}
 
 		public  int getIndex() {
-			return cvViewType.getIndex();
+			return eViewType.getIndex();
 		}
 
-		public CellType getCellType() {
-			return cvViewType;
+		public ViewType getCellType() {
+			return eViewType;
 		}
 
-		public void setCellViewType(CellType cvView) {
-			this.cvViewType = cvView;
+		public void setCellViewType(ViewType cvView) {
+			this.eViewType = cvView;
 		}
 
 		public int getID() {
@@ -531,44 +599,52 @@ public class ConfigCalcUIMgr {
 
 		@Override
 		public String toString() {
-			StringBuffer sBuf = new StringBuffer("");
-
 			int COLUMN = 20;
 
-			if (cvViewType != null) {
+			String preface = "\n   ";
+
+			StringBuilder sBuild = new StringBuilder();
+
+			if (eViewType != null) {
 				// view position and type
-				sBuf.append("\n\n" + padLeft("View type: ", COLUMN) +
-						cvViewType.ordinal() +
-						" (" + cvViewType.toString() + ")");
-				sBuf.append("\n" + padLeft("ID: ", COLUMN) + cvID);
+				sBuild.append(preface)
+						.append(padRight("View function: ", COLUMN))
+						.append(eViewType.getViewCategory().toString());
 
-				sBuf.append("\n" + padLeft("Text: ", COLUMN) + cvText);
-				sBuf.append("\n" + padLeft("Text color: ", COLUMN) + cvTextColor);
-				sBuf.append("\n" + padLeft("Text size: ", COLUMN) + cvTextSize);
-				sBuf.append("\n" + padLeft("Background color: ", COLUMN) + cvBackground);
-				sBuf.append("\n" + padLeft("View cat: ", COLUMN) + functionCategory.toStringValue(cvCategory));
-				sBuf.append("\n" + padLeft("View tag: ", COLUMN));
-				if (cvView != null) {
+				sBuild.append(preface)
+						.append(padRight("View type: ", COLUMN))
+						.append(eViewType.ordinal())
+						.append(" (")
+						.append(eViewType.toString()).append(")");
 
-					Object tagX = cvView.getTag();
+				sBuild.append(preface)
+						.append(padRight("ID: ", COLUMN))
+						.append(cvID);
 
-					if (tagX != null) {
-						sBuf.append(tagX.toString());
-					} else {
-						sBuf.append("no tag");
-					}
+				sBuild.append(preface).append(padRight("Text:", COLUMN))
+						.append("\"").append(cvText).append("\"");
 
-				} else {
-					sBuf.append(" is null");
-				}
+				sBuild.append(preface).append(padRight("Text color:", COLUMN))
+						.append(cvTextColor);
+
+				sBuild.append(preface).append(padRight("Text size: ", COLUMN))
+						.append(cvTextSize);
+
+				sBuild.append(preface).append(padRight("Background color: ", COLUMN))
+						.append(cvBackground);
+
+				sBuild.append(preface).append(padRight("View cat: ", COLUMN))
+						.append(ViewCategory.toStringValue(cvCategory));
+
+				sBuild.append(preface).append(padRight("View tag: ", COLUMN))
+						.append(formatTag(cvView));
 			} else {
-				sBuf.append("\n*** View: not initalized");
+				sBuild.append("\n*** View: not initialized");
 			}
 
-			sBuf.append("\n");
-
-			return sBuf.toString();
+			return sBuild.toString();
 		}
+
 
 		// provide a string representation of a cell view
 		// provide null if not initalized (i.e. viewtype == null)
@@ -576,7 +652,7 @@ public class ConfigCalcUIMgr {
 
 //			logMsg("@cv toString ");
 
-			if (cvViewType == null) {
+			if (eViewType == null) {
 //				logMsg("view type is null");
 				return null;
 			}
@@ -585,7 +661,7 @@ public class ConfigCalcUIMgr {
 
 			return toString();
 		}
-	}
+
 
 //
 //	// array of views in a single cell
@@ -601,7 +677,7 @@ public class ConfigCalcUIMgr {
 //		}
 //
 //		boolean addPrime(CellView cv) {
-//			if (cv == null || cv.getCellType().isSubFunction()) {return false;}
+//			if (cv == null || cv.getCellType().isSubCategory()) {return false;}
 //
 //			cvPrime = cv;
 //
@@ -609,7 +685,7 @@ public class ConfigCalcUIMgr {
 //		}
 //
 //		boolean addView(CellView cv) {
-//			if (cv == null || cv.getCellType().isPrime()) { return false;}
+//			if (cv == null || cv.getCellType().isPrimeCategory()) { return false;}
 //
 //			cvArray[cv.getCellType().getIndex()] = cv;
 //
@@ -633,9 +709,9 @@ public class ConfigCalcUIMgr {
 //			return cvArray[index];
 //		}
 //
-//		CellView getView(CellType ct) {
+//		CellView getView(ViewType ct) {
 //
-//			if (ct.isPrime()) {
+//			if (ct.isPrimeCategory()) {
 //				return cvPrime;
 //			}
 //
@@ -689,7 +765,8 @@ public class ConfigCalcUIMgr {
 //			return null;
 //		}
 //
-//	}
+
+	}
 
 	class RowInfo implements Iterable<CellView> {
 
@@ -809,9 +886,9 @@ public class ConfigCalcUIMgr {
 		CalculatorUI() {
 			if (!assigned) {
 				assigned = true;
-				calcArray = new RowInfo[functionCategory.count()];
+				calcArray = new RowInfo[ViewCategory.count()];
 
-				for (int i = 0; i < functionCategory.count(); i++) {
+				for (int i = 0; i < ViewCategory.count(); i++) {
 					calcArray[i] = new RowInfo();
 				}
 			}
@@ -863,7 +940,7 @@ public class ConfigCalcUIMgr {
 	}
 
 	static boolean verifyRow(int row) {
-		if (row > functionCategory.count() || row < 0) {
+		if (row > ViewCategory.count() || row < 0) {
 			return false;
 		}
 		return true;

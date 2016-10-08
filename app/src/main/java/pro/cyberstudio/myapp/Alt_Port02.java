@@ -86,9 +86,7 @@ public class Alt_Port02 extends AppCompatActivity {
 
 		setupViews();
 
-//		logMsg(CUI.toStringInitOnlyArray());
-
-		logMsg(CCM.toStringInitOnlyArray());
+		logMsg(CCM.toStringInitOnlyArrayList());
 
 		initHistoryView(message);
 

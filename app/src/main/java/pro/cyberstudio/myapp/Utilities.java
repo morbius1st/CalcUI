@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * @author Jeff
  *         File:    Utilities
@@ -24,9 +26,15 @@ class Utilities {
 
 	static void logMsg(String[] msg) {
 		for (String aMsg : msg) {
-			if (aMsg != null) {
-				Log.d("Test1", aMsg);
-			}
+			logMsg(msg);
+		}
+	}
+
+	static void logMsg(ArrayList<StringBuilder> sbArray) {
+		int count = 1;
+
+		for (StringBuilder sb : sbArray) {
+			logMsg(sb.toString());
 		}
 	}
 
@@ -42,8 +50,10 @@ class Utilities {
 	static <T extends View> T getView(Activity activity, DisplayInformation DI, int viewId) {
 		View vx = activity.findViewById(viewId);
 
+		// process based on the type fo view
 		if (vx instanceof TextView) {
 
+			// covers both textviews and buttons
 			DI.adjustViewTextSize((TextView) vx);
 
 		} else if (vx instanceof ImageButton) {
@@ -65,11 +75,30 @@ class Utilities {
 		return (T) vx;
 	}
 
-	static String padLeft(String s, int n) {
+	static String padRight(String s, int n) {
 		return String.format("%1$-" + n + "s", s);
 	}
 
+	static String padLeft(String s, int n) {
+		return String.format("%1$" + n + "s", s);
+	}
 
+	static String formatTag(View v) {
+
+		Object oTag;
+
+		if (v == null) {
+			return "view is null";
+		} else {
+
+			 oTag = v.getTag();
+
+			if (oTag == null) {
+				return "tag is null";
+			}
+		}
+		return oTag.toString();
+	}
 
 
 }
