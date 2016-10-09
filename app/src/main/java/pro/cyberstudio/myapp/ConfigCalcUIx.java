@@ -390,7 +390,7 @@ class ConfigCalcUIx {
 							cvCategory = ViewCategory.UNDEFINED.getValue();
 							break;
 					}
-//					logMsg("cat: " + cvCategory + "  class: " + v.getClass().getSimpleName() + "  tag: " + tag);
+//					logMsg("cat: " + category + "  class: " + v.getClass().getSimpleName() + "  tag: " + tag);
 				}
 //				else
 //					logMsg("** is null - tag: " + tag);
@@ -478,7 +478,7 @@ class ConfigCalcUIx {
 				// view position and type
 				sBuf.append("\n\nView: " + cvViewType.ordinal() +
 						" (" + cvViewType.toString() + ")");
-				sBuf.append("\nID: " + cvID);
+				sBuf.append("\nviewID: " + cvID);
 
 				sBuf.append("\nText: " + cvText);
 				sBuf.append("\nText color: " + cvTextColor);

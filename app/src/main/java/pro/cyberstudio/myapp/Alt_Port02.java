@@ -8,18 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import static pro.cyberstudio.myapp.ConfigCalcUIx.*;
-import static pro.cyberstudio.myapp.ConfigCalcUIx.CellViewType.*;
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static pro.cyberstudio.myapp.Utilities.*;
 //import static pro.cyberstudio.myapp.Utilities.*;
 
@@ -35,7 +32,7 @@ public class Alt_Port02 extends AppCompatActivity {
 	private static final int TV_HISTORY = R.id.tvHistory02;
 
 //	private ConfigCalcUIx CUI = new ConfigCalcUIx();
-	private ConfigCalcUIMgr CCM;
+	private ConfigUIMgr CCM;
 
 	private GridLayoutGravity GLG = new GridLayoutGravity();
 
@@ -67,9 +64,7 @@ public class Alt_Port02 extends AppCompatActivity {
 
 		TextView tvE = (TextView) findViewById(R.id.tv_entry);
 
-		logMsg("init configcalcui");
-
-		CCM = new ConfigCalcUIMgr(DI);
+		CCM = new ConfigUIMgr(DI);
 
 		if (DA.isFree()) {
 			tvE.setText("is free");
@@ -86,13 +81,11 @@ public class Alt_Port02 extends AppCompatActivity {
 
 		setupViews();
 
-		logMsg(CCM.toStringInitOnlyArrayList());
+//		logMsg(CCM.toStringArrayList());
 
 		initHistoryView(message);
 
 //		initHistory();
-
-
 
 		viewData[] vData = new viewData[5];
 
@@ -275,79 +268,12 @@ public class Alt_Port02 extends AppCompatActivity {
 	}
 
 
-//
-//	// for initial setup only - this will wipe out existing cell views
-//	// this deals with the primary views (the buttons)
-//	<T extends View> T getView(int row, int column, int viewId) {
-//		CellViewType cvt;
-//
-//		T v = (Utilities.getView(this, DI, viewId));
-//
-//		if (verifyRowColumn(row, column)) {
-//			CellInfo ci = new CellInfo();
-//
-//			// setup the basic cell view with just the type, id, and view reference
-//			// the other settings are based on the XML layout
-//
-//			CellView cv = null;
-////
-////			if (v != null) {
-////				logMsg("v: " + v.getClass().getSimpleName());
-////			} else {
-////				logMsg("v: is null");
-////			}
-//
-//			switch (findViewTypeByView(v)) {
-//				case BUTTON:
-////					logMsg("type is button");
-//					 cv = new CellView(BUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
-//					break;
-//				case TEXTVIEW:
-////					logMsg("type is textview");
-//					cv = new CellView(TEXTVIEW, viewId, "", UNDEF, UNDEF, UNDEF, v);
-//					break;
-//				case IMAGEBUTTON:
-////					logMsg("type is imagebutton");
-//					cv = new CellView(IMAGEBUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
-//					break;
-////				default:
-////					logMsg("type is undefined");
-//			}
-//
-//			if (cv != null) {
-//				ci.addView(cv);
-//
-//				ViewParent vp = v.getParent();
-//
-//				if (vp.getClass() == GridLayout.class) {
-//					int i = ((GridLayout) vp).getChildCount();
-//
-//					for (int j = 0; j < i; j++) {
-//						View vChild = ((GridLayout) vp).getChildAt(j);
-//
-//						adjustChildView(vChild);
-//
-//						cvt = findViewTypeByGravity(GLG.getGravity(vChild));
-//						if (cvt != null) {
-////							logMsg("add child view");
-//							cv = new CellView(cvt, UNDEF, "", UNDEF, UNDEF, UNDEF, vChild);
-//							ci.addView(cv);
-//						}
-//					}
-//				}
-//				CUI.addCell(row, column, ci);
-//			}
-//		}
-//		return v;
-//	}
-
 	public String test() {
 		return "this is a test";
 	}
 
 
 	public void setupViews() {
-		int row;
 
 //
 //		Method t = null;
@@ -369,30 +295,31 @@ public class Alt_Port02 extends AppCompatActivity {
 		// row n/a
 		// the banner ad
 
+		View vMS;
+		View vAns;
+		View vCalc;
+
+
 		// row 0
-		row = 0;
 		TextView tvHist = getView(TV_HISTORY);
 
 		// adjust the history textview height
 		adjustHistHeight(tvHist);
 
 		// row 1
-		row = 1;
-
 		getView(R.id.grp_pren_begin);
 		getView(R.id.grp_pren_end);
 		getView(R.id.tv_entry);
 
 		// row 2
-		row = 2;
 		getView(R.id.ctrl_shift);
-		getView(R.id.memory_store).setOnClickListener(oclTest);
+		(vMS = getView(R.id.memory_store)).setOnClickListener(oclTest2);
+
 		getView(R.id.memory_recall).setOnClickListener(oclTest);
 		getView(R.id.funct_sqrt);
 		getView(R.id.funct_square);
 
 		// row 3
-		row = 3;
 		getView(R.id.convert_deg_to_decimal);
 		getView(R.id.const_pi);
 		getView(R.id.funct_sin);
@@ -400,7 +327,6 @@ public class Alt_Port02 extends AppCompatActivity {
 		getView(R.id.funct_tan);
 
 		// row 4
-		row = 4;
 		getView(R.id.mark_degree);
 		getView(R.id.mark_foot);
 		getView(R.id.mark_inch);
@@ -410,7 +336,6 @@ public class Alt_Port02 extends AppCompatActivity {
 		getView(R.id.edit_ce_ca);
 
 		// row 5
-		row = 5;
 		getView(R.id.num_seven);
 		getView(R.id.num_eight);
 		getView(R.id.num_nine);
@@ -418,7 +343,6 @@ public class Alt_Port02 extends AppCompatActivity {
 		getView(R.id.funct_fraction);
 
 		// row 6
-		row = 6;
 		getView(R.id.num_four);
 		getView(R.id.num_five);
 		getView(R.id.num_six);
@@ -426,7 +350,6 @@ public class Alt_Port02 extends AppCompatActivity {
 		getView(R.id.opp_divide);
 
 		// row 7
-		row = 7;
 		getView(R.id.num_one);
 		getView(R.id.num_two);
 		getView(R.id.num_three);
@@ -434,63 +357,45 @@ public class Alt_Port02 extends AppCompatActivity {
 		getView(R.id.opp_subtract);
 
 		// row 8
-		row = 8;
 		getView(R.id.num_zero);
 		getView(R.id.num_decimal_pt);
 		getView(R.id.funct_change_sign);
-		getView(R.id.funct_answer).setOnClickListener(oclTest);
-		getView(R.id.opp_calculate).setOnClickListener(oclTest);
+		(vAns= getView(R.id.funct_answer)).setOnClickListener(oclTest);
+		(vCalc = getView(R.id.opp_calculate)).setOnClickListener(oclTest);
+
+		View vx;
 
 
-		// scan through all of the table layout's children
-		// all of these should be a tablerow
-		// find each child view of the proper type and update
-		// the view per the adjusted display parameters
-//		TableLayout v = (TableLayout) findViewById(LAYOUT_ID);
-//
-//		int j = v.getChildCount();
-//
-//		for (int i = 0; i < j; i++) {
-//			View vTblChild = v.getChildAt(i);
-//
-//			if (vTblChild instanceof TableRow) {
-//				// the tablelayout's child is a tablerow
-//
-//				int k = ((TableRow) vTblChild).getChildCount();
-//
-//				// scan through all of the children of the table row
-//				for (int l = 0; l < k; l++) {
-//
-//					View vTrChild = ((TableRow) vTblChild).getChildAt(l);
-//
-//					if (vTrChild instanceof GridLayout) {
-//
-//						GridLayout gridView = (GridLayout) vTrChild;
-//
-//						int m = gridView.getChildCount();
-//
-//						// scan through all of the children of the Grid Layout
-//						for (int n = 0; n < m; n++) {
-//
-//							adjustChildView(gridView.getChildAt(n));
-//						}
-//
-//					} else if (vTrChild instanceof android.support.v7.widget.GridLayout) {
-//
-//						android.support.v7.widget.GridLayout gridView =
-//								(android.support.v7.widget.GridLayout) vTrChild;
-//
-//						int m = gridView.getChildCount();
-//
-//						// scan through all of the children of the Grid Layout
-//						for (int n = 0; n < m; n++) {
-//							adjustChildView(gridView.getChildAt(n));
-//						}
-//
-//					}
-//				}
-//			}
-//		}
+		logMsg("ms button view: ");
+		vx = CCM.findView(vMS.getId(), ConfigUIMgr.ViewType.BUTTON);
+		logMsg("view id: " + vMS.getId());
+
+		if (vx == null) {
+			logMsg("is null");
+		} else {
+			logMsg(vx.getTag().toString());
+		}
+
+		logMsg("ans bottom left view: ");
+		vx = CCM.findView(vAns.getId(), ConfigUIMgr.ViewType.BOTTOM_LEFT);
+		logMsg("view id: " + vAns.getId());
+		if (vx == null) {
+			logMsg("is null");
+		} else {
+			logMsg(vx.getTag().toString());
+		}
+
+		logMsg("calc bottom right view: ");
+		vx = CCM.findView(vCalc.getId(), ConfigUIMgr.ViewType.BOTTOM_RIGHT);
+		logMsg("view id: " + vCalc.getId());
+		if (vx == null) {
+			logMsg("is null");
+		} else {
+			logMsg(vx.getTag().toString());
+		}
+
+
+
 	}
 
 	private OnClickListener oclTest = new OnClickListener() {
@@ -502,23 +407,32 @@ public class Alt_Port02 extends AppCompatActivity {
 		}
 	};
 
+	private OnClickListener oclTest2 = new OnClickListener() {
+		@Override
+		public void onClick(View view) {
+
+			ConfigUIMgr.ViewCategory vc = ConfigUIMgr.ViewCategory.ALPHABET;
+
+			displayTag(view);
+
+			logMsg("@oclTest2: " + view.getTag().toString());
+			logMsg("@oclTest2: affect Alpha views: " +
+			vc.name() + " (" + vc.getValue() + ")" + " (" + vc.ordinal() + ")");
+
+			logMsg(CCM.toStringRowInfo(vc.ordinal()));
+
+		}
+	};
+
+	void displayTag(View view) {
+		Toast.makeText(getApplicationContext(),
+				view.getTag().toString() + "  Clicked", Toast.LENGTH_SHORT).show();
+	}
+
 	public void clickTest(View view) {
 
 		if (((Button) view).getText() != null) {
-
-			String tagString = ((Button) view).getText().toString();
-
-//			logMsg("view clicked: " + tagString);
-
-			Toast.makeText(getApplicationContext(), tagString + "  Clicked", Toast.LENGTH_SHORT).show();
-		}
-
-	}
-
-	void adjustChildView (View vChild) {
-
-		if (vChild instanceof TextViewAlt) {
-			DI.adjustViewTextSize((TextView) vChild);
+			displayTag(view);
 		}
 
 	}

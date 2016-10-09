@@ -937,7 +937,7 @@
 
 			<pro.cyberstudio.myapp.TextViewAlt
 				style = "@style/root02.basic.gridLayoutCell.AltFunction"
-				android:text = "@string/alt_funct_top_left"
+				android:text = "@string/alt_funct_bot_left"
 				android:layout_gravity = "bottom|left"
 				android:tag = "bottom|left"
 				app:category_textview = "alphabet"
@@ -985,7 +985,7 @@
 				style = "@style/root02.basic.gridLayoutCell.AltFunction"
 				android:text = "@string/alt_funct_top_ctr"
 				android:layout_gravity = "top|center_horizontal"
-				android:tag = "top|center_horizontalt"
+				android:tag = "top|center_horizontal"
 				app:category_textview = "alphabet"
 				/>
 
@@ -1000,7 +1000,7 @@
 
 			<pro.cyberstudio.myapp.TextViewAlt
 				style = "@style/root02.basic.gridLayoutCell.AltFunction"
-				android:text = "@string/alt_funct_top_left"
+				android:text = "@string/alt_funct_bot_left"
 				android:layout_gravity = "bottom|left"
 				android:tag = "bottom|left"
 				app:category_textview = "alphabet"
