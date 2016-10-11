@@ -1,7 +1,6 @@
 package pro.cyberstudio.myapp;
 
-import android.view.Gravity;
-import android.view.View;
+import android.view.*;
 import android.widget.Button;
 import android.widget.GridLayout;
 

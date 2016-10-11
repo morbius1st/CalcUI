@@ -64,6 +64,10 @@ class Utilities {
 	}
 
 
+	static String padRight(String message, int column) {return "";}
+	static String padLeft(String message, int column) {return "";}
+	static String formatTag(View view) {return "";}
+
 
 
 }

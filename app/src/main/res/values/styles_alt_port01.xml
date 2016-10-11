@@ -20,7 +20,7 @@
 	<style name = "root01.basic.tableRow">
 		<item name = "android:layout_weight">100</item>
 	</style>
-	
+
 	<!-- alt 01 typical table cell -->
 	<style name = "root01.basic.tableCell">
 		<item name = "android:layout_margin">2dp</item>
@@ -162,7 +162,7 @@
 		<item name = "layout_row">2</item>
 		<item name = "layout_rowWeight">.2</item>
 	</style>
-	
+
 	<!-- alt 01 -->
 	<style name = "root01gridLayoutCell01">
 		<item name = "android:layout_width">match_parent</item>

@@ -86,7 +86,7 @@
 				style="?android:attr/borderlessButtonStyle"
 				android:background = "@android:color/darker_gray"
 				android:layout_margin="2dp"
-				
+
 				/>
 
 		</TableRow>
@@ -168,7 +168,7 @@
 				style="?android:attr/borderlessButtonStyle"
 				android:background = "@android:color/darker_gray"
 				android:layout_margin="2dp"
-				
+
 				/>
 
 			<TextView

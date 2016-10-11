@@ -14,7 +14,7 @@ import static pro.cyberstudio.myapp.ConfigCalcUI.ViewCategory.UNDEFINED;
  *         Project: CalcUI
  */
 
-public class ImageButtonAlt extends ImageButton implements iWidgetAlt{
+public class ImageButtonAlt extends ImageButton implements iViewAlt {
 
 	private int functionCategory;
 
@@ -32,13 +32,18 @@ public class ImageButtonAlt extends ImageButton implements iWidgetAlt{
 		attributes.recycle();
 	}
 
-
-	public int getFunctionCategory() {
+	public int getViewCategory() {
 		return functionCategory;
 	}
 
-	public void setFunctionCategory(int functionCategory) {
-		this.functionCategory = functionCategory;
+	public void setViewCategory(int viewCategory) {
+		this.functionCategory = viewCategory;
 	}
+
+	public void setTextSize(float size) {}
+
+	public void setTextColor(int color) {}
+
+	public void setText(CharSequence text) {}
 }
 

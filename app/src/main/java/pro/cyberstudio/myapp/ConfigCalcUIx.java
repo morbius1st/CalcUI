@@ -378,13 +378,13 @@ class ConfigCalcUIx {
 
 					switch (findViewTypeByView(v)) {
 						case BUTTON:
-							cvCategory = ((ButtonAlt) v).getFunctionCategory();
+							cvCategory = ((ButtonAlt) v).getViewCategory();
 							break;
 						case TEXTVIEW:
-							cvCategory = ((TextViewAlt) v).getFunctionCategory();
+							cvCategory = ((TextViewAlt) v).getViewCategory();
 							break;
 						case IMAGEBUTTON:
-							cvCategory = ((ImageButtonAlt) v).getFunctionCategory();
+							cvCategory = ((ImageButtonAlt) v).getViewCategory();
 							break;
 						default:
 							cvCategory = ViewCategory.UNDEFINED.getValue();

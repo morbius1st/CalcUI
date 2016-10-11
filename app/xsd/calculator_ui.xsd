@@ -17,7 +17,7 @@
         <xs:attribute ref="and:text"/>
         <xs:attribute ref="and:textColor"/>
         <xs:attribute ref="and:textSize"/>
-        <xs:attribute ref="and:background"/>
+        <xs:attribute ref="and:backgroundColor"/>
         <xs:attribute type="xs:string" name="onClick" use="optional"/>
       </xs:extension>
     </xs:simpleContent>
