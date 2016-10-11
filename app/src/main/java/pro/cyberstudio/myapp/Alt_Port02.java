@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import static android.R.attr.x;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static pro.cyberstudio.myapp.Utilities.*;
 //import static pro.cyberstudio.myapp.Utilities.*;
@@ -363,38 +364,11 @@ public class Alt_Port02 extends AppCompatActivity {
 		(vAns= getView(R.id.funct_answer)).setOnClickListener(oclTest);
 		(vCalc = getView(R.id.opp_calculate)).setOnClickListener(oclTest);
 
-		View vx;
 
 
-		logMsg("ms button view: ");
-		vx = CCM.findView(vMS.getId(), ConfigUIMgr.ViewType.BUTTON);
-		logMsg("view id: " + vMS.getId());
-
-		if (vx == null) {
-			logMsg("is null");
-		} else {
-			logMsg(vx.getTag().toString());
+		for (ConfigUIMgr.ViewInfo vi : CCM.getViews(ConfigUIMgr.ViewCategory.ALPHABET)) {
+			logMsg(vi.toString());
 		}
-
-		logMsg("ans bottom left view: ");
-		vx = CCM.findView(vAns.getId(), ConfigUIMgr.ViewType.BOTTOM_LEFT);
-		logMsg("view id: " + vAns.getId());
-		if (vx == null) {
-			logMsg("is null");
-		} else {
-			logMsg(vx.getTag().toString());
-		}
-
-		logMsg("calc bottom right view: ");
-		vx = CCM.findView(vCalc.getId(), ConfigUIMgr.ViewType.BOTTOM_RIGHT);
-		logMsg("view id: " + vCalc.getId());
-		if (vx == null) {
-			logMsg("is null");
-		} else {
-			logMsg(vx.getTag().toString());
-		}
-
-
 
 	}
 

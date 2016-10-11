@@ -78,44 +78,18 @@ public class ConfigUIMgr {
 		}
 	}
 
+
+	RowInfo getViews(ViewCategory vc) {
+		return cui.calcArray[vc.ordinal()];
+	}
+
+
+
 	boolean modifyView(int viewID, ViewType viewType,
 	                   int textColor, int textSize, int background, String text) {
 
 		return false;
 	}
-
-
-	// find a view based on the id and viewType
-	View findView(int viewID, ViewType viewType) {
-//
-//		RowInfo ri = cui.calcArray[viewType.ordinal()];
-//
-//
-//		logMsg("find");
-//
-//		logMsg("finding: view id: " + viewID +
-//				"  viewtype: " + viewType.name() +
-//				"  gravity: " + viewType.getGravity());
-
-
-		for (RowInfo ri : cui.calcArray) {
-			for (ViewInfo viewInfo : ri) {
-	//
-	//			logMsg("matching: viewid: " + viewInfo.getViewID() +
-	//				" viewtype: " + viewInfo.getViewType().name() +
-	//				" gravity: " + viewInfo.getGravity());
-
-				if (viewInfo.getViewID() == viewID && viewInfo.getGravity() == viewType.getGravity()) {
-					return viewInfo.getView();
-				}
-			}
-		}
-
-		return null;
-	}
-
-
-
 
 	void adjustChildView (View vChild) {
 
