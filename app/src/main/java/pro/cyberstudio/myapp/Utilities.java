@@ -83,7 +83,7 @@ class Utilities {
 		return String.format("%1$" + n + "s", s);
 	}
 
-	static String formatTag(View v) {
+	static String formatTag(iViewAlt v) {
 
 		Object oTag;
 

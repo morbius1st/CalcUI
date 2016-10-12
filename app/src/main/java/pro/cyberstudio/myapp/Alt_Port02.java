@@ -367,7 +367,13 @@ public class Alt_Port02 extends AppCompatActivity {
 
 
 		for (ConfigUIMgr.ViewInfo vi : CCM.getViews(ConfigUIMgr.ViewCategory.ALPHABET)) {
-			logMsg(vi.toString());
+
+			int color = 0xffff0000;
+
+			vi.setTextColor(color);
+
+			vi.getView().setTextColor(color);
+
 		}
 
 	}

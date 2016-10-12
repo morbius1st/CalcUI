@@ -43,13 +43,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/googlePaidDebug/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/googlePaidDebug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/googlePaidDebug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/googlePaid/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/googlePaid/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/googlePaid/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/googlePaid/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/googlePaid/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/googlePaid/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/googlePaid/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testGooglePaidDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testGooglePaidDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testGooglePaidDebug/assets" type="java-test-resource" />
@@ -58,6 +51,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/testGooglePaidDebug/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testGooglePaidDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testGooglePaidDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/googlePaid/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/googlePaid/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/googlePaid/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/googlePaid/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/googlePaid/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/googlePaid/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/googlePaid/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/googlePaid/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/googlePaid/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/googlePaid/assets" type="java-resource" />

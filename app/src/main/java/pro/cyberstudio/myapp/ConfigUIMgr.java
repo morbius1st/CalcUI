@@ -186,7 +186,7 @@ public class ConfigUIMgr {
 		int textColor;
 		int textSize;
 		int background;
-		View view;
+		iViewAlt view;
 		int category;
 
 		ViewInfo(ViewType viewType, View view, int viewID) {
@@ -209,7 +209,7 @@ public class ConfigUIMgr {
 		void setCellView(ViewType viewType, View view, int viewID, int textColor, int textSize, int background, String text) {
 
 			this.viewType = viewType;
-			this.view = view;
+
 			this.viewID = viewID;
 			this.textColor = textColor;
 			this.textSize = textSize;
@@ -222,13 +222,10 @@ public class ConfigUIMgr {
 
 				switch (findViewTypeByView(view)) {
 					case BUTTON:
-						category = ((ButtonAlt) view).getFunctionCategory();
-						break;
 					case TEXTVIEW:
-						category = ((TextViewAlt) view).getFunctionCategory();
-						break;
 					case IMAGEBUTTON:
-						category = ((ImageButtonAlt) view).getFunctionCategory();
+						this.view = (iViewAlt) view;
+						category = this.view.getFunctionCategory();
 						break;
 					default:
 						category = ViewCategory.UNDEFINED.getValue();
@@ -250,11 +247,19 @@ public class ConfigUIMgr {
 			return viewType.isSubClass();
 		}
 
-		public void setView(View v) {
-			view = v;
+		public iViewAlt setView(View view) {
+			switch (findViewTypeByView(view)) {
+				case BUTTON:
+				case TEXTVIEW:
+				case IMAGEBUTTON:
+					this.view = (iViewAlt) view;
+					return this.view;
+				default:
+					return null;
+			}
 		}
 
-		public View getView() {
+		public iViewAlt getView() {
 			return view;
 		}
 
@@ -448,9 +453,9 @@ public class ConfigUIMgr {
 			int fCategory;
 			int row;
 
-			View vw = cv.getView();
+			iViewAlt vw = cv.getView();
 
-			fCategory = ((iWidgetAlt) vw).getFunctionCategory();
+			fCategory = vw.getFunctionCategory();
 
 			row = getIndex(fCategory);
 

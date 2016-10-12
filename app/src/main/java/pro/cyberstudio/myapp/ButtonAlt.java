@@ -14,7 +14,7 @@ import static pro.cyberstudio.myapp.ConfigCalcUIx.ViewCategory.UNDEFINED;
  *         Project: CalcUI
  */
 
-public class ButtonAlt extends Button implements iWidgetAlt {
+public class ButtonAlt extends Button implements iViewAlt {
 
 	private int functionCategory;
 
