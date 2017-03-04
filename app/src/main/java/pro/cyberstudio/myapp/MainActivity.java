@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
 			HISTORY_PERCENT = 0.50f;
 		}
 
+		logMsg("app id: " + BuildConfig.APPLICATION_ID);
+		logMsg("test: " + BuildConfig.VERSION_NAME);
+		logMsg("test: " + BuildConfig.VERSION_CODE);
+
 		String strDisplayInfo = "";
 
 		strDisplayInfo += DI.toString();
@@ -80,11 +84,7 @@ public class MainActivity extends AppCompatActivity {
 		int intPaddingLeft = (int) (ib.getPaddingLeft() * factor);
 		int intPaddingRight = (int) (ib.getPaddingRight() * factor);
 
-
 		ib.setPadding(intPaddingLeft,ib.getPaddingTop(), intPaddingRight, ib.getPaddingBottom());
-
-
-
 	}
 
 

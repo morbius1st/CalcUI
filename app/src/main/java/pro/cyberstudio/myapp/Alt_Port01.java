@@ -17,7 +17,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static pro.cyberstudio.myapp.Utilities.logMsg;
+import static pro.cyberstudio.myapp.Utilities.*;
+import static pro.cyberstudio.myapp.Functions.*;
 
 
 public class Alt_Port01 extends AppCompatActivity {
@@ -224,7 +225,7 @@ public class Alt_Port01 extends AppCompatActivity {
 
 	<T extends View> T getView(int viewId) {
 
-		return (Utilities.getView(this, DI, viewId));
+		return (Functions.getView(this, DI, viewId));
 	}
 
 

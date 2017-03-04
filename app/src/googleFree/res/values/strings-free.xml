@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!-- free -->
+	<string name = "app_name">CalcUI Free</string>
 	<string name = "app_type">free</string>
 </resources>
