@@ -215,7 +215,7 @@ public class Alt_Port11 extends AppCompatActivity {
 
 	<T extends View> T getView(int viewId) {
 
-		return (Utilities.getView(this, DI, viewId));
+		return (Functions.getView(this, DI, viewId));
 	}
 
 

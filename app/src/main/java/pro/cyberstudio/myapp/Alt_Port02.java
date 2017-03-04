@@ -261,7 +261,7 @@ public class Alt_Port02 extends AppCompatActivity {
 	// the field bogus is only to create a unique signature
 	// for this method
 	<T extends View> T getView(int viewId) {
-		T v = Utilities.getView(this, DI, viewId);
+		T v = Functions.getView(this, DI, viewId);
 
 		CCM.addView(v, viewId);
 

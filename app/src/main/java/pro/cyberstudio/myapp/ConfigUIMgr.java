@@ -370,7 +370,7 @@ public class ConfigUIMgr {
 						.append(ViewCategory.toStringValue(category));
 
 				sBuild.append(preface).append(padRight("View tag: ", COLUMN))
-						.append(formatTag(view));
+						.append(Functions.formatTag(view));
 			} else {
 				sBuild.append("\n*** View: not initialized");
 			}
