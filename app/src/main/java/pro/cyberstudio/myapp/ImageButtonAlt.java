@@ -5,7 +5,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
 
-import static pro.cyberstudio.myapp.ConfigCalcUI.ViewCategory.UNDEFINED;
+import static pro.cyberstudio.myapp.ConfigCalcUIx.ViewCategory.UNDEFINED;
 
 /**
  * @author Jeff
@@ -32,18 +32,14 @@ public class ImageButtonAlt extends ImageButton implements iViewAlt {
 		attributes.recycle();
 	}
 
-	public int getViewCategory() {
+	public int getFunctionCategory() {
 		return functionCategory;
 	}
 
-	public void setViewCategory(int viewCategory) {
-		this.functionCategory = viewCategory;
+	public void setFunctionCategory(int functionCategory) {
+		this.functionCategory = functionCategory;
 	}
 
-	public void setTextSize(float size) {}
-
-	public void setTextColor(int color) {}
-
-	public void setText(CharSequence text) {}
+	public void setTextColor(int c) {}
 }
 

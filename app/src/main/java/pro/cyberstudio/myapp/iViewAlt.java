@@ -2,8 +2,6 @@ package pro.cyberstudio.myapp;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.*;
-import android.widget.TextView;
 
 /**
  * @author Jeff
@@ -16,18 +14,12 @@ interface iViewAlt {
 
 	void setAttributes(Context context, AttributeSet attrs);
 
-	int getViewCategory();
+	int getFunctionCategory();
 
-	void setViewCategory(int viewCategory);
+	void setFunctionCategory(int functionCategory);
 
-//	void setTextColor(int color);
-//
-//	void setText(CharSequence text);
-//
-//	void setTextSize(float size);
+	Object getTag();
 
-//	void setBackgroundColor(int color);
-
-
+	void setTextColor(int color);
 
 }

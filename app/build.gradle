@@ -8,9 +8,8 @@ android {
 		applicationId "pro.cyberstudio.myapp"
 		minSdkVersion 16
 		targetSdkVersion 24
-		versionCode 1
-		versionName "1.1"
-
+		versionCode project.VERSION_CODE.toInteger()
+		versionName project.VERSION_NAME
 	}
 
 	buildTypes {
@@ -23,10 +22,19 @@ android {
 	}
 	productFlavors {
 		googleFree {
-			applicationId = "pro.cyberstudio.myapp.gfree"
+			applicationId = "pro.cyberstudio.myapp"
+
+			versionName project.VERSION_NAME + ".f"
+
+//			buildConfigField("String", "VER_NAME", "\"" + getVersionName() + "\"")
+//			buildConfigField("String", "VTEST", buildConfigFields.get("VNAME").value)
 		}
 		googlePaid {
 			applicationId = "pro.cyberstudio.myapp.gpaid"
+
+			versionName project.VERSION_NAME + ".p"
+
+//			buildConfigField("String", "VER_NAME", "\"" + getVersionName() + "\"")
 		}
 	}
 }

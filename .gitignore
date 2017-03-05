@@ -79,3 +79,5 @@ thumbs.db
 app/libs/
 app/src/main/res/drawable/
 console/libs/
+/gradle.properties
+.idea/encodings.xml

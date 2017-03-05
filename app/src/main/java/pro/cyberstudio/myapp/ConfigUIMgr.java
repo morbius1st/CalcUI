@@ -78,44 +78,18 @@ public class ConfigUIMgr {
 		}
 	}
 
+
+	RowInfo getViews(ViewCategory vc) {
+		return cui.calcArray[vc.ordinal()];
+	}
+
+
+
 	boolean modifyView(int viewID, ViewType viewType,
 	                   int textColor, int textSize, int background, String text) {
 
 		return false;
 	}
-
-
-	// find a view based on the id and viewType
-	View findView(int viewID, ViewType viewType) {
-//
-//		RowInfo ri = cui.calcArray[viewType.ordinal()];
-//
-//
-//		logMsg("find");
-//
-//		logMsg("finding: view id: " + viewID +
-//				"  viewtype: " + viewType.name() +
-//				"  gravity: " + viewType.getGravity());
-
-
-		for (RowInfo ri : cui.calcArray) {
-			for (ViewInfo viewInfo : ri) {
-	//
-	//			logMsg("matching: viewid: " + viewInfo.getViewID() +
-	//				" viewtype: " + viewInfo.getViewType().name() +
-	//				" gravity: " + viewInfo.getGravity());
-
-				if (viewInfo.getViewID() == viewID && viewInfo.getGravity() == viewType.getGravity()) {
-					return viewInfo.getView();
-				}
-			}
-		}
-
-		return null;
-	}
-
-
-
 
 	void adjustChildView (View vChild) {
 
@@ -212,7 +186,7 @@ public class ConfigUIMgr {
 		int textColor;
 		int textSize;
 		int background;
-		View view;
+		iViewAlt view;
 		int category;
 
 		ViewInfo(ViewType viewType, View view, int viewID) {
@@ -235,7 +209,7 @@ public class ConfigUIMgr {
 		void setCellView(ViewType viewType, View view, int viewID, int textColor, int textSize, int background, String text) {
 
 			this.viewType = viewType;
-			this.view = view;
+
 			this.viewID = viewID;
 			this.textColor = textColor;
 			this.textSize = textSize;
@@ -248,13 +222,10 @@ public class ConfigUIMgr {
 
 				switch (findViewTypeByView(view)) {
 					case BUTTON:
-						category = ((ButtonAlt) view).getViewCategory();
-						break;
 					case TEXTVIEW:
-						category = ((TextViewAlt) view).getViewCategory();
-						break;
 					case IMAGEBUTTON:
-						category = ((ImageButtonAlt) view).getViewCategory();
+						this.view = (iViewAlt) view;
+						category = this.view.getFunctionCategory();
 						break;
 					default:
 						category = ViewCategory.UNDEFINED.getValue();
@@ -276,11 +247,19 @@ public class ConfigUIMgr {
 			return viewType.isSubClass();
 		}
 
-		public void setView(View v) {
-			view = v;
+		public iViewAlt setView(View view) {
+			switch (findViewTypeByView(view)) {
+				case BUTTON:
+				case TEXTVIEW:
+				case IMAGEBUTTON:
+					this.view = (iViewAlt) view;
+					return this.view;
+				default:
+					return null;
+			}
 		}
 
-		public View getView() {
+		public iViewAlt getView() {
 			return view;
 		}
 
@@ -391,7 +370,7 @@ public class ConfigUIMgr {
 						.append(ViewCategory.toStringValue(category));
 
 				sBuild.append(preface).append(padRight("View tag: ", COLUMN))
-						.append(formatTag(view));
+						.append(Functions.formatTag(view));
 			} else {
 				sBuild.append("\n*** View: not initialized");
 			}
@@ -474,9 +453,9 @@ public class ConfigUIMgr {
 			int fCategory;
 			int row;
 
-			View vw = cv.getView();
+			iViewAlt vw = cv.getView();
 
-			fCategory = ((iViewAlt) vw).getViewCategory();
+			fCategory = vw.getFunctionCategory();
 
 			row = getIndex(fCategory);
 

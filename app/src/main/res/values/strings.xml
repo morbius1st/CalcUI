@@ -1,5 +1,5 @@
 <resources>
-	<string name = "app_name">CalcUI</string>
+
 	<string name = "app_name_alt11">Alt_Port11</string>
 	<string name = "app_name_alt01">Alt_Port01</string>
 	<string name = "app_name_alt02">Alt_Port02</string>

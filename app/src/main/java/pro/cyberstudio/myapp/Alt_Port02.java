@@ -8,19 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import static android.R.attr.x;
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static pro.cyberstudio.myapp.Utilities.*;
-import static pro.cyberstudio.myapp.ConfigCalcUI.*;
-import static pro.cyberstudio.myapp.ConfigCalcUI.CellViewType.*;
+//import static pro.cyberstudio.myapp.Utilities.*;
 
 public class Alt_Port02 extends AppCompatActivity {
 
@@ -33,7 +32,8 @@ public class Alt_Port02 extends AppCompatActivity {
 
 	private static final int TV_HISTORY = R.id.tvHistory02;
 
-	private ConfigCalcUI CUI = new ConfigCalcUI();
+//	private ConfigCalcUIx CUI = new ConfigCalcUIx();
+	private ConfigUIMgr CCM;
 
 	private GridLayoutGravity GLG = new GridLayoutGravity();
 
@@ -65,6 +65,8 @@ public class Alt_Port02 extends AppCompatActivity {
 
 		TextView tvE = (TextView) findViewById(R.id.tv_entry);
 
+		CCM = new ConfigUIMgr(DI);
+
 		if (DA.isFree()) {
 			tvE.setText("is free");
 			HISTORY_PERCENT = 0.25f;
@@ -78,15 +80,13 @@ public class Alt_Port02 extends AppCompatActivity {
 
 //		CUI.testConfigUI(this);
 
-		updateTextSize();
+		setupViews();
 
-		logMsg(CUI.toStringInitOnlyArray());
+//		logMsg(CCM.toStringArrayList());
 
 		initHistoryView(message);
 
 //		initHistory();
-
-
 
 		viewData[] vData = new viewData[5];
 
@@ -251,84 +251,30 @@ public class Alt_Port02 extends AppCompatActivity {
 		// update the view
 		tv.setLayoutParams(lp);
 	}
-
-	<T extends View> T getView(int viewId) {
-
-		return (Utilities.getView(this, DI, viewId));
-	}
-
-	// for initial setup only - this will wipe out existing cell views
-	// this deals with the primary views (the buttons)
-	<T extends View> T getView(int row, int column, int viewId) {
-		CellViewType cvt;
-
-		T v = (Utilities.getView(this, DI, viewId));
-
-		if (verifyRowColumn(row, column)) {
-			CellInfo ci = new CellInfo();
-
-			// setup the basic cell view with just the type, id, and view reference
-			// the other settings are based on the XML layout
-
-			CellView cv = null;
 //
-//			if (v != null) {
-//				logMsg("v: " + v.getClass().getSimpleName());
-//			} else {
-//				logMsg("v: is null");
-//			}
+//	<T extends View> T getView(int viewId) {
+//
+//		return (Utilities.getView(this, DI, viewId));
+//	}
 
-			switch (findViewTypeByView(v)) {
-				case BUTTON:
-//					logMsg("type is button");
-					 cv = new CellView(BUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
-					break;
-				case TEXTVIEW:
-//					logMsg("type is textview");
-					cv = new CellView(TEXTVIEW, viewId, "", UNDEF, UNDEF, UNDEF, v);
-					break;
-				case IMAGEBUTTON:
-//					logMsg("type is imagebutton");
-					cv = new CellView(IMAGEBUTTON, viewId, "", UNDEF, UNDEF, UNDEF, v);
-					break;
-//				default:
-//					logMsg("type is undefined");
-			}
 
-			if (cv != null) {
-				ci.addView(cv);
+	// the field bogus is only to create a unique signature
+	// for this method
+	<T extends View> T getView(int viewId) {
+		T v = Functions.getView(this, DI, viewId);
 
-				ViewParent vp = v.getParent();
+		CCM.addView(v, viewId);
 
-				if (vp.getClass() == GridLayout.class) {
-					int i = ((GridLayout) vp).getChildCount();
-
-					for (int j = 0; j < i; j++) {
-						View vChild = ((GridLayout) vp).getChildAt(j);
-
-						adjustChildView(vChild);
-
-						cvt = findViewTypeByGravity(GLG.getGravity(vChild));
-						if (cvt != null) {
-//							logMsg("add child view");
-							cv = new CellView(cvt, UNDEF, "", UNDEF, UNDEF, UNDEF, vChild);
-							ci.addView(cv);
-						}
-					}
-				}
-				CUI.addCell(row, column, ci);
-			}
-		}
 		return v;
 	}
+
 
 	public String test() {
 		return "this is a test";
 	}
 
 
-	public void updateTextSize() {
-		int row;
+	public void setupViews() {
 
 //
 //		Method t = null;
@@ -350,128 +296,86 @@ public class Alt_Port02 extends AppCompatActivity {
 		// row n/a
 		// the banner ad
 
+		View vMS;
+		View vAns;
+		View vCalc;
+
+
 		// row 0
-		row = 0;
-		TextView tvHist = getView(row, 0, TV_HISTORY);
+		TextView tvHist = getView(TV_HISTORY);
 
 		// adjust the history textview height
 		adjustHistHeight(tvHist);
 
 		// row 1
-		row = 1;
-
-		getView(row, 0, R.id.grp_pren_begin);
-		getView(row, 1, R.id.grp_pren_end);
-		getView(row, 2, R.id.tv_entry);
+		getView(R.id.grp_pren_begin);
+		getView(R.id.grp_pren_end);
+		getView(R.id.tv_entry);
 
 		// row 2
-		row = 2;
-		getView(row, 0, R.id.ctrl_shift);
-		getView(row, 1, R.id.memory_store).setOnClickListener(oclTest);
-		getView(row, 2, R.id.memory_recall).setOnClickListener(oclTest);
-		getView(row, 3, R.id.funct_sqrt);
-		getView(row, 4, R.id.funct_square);
+		getView(R.id.ctrl_shift);
+		(vMS = getView(R.id.memory_store)).setOnClickListener(oclTest2);
+
+		getView(R.id.memory_recall).setOnClickListener(oclTest);
+		getView(R.id.funct_sqrt);
+		getView(R.id.funct_square);
 
 		// row 3
-		row = 3;
-		getView(row, 0, R.id.convert_deg_to_decimal);
-		getView(row, 1, R.id.const_pi);
-		getView(row, 2, R.id.funct_sin);
-		getView(row, 3, R.id.funct_cos);
-		getView(row, 4, R.id.funct_tan);
+		getView(R.id.convert_deg_to_decimal);
+		getView(R.id.const_pi);
+		getView(R.id.funct_sin);
+		getView(R.id.funct_cos);
+		getView(R.id.funct_tan);
 
 		// row 4
-		row = 4;
-		getView(row, 0, R.id.mark_degree);
-		getView(row, 1, R.id.mark_foot);
-		getView(row, 2, R.id.mark_inch);
-		getView(row, 3, R.id.mark_space);
-		getView(row, 4, R.id.mark_frac);
-		getView(row, 5, R.id.edit_backspace);
-		getView(row, 6, R.id.edit_ce_ca);
+		getView(R.id.mark_degree);
+		getView(R.id.mark_foot);
+		getView(R.id.mark_inch);
+		getView(R.id.mark_space);
+		getView(R.id.mark_frac);
+		getView(R.id.edit_backspace);
+		getView(R.id.edit_ce_ca);
 
 		// row 5
-		row = 5;
-		getView(row, 0, R.id.num_seven);
-		getView(row, 1, R.id.num_eight);
-		getView(row, 2, R.id.num_nine);
-		getView(row, 3, R.id.funct_integer);
-		getView(row, 4, R.id.funct_fraction);
+		getView(R.id.num_seven);
+		getView(R.id.num_eight);
+		getView(R.id.num_nine);
+		getView(R.id.funct_integer);
+		getView(R.id.funct_fraction);
 
 		// row 6
-		row = 6;
-		getView(row, 0, R.id.num_four);
-		getView(row, 1, R.id.num_five);
-		getView(row, 2, R.id.num_six);
-		getView(row, 3, R.id.opp_multiply);
-		getView(row, 4, R.id.opp_divide);
+		getView(R.id.num_four);
+		getView(R.id.num_five);
+		getView(R.id.num_six);
+		getView(R.id.opp_multiply);
+		getView(R.id.opp_divide);
 
 		// row 7
-		row = 7;
-		getView(row, 0, R.id.num_one);
-		getView(row, 1, R.id.num_two);
-		getView(row, 2, R.id.num_three);
-		getView(row, 3, R.id.opp_add);
-		getView(row, 4, R.id.opp_subtract);
+		getView(R.id.num_one);
+		getView(R.id.num_two);
+		getView(R.id.num_three);
+		getView(R.id.opp_add);
+		getView(R.id.opp_subtract);
 
 		// row 8
-		row = 8;
-		getView(row, 0, R.id.num_zero);
-		getView(row, 1, R.id.num_decimal_pt);
-		getView(row, 2, R.id.funct_change_sign);
-		getView(row, 3, R.id.funct_answer).setOnClickListener(oclTest);
-		getView(row, 4, R.id.opp_calculate).setOnClickListener(oclTest);
+		getView(R.id.num_zero);
+		getView(R.id.num_decimal_pt);
+		getView(R.id.funct_change_sign);
+		(vAns= getView(R.id.funct_answer)).setOnClickListener(oclTest);
+		(vCalc = getView(R.id.opp_calculate)).setOnClickListener(oclTest);
 
 
-		// scan through all of the table layout's children
-		// all of these should be a tablerow
-		// find each child view of the proper type and update
-		// the view per the adjusted display parameters
-//		TableLayout v = (TableLayout) findViewById(LAYOUT_ID);
-//
-//		int j = v.getChildCount();
-//
-//		for (int i = 0; i < j; i++) {
-//			View vTblChild = v.getChildAt(i);
-//
-//			if (vTblChild instanceof TableRow) {
-//				// the tablelayout's child is a tablerow
-//
-//				int k = ((TableRow) vTblChild).getChildCount();
-//
-//				// scan through all of the children of the table row
-//				for (int l = 0; l < k; l++) {
-//
-//					View vTrChild = ((TableRow) vTblChild).getChildAt(l);
-//
-//					if (vTrChild instanceof GridLayout) {
-//
-//						GridLayout gridView = (GridLayout) vTrChild;
-//
-//						int m = gridView.getChildCount();
-//
-//						// scan through all of the children of the Grid Layout
-//						for (int n = 0; n < m; n++) {
-//
-//							adjustChildView(gridView.getChildAt(n));
-//						}
-//
-//					} else if (vTrChild instanceof android.support.v7.widget.GridLayout) {
-//
-//						android.support.v7.widget.GridLayout gridView =
-//								(android.support.v7.widget.GridLayout) vTrChild;
-//
-//						int m = gridView.getChildCount();
-//
-//						// scan through all of the children of the Grid Layout
-//						for (int n = 0; n < m; n++) {
-//							adjustChildView(gridView.getChildAt(n));
-//						}
-//
-//					}
-//				}
-//			}
-//		}
+
+		for (ConfigUIMgr.ViewInfo vi : CCM.getViews(ConfigUIMgr.ViewCategory.ALPHABET)) {
+
+			int color = 0xffff0000;
+
+			vi.setTextColor(color);
+
+			vi.getView().setTextColor(color);
+
+		}
+
 	}
 
 	private OnClickListener oclTest = new OnClickListener() {
@@ -483,23 +387,32 @@ public class Alt_Port02 extends AppCompatActivity {
 		}
 	};
 
+	private OnClickListener oclTest2 = new OnClickListener() {
+		@Override
+		public void onClick(View view) {
+
+			ConfigUIMgr.ViewCategory vc = ConfigUIMgr.ViewCategory.ALPHABET;
+
+			displayTag(view);
+
+			logMsg("@oclTest2: " + view.getTag().toString());
+			logMsg("@oclTest2: affect Alpha views: " +
+			vc.name() + " (" + vc.getValue() + ")" + " (" + vc.ordinal() + ")");
+
+			logMsg(CCM.toStringRowInfo(vc.ordinal()));
+
+		}
+	};
+
+	void displayTag(View view) {
+		Toast.makeText(getApplicationContext(),
+				view.getTag().toString() + "  Clicked", Toast.LENGTH_SHORT).show();
+	}
+
 	public void clickTest(View view) {
 
 		if (((Button) view).getText() != null) {
-
-			String tagString = ((Button) view).getText().toString();
-
-//			logMsg("view clicked: " + tagString);
-
-			Toast.makeText(getApplicationContext(), tagString + "  Clicked", Toast.LENGTH_SHORT).show();
-		}
-
-	}
-
-	void adjustChildView (View vChild) {
-
-		if (vChild instanceof TextViewAlt) {
-			DI.adjustViewTextSize((TextView) vChild);
+			displayTag(view);
 		}
 
 	}
