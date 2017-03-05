@@ -1,94 +1,47 @@
 package pro.cyberstudio.myapp;
 
+import static pro.cyberstudio.myapp.UnitType.*;
+
 /**
  * Created by Jeff on 6/28/2014.
  */
 
+// note that the ordinal order of the below determines the CompareTo / ordering sequence
 
-// enum for the types of units
-// the unit category is used to organize the units -
-// Length / Area / Volume are interrelated in that
-// a Length * Length = Area
-// an Area * Length = Volume
-// a Volume * Length = unit^4
-// a Unit^4 * Length = unit^5 - etc.
-// given the above, this could go on forever but, all
-// of these units above Volume will just be the
-// base unit raised to the number of times it has
-// ben multiplied - therefore we cannot have any
-// unit categories above Volume (10300) because the next
-// level (10400) is just the base unit to the fourth power
-// e.g. ft⁴ (which, for feet, is nonsensical of course)
+enum UnitCategory {
+	VOID		(1, INVALID, false),
+	NOUNIT		(1, SCALAR, false),
+	ANGLE		(1, ANGLEDECIMAL, false),
+	MASS		(1, MILLIGRAM, false),
+	TIME		(1, SECOND, false),
+	TEMPERATURE	(1, KELVIN, false),
+	LENGTH		(1, MILLIMETER, true),
+	AREA		(2, SQMILLIMETER, true),
+	VOLUME		(3, CUCENTIMETER, true),
+	FOURTH		(4, MOMENTOFINERTIA, true);
 
-
-// the promote / demote code is the cat code of the "base" unit
-//					Cat Code	level code	Promote Cat		Demote Cat
-//								zero based		code			code
-public enum UnitCategory {
-	VOID				(0,			1,			-1,				-1),
-	NOUNIT				(0,			1,			 0,				 0),
-	ANGLE				(0,			1,			-1,				 0),
-	MASS			 (2000,			1,			-1,				 0),
-	DENSITY			 (3000,			1,			-1,				 0),
-	TIME			 (4000,			1,			-1,				 0),
-	TEMPERATURE		 (5000,			1,			-1,				 0),
-	LENGTH			(11000,			1,		 11000,			 11000),
-	AREA			(12000,			2,		 11000,			 11000),
-	VOLUME			(13000,			3,		 11000,			 11000),
-	FOURTH			(14000,			4,		 11000,			 11000);		// moment of inertia (only so far)
-
-	public static final int LEVELSEPARATION = 1000;
-	private static final int MAXUNITTYPES = 5;
-
-	private final int intCategoryCode;			// the category code (which gets added to the unit code)
-	private final int intLevelCode;				// the level code (used to determine promotion / demotion of units)
-	private final int intPromoteCategoryCode;	// the
-	private final int intDemoteCategoryCode;
-
-	private UnitCategory(int iCC, int iLC, int iPCC, int iDCC) {
-		intCategoryCode = iCC;
-		intLevelCode = iLC;
-		intPromoteCategoryCode = iPCC;
-		intDemoteCategoryCode = iDCC;
-	}
-
-	public int getCategoryCode() {
-		return intCategoryCode;
-	}
-
-	// this provides the UnitCategory for when (2) Unit are multiplied
-	public int getPromoteCategoryCode() {
-		return intPromoteCategoryCode;
-	}
-
-	// this provides the UnitCategory for when (2) Unit are divided
-	public int getDemoteCategoryCode() {
-		return intDemoteCategoryCode;
-	}
-
-	public int getLevelCode() {
-		return intLevelCode;
-	}
-}
-
-enum UnitCategory2 {
-	VOID		(false),
-	NOUNIT		(false),
-	ANGLE		(false),
-	MASS		(false),
-	DENSITY		(false),
-	TIME		(false),
-	TEMPERATURE	(false),
-	DIMENSION	(true);
-
+	private final int exponent;
 	private final boolean hasExtensionUnits;
+	private final UnitType baseUnitType;
 
-	UnitCategory2(boolean extUnit) {
+	UnitCategory(int exp, UnitType uT, boolean extUnit) {
+		exponent = exp;
+		baseUnitType = uT;
 		hasExtensionUnits = extUnit;
 	}
+	
+	int CompareTo(UnitCategory test) { return test.ordinal() - ordinal(); }
+	
+	boolean equals(UnitCategory test) { return test.ordinal() == ordinal(); }
 
 	boolean hasExtensionUnits() {
 		return hasExtensionUnits;
 	}
+	
+	UnitType getBaseUnitType () {
+		return baseUnitType;
+	}
+	
+	int getExponent() { return exponent; }
 
 }

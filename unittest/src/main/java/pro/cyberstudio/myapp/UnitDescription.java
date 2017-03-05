@@ -7,7 +7,7 @@ package pro.cyberstudio.myapp;
  *         Project: CalcUI
  */
 
-public enum UnitDescription2 {
+public enum UnitDescription {
 
 	// special UnitType - invalid
 	INVALIDdesc		("", "", "", ""),
@@ -115,19 +115,42 @@ public enum UnitDescription2 {
 	CELSIUSdesc		("°C", "", "Celsius", "Celsius"),
 	FAHRENHEITdesc	("°F", "", "Fahrenheit", "Fahrenheit"),
 	NEWTONdesc		("°N", "", "Newton", "Newton"),
-	KELVINdesc		("K", "", "Kelvin", "Kelvin");
+	KELVINdesc		("K", "", "Kelvin", "Kelvin"),
+	
+	// angle UnitType
+	// all angles are stored as decimal degrees 360
+	ANGLEDECIMALdesc	("°", "", "Degree", "Degrees"),
+	ANGLEDMSdesc		("°\'\"", "", "dms", "dms"),
+	ANGLEPERCENTdesc	("%", "", "Percent", "Percent"),
+	ANGLERATIOdesc		(":", "", "Ratio", "Ratio"),
+	ANGLERADIANSdesc	("π", "", "Pi", "Pi");
 
-
+	
+	
 	private final String strCommonNameSingular;
 	private final String strCommonNamePlural;
 	private final String strCommonAbbr;
 	private final String strAltAbbr;
 
-	UnitDescription2(String cA, String aA, String cNms, String cNmp) {
+	UnitDescription(String cA, String aA, String cNms, String cNmp) {
 		strCommonAbbr = cA;
 		strAltAbbr = aA;
 		strCommonNameSingular = cNms;
 		strCommonNamePlural = cNmp;
 	}
+	
+	public String getCommonName(double qty) {
+		if (qty == -1.0 || qty == 0 || qty == 1.0)
+			return strCommonNameSingular;
+		else
+			return strCommonNamePlural;
+	}
 
+	public String getAbbreviation() {
+		return strCommonAbbr;
+	}
+	
+	public String getAltAbbreviation() {
+		return strAltAbbr;
+	}
 }

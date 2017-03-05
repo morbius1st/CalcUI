@@ -1,7 +1,9 @@
 package pro.cyberstudio.myapp;
 
+
+import java.math.*;
+
 import static pro.cyberstudio.myapp.UnitType.*;
-import static pro.cyberstudio.myapp.Utilities.*;
 
 /**
  * Created by Jeff on 6/28/2014.
@@ -14,37 +16,68 @@ import static pro.cyberstudio.myapp.Utilities.*;
 public class Unit {
 
 	// the value of this Unit (will depend in the unit type)
-	private double doubUnit = 0.0;
-	private UnitType utUnitType;
+	private double unitValue;		// this is the value of the unit in the unit type's base unit type
+	private UnitType unitType;
+	private int exponent;
 
 
 	/** Assign the value of this Unit and the its UnitType
-	 * @param doubInUnit The value of the Unit
+	 * this pre-assigns the exponent to 1
+	 * @param inUnit The value of the Unit
 	 * @param utIn The Unit Type of the unit
 	 */
-	public Unit(double doubInUnit, UnitType utIn) {
-		doubUnit = doubInUnit;
-		utUnitType = utIn;
+	Unit(double inUnit, UnitType utIn) {
+		unitValue = inUnit;
+		
+		unitType = utIn;
 	}
 
 	/**
-	 * Duplicate Unit constructor
-	 * @param uU the original Unit to duplicate
+	 * Clone a unit
+	 * @param uU the original Unit to clone
 	 */
-	public  Unit(Unit uU) {
-		this.doubUnit = uU.doubUnit;
-		this.utUnitType = uU.utUnitType;
+	public Unit clone(Unit uU) {
+		Unit xU = defaultUnit();
+		
+		xU.unitValue = uU.unitValue;
+		xU.unitType = uU.unitType;
+		xU.exponent = uU.exponent;
+		
+		return xU;
 	}
 
-	public static Unit DefaultUnit() {
-		return new Unit(0.0,SCALAR);
+	static Unit defaultUnit() {
+		return new Unit(0.0, SCALAR);
 	}
+	
+	
+	/**
+	 *
+	 * @param ValueInOrigUnit	the value of the unit in based on the unitType provided
+	 * @param inUnitType			the unitType of the value
+	 * @return					the equivilent value on the unitTypes base unit
+	 */
+	static Double baseValue(double ValueInOrigUnit, UnitType inUnitType) {
+		
+		// if the inUnitType is already the base unit type
+		if (inUnitType.equals(inUnitType.getBaseUnitType())) {
+			return ValueInOrigUnit;
+		}
+		
+		// value is not in the base units
+		// must convert the value to the base unitType
+		
+		
+		
+	}
+	
+	
 
 	/**
 	 * Get the current Unit's value in its current unit type
 	 */
 	public double getValue() {
-		return doubUnit;
+		return unitValue;
 	}
 
 	/**
@@ -52,33 +85,33 @@ public class Unit {
 	 * @param utOut The UnitType of the value to be returned
 	 */
 	public double getValue(UnitType utOut) {
-		if (utUnitType.equals(utOut))
+		if (unitType.equals(utOut))
 			// check - if requested out unit matches the current unit type,
 			// just provide the current value
-			return doubUnit;
+			return unitValue;
 		else {
 			// else, provide the current unit's value in the unit type requested
 			// note that ConvertUnit will return NaN if the requested
 			// unit type output's unit category does not match the current
 			// unit's category
-			return ConvertUnit(doubUnit, utUnitType, utOut);
+			return ConvertUnit(unitValue, unitType, utOut);
 		}
 	}
 
 	// assign a value to this unit - tell me the incoming unit type
 	public void setValue(double doubInUnit, UnitType utIn) {
-		doubUnit = doubInUnit;
-		utUnitType = utIn;
+		unitValue = doubInUnit;
+		unitType = utIn;
 	}
 
 	// assign a value to this unit based on the passed unit
 	public void setValue(Unit unitIn) {
-		doubUnit = unitIn.getValue();
-		utUnitType = unitIn.getUnitType();
+		unitValue = unitIn.getValue();
+		unitType = unitIn.getUnitType();
 	}
 
 	public UnitCategory getUnitCategory() {
-		return utUnitType.getUnitCategory();
+		return unitType.getUnitCategory();
 	}
 
 	/**
@@ -86,6 +119,6 @@ public class Unit {
 	 * @return UnitType (e.g. SCALAR, INCH, FOOT, etc.)
 	 */
 	public UnitType getUnitType() {
-		return utUnitType;
+		return unitType;
 	}
 }

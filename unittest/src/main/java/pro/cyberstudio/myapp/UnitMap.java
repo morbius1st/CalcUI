@@ -1,6 +1,6 @@
 package pro.cyberstudio.myapp;
 
-import static pro.cyberstudio.myapp.UnitType2.*;
+import static pro.cyberstudio.myapp.UnitType.*;
 
 /**
  * @author jeffs
@@ -9,7 +9,7 @@ import static pro.cyberstudio.myapp.UnitType2.*;
  *         Project: CalcUI
  */
 
-enum UnitMap2 {
+enum UnitMap {
 	// length
 	MILex				(MIL, SQMIL, null),
 	INCHex				(INCH, SQINCH, CUINCH),
@@ -47,11 +47,11 @@ enum UnitMap2 {
 	KILOLITERex			(MILLIMETER, SQMILLIMETER, KILOLITER);
 
 
-	private static UnitType2[] specialUnitTypes = {CUINCH, MOMENTOFINERTIA, ACREFOOT};
+	private static UnitType[] specialUnitTypes = {CUINCH, MOMENTOFINERTIA, ACREFOOT};
 
-	private final UnitType2[] uMap = new UnitType2[3];
+	private final UnitType[] uMap = new UnitType[3];
 
-	UnitMap2(UnitType2 ut1, UnitType2 ut2, UnitType2 ut3) {
+	UnitMap(UnitType ut1, UnitType ut2, UnitType ut3) {
 		uMap[0] = ut1;
 		uMap[1] = ut2;
 		uMap[2] = ut3;

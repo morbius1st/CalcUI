@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!--general messsages-->
+	<string name="num_mode_nothing">Nothing</string>
+	<string name="fract_mode_nothing">Nothing</string>
+
+	<!--calculation results -->
+	<string name = "calc_error">(error)</string>
+
+	<!--status error messages-->
+	<string name="status_format_failed">Cannot Format Number</string>
+	<string name = "status_error_icon">�</string>
+
+	<!--parseFtIn error messages (part 1)-->
+	<string name = "parseEM_invalidEntry">Invalid number"</string>
+
+	<integer name = "parseEC_numChars">1</integer>
+	<string name = "parseEM_numCharsLong">The number entered has too many characters</string>
+
+	<integer name = "parseEC_invalid1stChar">2</integer>
+	<string name = "parseEM_invalid1stCharLong">The first Character is invalid</string>
+
+	<integer name = "parseEC_XtraFtMark">3</integer>
+	<string name = "parseEM_XtraFtMarkLong">Number entered has too many foot marks</string>
+
+	<integer name = "parseEC_XtraInMark">4</integer>
+	<string name = "parseEM_XtraInMarkLong">Number entered has too many inch marks</string>
+
+	<integer name = "parseEC_XtraFracMark">5</integer>
+	<string name = "parseEM_XtraFracMarkLong">Number entered has too many fraction marks</string>
+
+	<integer name = "parseEC_XtraDecPtMark">6</integer>
+	<string name = "parseEM_XtraDecPtMarkLong">Decimal points: Too many or in wrong location</string>
+
+	<integer name = "parseEC_XtraNegMark">7</integer>
+	<string name = "parseEM_XtraNegMarkLong">Number entered has too many sign marks</string>
+
+	<integer name = "parseEC_XtraSepMark">8</integer>
+	<string name = "parseEM_XtraSepMarkLong">Number entered has too many space marks</string>
+
+	<integer name = "parseEC_InvalidCharacter">9</integer>
+	<string name = "parseEM_InvalidCharacterLong">Number entered contains invalid character</string>
+
+	<integer name = "parseEC_NoDigits">10</integer>
+	<string name = "parseEM_NoDigitsLong">Number entered does not have any digits</string>
+
+	<integer name = "parseEC_NegMarkNot1">11</integer>
+	<string name = "parseEM_NegMarkNot1Long">Sign mark must be the first character</string>
+
+	<integer name = "parseEC_InchMarkBadOrder">12</integer>
+	<string name = "parseEM_InchMarkBadOrderLong">Inch mark must occur before foot mark</string>
+
+	<integer name = "parseEC_FootMarkNotAtEnd">13</integer>
+	<string name = "parseEM_FootMarkNotAtEndLong">Foot mark must be at the last character</string>
+
+	<integer name = "parseEC_InchMarkNotAtEnd">14</integer>
+	<string name = "parseEM_InchMarkNotAtEndLong">Inch mark must be the last character</string>
+
+	<integer name = "parseEC_MarksBadOrder1">15</integer>
+	<string name = "parseEM_MarksBadOrder1Long">Too many marks in a row without digits between them</string>
+
+	<integer name = "parseEC_MarksBadOrder2">16</integer>
+	<string name = "parseEM_MarksBadOrder2Long">Foot, inch, or fraction mark cannot be the first character</string>
+
+	<integer name = "parseEC_FracMarkMissing">20</integer>
+	<string name = "parseEM_FracMarkMissingLong">Fraction mark missing</string>
+
+	<integer name = "parseEC_FracMarkBadOrder">21</integer>
+	<string name = "parseEM_FracMarkBadOrderLong">Fraction mark must have occurred after space</string>
+
+	<integer name = "parseEC_FracMarkMissingNuOrDe">22</integer>
+	<string name = "parseEM_FracMarkMissingNuOrDeLong">Fraction is missing numerator or denominator</string>
+
+	<integer name = "parseEC_BothDecPtAndFracMark">23</integer>
+	<string name = "parseEM_BothDecPtAndFracMarkLong">Cannot have both decimal point and fraction mark</string>
+
+	<integer name = "parseEC_DecPtBadOrder">24</integer>
+	<string name = "parseEM_DecPtBadOrderLong">A decimal point is in a wrong location</string>
+
+	<integer name = "parseEC_FtInDigitMissing">25</integer>
+	<string name = "parseEM_FtInDigitMissingLong">Missing foot or inch digits</string>
+
+	<!--parseFtIn errors (part 2)-->
+	<integer name = "parseEC_ConvFail31">31</integer>
+	<integer name = "parseEC_ConvFail32">32</integer>
+	<integer name = "parseEC_ConvFail33">33</integer>
+	<integer name = "parseEC_ConvFail34">34</integer>
+	<integer name = "parseEC_ConvFail35">35</integer>
+	<integer name = "parseEC_ConvFail36">36</integer>
+	<integer name = "parseEC_ConvFail37">37</integer>
+	<integer name = "parseEC_ConvFail38">38</integer>
+	<integer name = "parseEC_ConvFail39">39</integer>
+	<integer name = "parseEC_ConvFail40">40</integer>
+	<integer name = "parseEC_ConvFail41">41</integer>
+	<integer name = "parseEC_ConvFail42">42</integer>
+	<integer name = "parseEC_ConvFail43">43</integer>
+	<integer name = "parseEC_ConvFail44">44</integer>
+	<integer name = "parseEC_ConvFail45">45</integer>
+	<string name="parseEM_ConvFailLong">Number cannot be converted</string>		<!-- 31 thru 45-->
+
+	<integer name = "parseEC_UnknownFail">50</integer>
+	<string name="parseEM_UnknownFailShort">Unknown failure</string>
+	<string name="parseEM_UnknownFailLong">Internal: Unknown parse routine failure</string>
+
+	<!--formatFtIn error messages-->
+	<integer name = "formatEC_numModeBad">101</integer>
+	<string name="formatEM_numModeBad">Invalid number Mode</string>
+
+	<integer name = "formatEC_fracModeBad">102</integer>
+	<string name="formatEM_fracModeBad">Invalid fraction Mode</string>
+
+	<integer name = "formatEC_precisionBad">103</integer>
+	<string name="formatEM_precisionBad">Invalid precision</string>
+
+	<integer name = "formatEC_precisionBadforDecimal">104</integer>
+	<string name="formatEM_precisionBadforDecimal">Invalid precision for mode: Decimal</string>
+
+	<integer name = "formatEC_precisionBadforFraction">105</integer>
+	<string name="formatEM_precisionBadforFraction">Invalid precision for mode: Fraction</string>
+
+	<!--main program error messages-->
+	<integer name = "mainEC_cannotEdit">1001</integer>
+	<string name="mainEM_cannotEditShort">Cannot be edited</string>
+	<string name="mainEM_cannotEditLong">Number is not editable</string>
+
+	<integer name = "mainEC_funcIntFailed">1002</integer>
+	<string name="mainEM_funcIntFailedShort">Integer failed</string>
+	<string name="mainEM_funcIntFailedLong">Integer function cannot be performed on this number</string>
+
+	<integer name = "mainEC_funcFracFailed">1003</integer>
+	<string name="mainEM_funcFracFailedShort">Fraction failed</string>
+	<string name="mainEM_funcFracFailedLong">Fraction function cannot be performed on this number</string>
+
+	<integer name = "mainEC_funcSqrtFailed">1004</integer>
+	<string name="mainEM_funcSqrtFailedShort">Square root failed</string>
+	<string name="mainEM_funcSqrtFailedLong">Square root function cannot be performed on this number</string>
+
+	<integer name = "mainEC_funcSquareFailed">1005</integer>
+	<string name="mainEM_funcSquareFailedShort">Square failed</string>
+	<string name="mainEM_funcSquareFailedLong">Square function cannot be performed on this number</string>
+
+	<integer name = "mainEC_mathOpFailed">1006</integer>
+	<string name="mainEM_mathOpFailedShort">Math Operation Failed</string>
+	<string name="mainEM_mathOpFailedLong">Math Operation Failed</string>
+
+
+	<!--math routine error messages-->
+	<integer name = "mathEC_genInfoNoGood">500</integer>
+	<string name = "mathEM_genInfoNoGoodShort">Info passed is unusable</string>
+	<string name = "mathEM_genInfoNoGoodLong">The information passed to the function is unusable</string>
+
+	<integer name = "mathEC_genNaN">501</integer>
+	<string name = "mathEM_genNaNShort">Invalid calculation</string>
+	<string name = "mathEM_genNaNLong">Math routine calculated an invalid number</string>
+
+	<integer name = "mathEC_invalidUnit">502</integer>
+	<string name = "mathEM_invalidUnitShort">Cannot determine unit</string>
+	<string name = "mathEM_invalidUnitLong">The math operation produces an invalid unit</string>
+
+	<integer name = "mathEC_cannotPromote">503</integer>
+	<string name = "mathEM_cannotPromoteShort">Cannot determine unit</string>
+	<string name = "mathEM_cannotPromoteLong">The math operation produces an invalid unit</string>
+
+	<integer name = "mathEC_cannotDemote">504</integer>
+	<string name = "mathEM_cannotDemoteShort">Cannot determine unit</string>
+	<string name = "mathEM_cannotDemoteLong">The math operation produces an invalid unit</string>
+
+	<integer name = "mathEC_addBadCat">511</integer>
+	<string name = "mathEM_addBadCatShort">Mismatched unit categories</string>
+	<string name = "mathEM_addBadCatLong">You cannot add Scalar and length numbers to each other</string>
+
+	<integer name = "mathEC_subBadCat">521</integer>
+	<string name = "mathEM_subBadCatShort">Mismatched unit categories</string>
+	<string name = "mathEM_subBadCatLong">You cannot subtract Scalar and length numbers from each other</string>
+
+	<integer name = "mathEC_divByNonScalar">531</integer>
+	<string name = "mathEM_divByNonScalarShort">Division by non-scalar</string>
+	<string name = "mathEM_divByNonScalarLong">You cannot divide a scalar number by a length number</string>
+
+	<integer name = "mathEC_divByZero">532</integer>
+	<string name = "mathEM_divByZeroShort">Division by zero</string>
+	<string name = "mathEM_divByZeroLong">You cannot divide by zero</string>
+
+	<integer name = "mathEC_powInvalidPower">541</integer>
+	<string name = "mathEM_powInvalidPowerShort">Invalid exponent</string>
+	<string name = "mathEM_powInvalidPowerLong">Exponent must be a scalar number</string>
+
+	<integer name = "mathEC_trigNonScalar">551</integer>
+	<string name = "mathEM_trigNonScalarShort">Invalid number</string>
+	<string name = "mathEM_trigNonScalarLong">Trig operand must be a scalar number</string>
+
+
+
+
+</resources>
