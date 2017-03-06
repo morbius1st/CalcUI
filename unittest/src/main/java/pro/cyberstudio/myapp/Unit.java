@@ -19,7 +19,8 @@ public class Unit {
 	private UnitType unitType;
 	private int exponent;
 	
-	public static final long APFLOATPRECISION = 40;
+	static final long APFLOATPRECISION = 81;
+	static final long APFLOATPRECROUND = 80;
 
 	
 // constructors

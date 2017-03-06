@@ -1,6 +1,8 @@
 package pro.cyberstudio.myapp;
 
-import org.apfloat.Apfloat;
+import org.apfloat.*;
+
+import java.math.RoundingMode;
 
 import static pro.cyberstudio.myapp.Utilities.*;
 import static pro.cyberstudio.myapp.UnitType.*;
@@ -26,22 +28,17 @@ class TestUnitConversions {
 		
 		Apfloat apActualOut = UnitType.ConvertValue(apValueIn, utIn, utOut);
 		
-		String plannedResult = String.format(format, apPlannedOut);
-		String ActualResult = String.format(format, apActualOut);
-		
 		sb.append("Test #: ").append(testNumber);
 		logMsg(sb.toString());
 		sb = new StringBuilder();
 		
-		sb.append("in  planned ApFloat: ").append(String.format(format, apValueIn));
+		sb.append("in  planned ApFloat: ").append(formatApFloat(apValueIn));
+		sb.append(" (").append(utIn.getName(apValueIn.doubleValue())).append(")");
 		logMsg(sb.toString());
 		sb = new StringBuilder();
 		
-		sb.append("out planned ApFloat: ").append(String.format(format, apPlannedOut));
-		logMsg(sb.toString());
-		sb = new StringBuilder();
-		
-		sb.append("out  actual ApFloat: ").append(String.format(format, apActualOut));
+		sb.append("out planned ApFloat: ").append(formatApFloat(apPlannedOut));
+		sb.append(" (").append(utOut.getName(apPlannedOut.doubleValue())).append(")");
 		logMsg(sb.toString());
 		sb = new StringBuilder();
 		
@@ -53,18 +50,41 @@ class TestUnitConversions {
 		logMsg(sb.toString());
 		sb = new StringBuilder();
 		
-		sb.append("  : matches: ").append(apPlannedOut.equals(apActualOut));
+		if (apActualOut != null) {
+
+			sb.append("out  actual ApFloat: ").append(formatApFloat(apActualOut));
+			logMsg(sb.toString());
+			sb = new StringBuilder();
+			
+			sb.append("  : matches: ").append(apPlannedOut.equals(apActualOut));
+			logMsg(sb.toString());
+		} else {
+			sb.append("*** invalid conversion");
+			logMsg(sb.toString());
+		}
 		
-		logMsg(sb.toString());
+		logMsg("");
+		
+	}
+	
+	String formatApFloat(Apfloat apIn) {
+		return String.format("%#s", ApfloatMath.round(apIn, Unit.APFLOATPRECROUND, RoundingMode.HALF_UP));
 	}
 	
 	void RunTests() {
 		
-		//
+		// length
 		Test(1000, "1.0", INCH, "1.0", INCH);
 		Test(1010, "25.4", MILLIMETER, "1.0", INCH);
+		Test(1010, "1.0", MILLIMETER, "0.03937007874015748031496062992125984251968503937007874015748031496062992125984252", INCH);
 		Test(1020, "1.0", INCH, "25.4", MILLIMETER);
+		Test(1030, "1.0", KILOMETER, "39370.07874015748031496062992125984251968503937007874015748031496062992125984252", INCH);
+		Test(1099, "1.0", INCH, "1.0", SQINCH);	// invalid - different UnitTypes
 		
+		// area
+		Test(2000, "1.0", SQINCH, "1.0", SQINCH);
+		Test(2000, "645.16", SQMILLIMETER, "1.0", SQINCH);
+	
 		
 	}
 	

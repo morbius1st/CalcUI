@@ -2,6 +2,8 @@ package pro.cyberstudio.myapp;
 
 import org.apfloat.*;
 
+import java.math.RoundingMode;
+
 import static pro.cyberstudio.myapp.UnitCategory.*;
 import static pro.cyberstudio.myapp.UnitDescription.*;
 import static pro.cyberstudio.myapp.Utilities.*;
@@ -201,9 +203,6 @@ public enum UnitType {
 		Apfloat apFactor;
 		Apfloat apTemp = Apfloat.ZERO;
 		
-		FixedPrecisionApfloatHelper ApMath = new FixedPrecisionApfloatHelper(Unit.APFLOATPRECISION);
-		
-		
 		// if both are the same unit type - no conversion is needed
 		if (uTypeIn.equals(uTypeOut) || apValueIn.equals(Apfloat.ZERO)) {
 			return apValueIn;
@@ -215,7 +214,7 @@ public enum UnitType {
 				
 				apFactor = uTypeIn.getConvertFactor().divide(uTypeOut.getConvertFactor());
 				
-				apResult = apValueIn.multiply(apFactor);
+				apResult = ApfloatMath.round(apValueIn.multiply(apFactor), Unit.APFLOATPRECROUND, RoundingMode.HALF_UP);
 				
 			} else {
 				// unitType uses a complex conversion
