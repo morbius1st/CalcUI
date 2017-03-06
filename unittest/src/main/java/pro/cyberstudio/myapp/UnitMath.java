@@ -1,6 +1,9 @@
 package pro.cyberstudio.myapp;
 
+import org.apfloat.*;
+
 import static pro.cyberstudio.myapp.UnitType.*;
+import static pro.cyberstudio.myapp.Utilities.apfloat;
 
 public class UnitMath {
 
@@ -27,6 +30,8 @@ public class UnitMath {
 		intErrorMsgShort = iEMS;
 		intErrorMsgLong = iEML;
 	}
+	
+	
 //
 //	/**
 //	 * Add two Units together<br>
@@ -216,7 +221,7 @@ public class UnitMath {
 //		}
 //
 //		if ((utIN != null) && (utIN != INVALID)) {
-//			doubResult = ConvertUnit(doubResult, utIN, utFinal);
+//			doubResult = ConvertValue(doubResult, utIN, utFinal);
 //		}
 //
 //		unitResult.setValue(doubResult, utFinal);
@@ -345,7 +350,7 @@ public class UnitMath {
 //		}
 //
 //		if ((utIN != null) && (utIN != INVALID)) {
-//			doubResult = ConvertUnit(doubResult, utIN, utFinal);
+//			doubResult = ConvertValue(doubResult, utIN, utFinal);
 //		}
 //
 //		unitResult.setValue(doubResult, utFinal);

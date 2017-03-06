@@ -1,2 +1,2 @@
-include ':app', ':unittest'
+include ':app', ':unittest', ':apcalculator'
 project(':app').projectDir = new File(settingsDir, 'app')

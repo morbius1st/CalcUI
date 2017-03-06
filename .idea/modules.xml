@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CalcUI.iml" filepath="$PROJECT_DIR$/CalcUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apcalculator/apcalculator.iml" filepath="$PROJECT_DIR$/apcalculator/apcalculator.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/unittest/unittest.iml" filepath="$PROJECT_DIR$/unittest/unittest.iml" />
     </modules>
