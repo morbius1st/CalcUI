@@ -10,6 +10,8 @@ import org.apfloat.Apfloat;
  */
 
 class Utilities {
+	
+	static void Println(String msg) { logMsg(msg); }
 
 	static void logMsg(String msg) { System.out.println(msg);}
 	

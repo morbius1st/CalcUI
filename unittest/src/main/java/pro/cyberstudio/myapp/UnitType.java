@@ -255,6 +255,7 @@ public enum UnitType {
 					case ANGLE_DECIMAL: // base unit, no conversion
 					case ANGLE_DMS:	// this is actually the same units as decimal
 					case TEMP_KELVIN: // base unit, no conversion
+						apResult = apTemp;
 						break;
 					case TEMP_FAHRENHEIT:  // convert FROM kelvin
 						apTemp = apfloat("9.0").divide(apfloat("5.0"));
